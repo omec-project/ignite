@@ -1,0 +1,75 @@
+{
+	"S1AP-PDU":
+	{
+		"initiatingMessage":
+		{
+			"procedureCode": 10,
+			"criticality": 0,
+			"value":
+			{
+				"Paging":
+				{
+					"protocolIEs":
+					[
+						{
+							"id": 80,
+							"criticality": 0,
+							"value":
+							{
+								"UEIdentityIndexValue": 0
+							}
+						},
+						{
+							"id": 43,
+							"criticality": 0,
+							"value":
+							{
+								"UEPagingID": 0
+							}
+						},
+						{
+							"id": 109,
+							"criticality": 0,
+							"value":
+							{
+								"CNDomain":0
+							}
+						},
+						{
+							"id": 46,
+							"criticality": 0,
+							"value":
+							{
+								"TAIList":
+								{
+									"id": 47,
+									"criticality": 0,
+									"value":
+									{
+										"TAIItem":
+										[
+											{
+												"id": 67,
+												"criticality": 0,
+												"value":
+												{
+													"tAI":
+													{
+														"pLMNidentity": "02f829",
+														"tAC": "1002"
+													}
+												}
+											}
+											
+										]
+									}
+								
+								}
+							}
+						}
+					]
+				}
+			}
+		}
+	}
+}

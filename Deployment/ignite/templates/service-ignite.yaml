@@ -1,0 +1,131 @@
+{{/*
+Copyright 2019, Infosys Ltd.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{- $configJson := index .Values.config.ignite.cfgFiles "configuration.json" }}
+{{- $configJsonDiameter := index $configJson "diameter"}}
+{{- $configJsonGtp := index $configJson "gtp" }}
+{{- $configJsonS1ap := index $configJson "s1ap" }}
+{{- $configJsonTc := index $configJson "runtestcase" }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ignite
+  labels:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+  type: ClusterIP
+  ports:
+    - name: diameter
+      port: {{ index $configJsonDiameter "ignite_port" }}
+      protocol: SCTP
+    - name: diametertc
+      port: {{ index $configJsonDiameter "tc_port" }}
+      protocol: TCP      
+    - name: gtp
+      port: {{ index $configJsonGtp "ignite_port" }}
+      protocol: UDP
+    - name: gtptc
+      port: {{ index $configJsonGtp "tc_port" }}
+      protocol: TCP
+    - name: s1ap
+      port: {{ index $configJsonS1ap "ignite_port" }}
+      protocol: TCP
+    - name: s1aptc
+      port: {{ index $configJsonS1ap "tc_port" }}
+      protocol: TCP
+    - name: ssh
+      port: {{ index $configJsonTc "ssh_port" }}
+      protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ignite-headless
+  labels:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+  clusterIP: None
+  ports:
+    - name: diameter
+      port: {{ index $configJsonDiameter "ignite_port" }}
+      protocol: SCTP
+    - name: diametertc
+      port: {{ index $configJsonDiameter "tc_port" }}
+      protocol: TCP  
+    - name: gtp
+      port: {{ index $configJsonGtp "ignite_port" }}
+      protocol: UDP
+    - name: gtptc
+      port: {{ index $configJsonGtp "tc_port" }}
+      protocol: TCP
+    - name: s1ap
+      port: {{ index $configJsonS1ap "ignite_port" }}
+      protocol: TCP
+    - name: s1aptc
+      port: {{ index $configJsonS1ap "tc_port" }}
+      protocol: TCP
+    - name: ssh
+      port: {{ index $configJsonTc "ssh_port" }}
+      protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ignite-external
+  labels:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+  type: NodePort
+  ports:
+    - name: diameter
+      port: {{ index $configJsonDiameter "ignite_port" }}
+      protocol: SCTP
+      nodePort: {{ index $configJsonDiameter "ignite_port" }}
+    - name: diametertc
+      port: {{ index $configJsonDiameter "tc_port" }}
+      protocol: TCP
+      nodePort: {{ index $configJsonDiameter "tc_port" }}
+    - name: gtp
+      port: {{ index $configJsonGtp "ignite_port" }}
+      protocol: UDP
+      nodePort: {{ index $configJsonGtp "ignite_port" }}
+    - name: gtptc
+      port: {{ index $configJsonGtp "tc_port" }}
+      protocol: TCP
+      nodePort: {{ index $configJsonGtp "tc_port" }}
+    - name: s1ap
+      port: {{ index $configJsonS1ap "ignite_port" }}
+      protocol: TCP
+      nodePort: {{ index $configJsonS1ap "ignite_port" }}
+    - name: s1aptc
+      port: {{ index $configJsonS1ap "tc_port" }}
+      protocol: TCP
+      nodePort: {{ index $configJsonS1ap "tc_port" }}
+    - name: ssh
+      port: {{ index $configJsonTc "ssh_port" }}
+      nodePort: {{ index $configJsonTc "ssh_port_external" }}
+      protocol: TCP
+

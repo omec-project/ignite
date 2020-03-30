@@ -1,0 +1,105 @@
+{
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "NAS-MESSAGE": {},
+  "S1AP-PDU": {
+    "initiatingMessages": {
+      "procedure": 1,
+      "criticality": 1,
+      "value": {
+        "HandoverResourceAllocation": {
+          "ProtocallIEs": [
+            {
+              "id": 0,
+              "criticality": 1,
+              "value": {
+                "MME-UE-S1AP-ID": 0
+              }
+            },
+            {
+              "id": 1,
+              "criticality": 1,
+              "value": {
+                "HandoverType": 0
+              }
+            },
+            {
+              "id": 2,
+              "criticality": 0,
+              "value": {
+                "Cause": {
+                  "CauseRadioNetwork": 33
+                }
+              }
+            },
+            {
+              "id": 66,
+              "criticality": 1,
+              "value": {
+                "UEAggregateMaximumBitrate": {
+                  "uEaggregateMaximumBitRateDL": 0,
+                  "uEaggregateMaximumBitRateUL": 0
+                }
+              }
+            },
+            {
+              "id": 53,
+              "criticality": 1,
+              "value": {
+                "E-RABToBeSetupListHOReq ": [
+                  {
+                    "id": 27,
+                    "criticality": 1,
+                    "value": {
+                      "E-RABToBeSetupItemHOReq": {
+                        "e-RAB-ID": 5,
+                        "transportLayerAddress": "ac10ec0e",
+                        "gTP-TEID": "00000236",
+                        "e-RABlevelQoSParameters": {
+                          "qCI": 9,
+                          "allocationRetentionPriority": {
+                            "priorityLevel": 1,
+                            "pre-emptionCapability": 1,
+                            "pre-emptionVulnerablity": 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "id": 107,
+              "criticality": 0,
+              "value": {
+                "UESecurityCapabilities": {
+                  "encryptionAlgorithms": "1110000000000000",
+                  "integrityProtectionAlgorithms": "1100000000000000"
+                }
+              }
+            },
+            {
+              "id": 40,
+              "criticality": 0,
+              "value": {
+                "SecurityContext": {
+                  "nextHopChainingCount": 1,
+                  "nextHopParameter": "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

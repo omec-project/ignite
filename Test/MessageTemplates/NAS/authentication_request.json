@@ -1,0 +1,26 @@
+{
+"_comment": "Copyright (c) 2019, Infosys Ltd.",
+"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+"_comment": "you may not use this file except in compliance with the License.",
+"_comment": "You may obtain a copy of the License at",
+"_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+"_comment": "Unless required by applicable law or agreed to in writing, software",
+"_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+"_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+"_comment": "See the License for the specific language governing permissions and",
+"_comment": "limitations under the License.",
+
+"security_header_type":"plain_nas_message_not_security_protected",
+"protocol_discriminator":"eps_mobility_management_messages",
+"mobility_mgmt_message_type":"authentication_request",
+"spare_half_octet":0,
+"type_of_security_context_flag_auth_req":"native_security_context_for_ksiasme",
+"nas_key_set_identifier_auth_req":6,
+"authentication_parameter_rand":4450888570729150081128168729192781136,
+"authentication_parameter_autn" :
+{
+
+"autn_value":280248487601900938346448213837270633809
+}
+}
+    

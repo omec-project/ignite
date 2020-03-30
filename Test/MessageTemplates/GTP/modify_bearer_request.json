@@ -1,0 +1,56 @@
+{
+	"_comment": "Copyright (c) 2019, Infosys Ltd.",
+	"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+    "_comment": "you may not use this file except in compliance with the License.",
+    "_comment": "You may obtain a copy of the License at",
+    "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+    "_comment": "Unless required by applicable law or agreed to in writing, software",
+    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+    "_comment": "See the License for the specific language governing permissions and",
+    "_comment": "limitations under the License.",
+    "msgHeirarchy": ["gtpv2"],
+    "msgDetails": 
+	{
+        "gtpv2": 
+	{
+        "protocol": "gtpv2",
+        "msg": 
+		{
+            "flags": "48",
+            "message_type": 34,
+            "teid": 566,
+            "sequence_number": 4260217,
+            "spare": 0,
+            "information_elements":
+	        [
+			  {
+			        "ie_type": 93,
+				"spare": 0,
+				"instance": 0,
+				"bearer_context":
+				    [
+				      {
+				        "ie_type": 73,
+					"spare": 0,
+					"instance": 0,
+					"eps_bearer_id": 5
+				       },
+				       {
+				         "ie_type": 87,
+					 "spare": 0,
+					 "instance": 0,
+					 "ipv4present": 1,
+					 "ipv6present": 0,
+					 "interface_type": 0,
+					 "teid_gre_key": 220,
+					 "ipv4address": "10.166.30.12"
+				       }
+				     ]
+			   }
+			]
+		}
+	}
+	
+	}	
+}

@@ -1,0 +1,82 @@
+{{/*
+Copyright 2019, Infosys Ltd.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{- $configJson := index .Values.config.ignite.cfgFiles "configuration.json" }}
+{{- $configJsonRobo := index .Values.config.ignite.cfgFiles "resources.MMEConfig.txt" }}
+{{- $configJsonGtp := index $configJson "gtp" }}
+{{- $configJsonS1ap := index $configJson "s1ap" }}
+{{- $configJsonDiameter := index $configJson "diameter" }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ignite
+  labels:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+data:
+  configuration.json: |
+    {
+    "gtp": {"type_of_socket": {{index $configJsonGtp "type_of_socket" | quote}},
+    "sut_ip": "mme",
+    "sut_port": {{index $configJsonGtp "sut_port"}},
+    "ignite_ip": "ignite",
+    "ignite_port": {{index $configJsonGtp "ignite_port"}},
+    "tc_port": {{index $configJsonGtp "tc_port"}}
+    },
+    "s1ap":
+    {
+    "type_of_socket": {{index $configJsonS1ap "type_of_socket" | quote}},
+    "sut_ip": "mme",
+    "sut_port": {{index $configJsonS1ap "sut_port"}},
+    "ignite_ip": "ignite",
+    "ignite_port": {{index $configJsonS1ap "ignite_port"}},
+    "tc_port": {{index $configJsonS1ap "tc_port"}}
+    },
+    "diameter": {
+    "type_of_socket": {{index $configJsonDiameter "type_of_socket"| quote}},
+    "sut_ip": "mme",
+    "sut_port": {{index $configJsonDiameter "sut_port"}},
+    "ignite_port": {{index $configJsonDiameter "ignite_port"}},
+    "ignite_ip": "ignite",
+    "tc_port": {{index $configJsonDiameter "tc_port"}},
+    "ignite_host": {{ tuple "ignite" "identity" . | include "ignite.diameter_endpoint" | quote }},
+    "ignite_realm": {{ tuple "ignite" "realm" . | include "ignite.diameter_endpoint" | quote }},
+    "mme_host": {{ tuple "mme" "identity" . | include "ignite.diameter_endpoint" | quote }},
+    "mme_realm": {{ tuple "mme" "realm" . | include "ignite.diameter_endpoint" | quote }}
+    }
+    }
+  resources.MMEConfig.txt: |
+    *** Settings ***
+    Documentation     This is a genric resource file to define global variables.
+
+    *** Variables ***
+    ${mmeUserName}    {{index $configJsonRobo "mmeUserName"}}
+    ${igniteUserName}    {{index $configJsonRobo "igniteUserName"}}
+    ${openMmeLibPath}    {{index $configJsonRobo "openMmeLibPath"}}
+    ${mmeGrpcClientPath}    {{index $configJsonRobo "mmeGrpcClientPath"}}
+
+  ignite-init.sh: |
+{{ tuple "bin/_ignite-init.sh.tpl" . | include "ignite.template" | indent 4 }}
+
+  ignite-run.sh: |
+{{ tuple "bin/_ignite-run.sh.tpl" . | include "ignite.template" | indent 4 }}
+
+  ignite-ip.sh: |
+{{ tuple "bin/_ignite-ip.sh.tpl" . | include "ignite.template" | indent 4 }}  
+  
+  ignite-runtc.sh: |
+{{ tuple "bin/_ignite-runtc.sh.tpl" . | include "ignite.template" | indent 4 }}

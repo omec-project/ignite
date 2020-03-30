@@ -1,0 +1,41 @@
+{
+"_comment": "Copyright (c) 2019, Infosys Ltd.",
+"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+"_comment": "you may not use this file except in compliance with the License.",
+"_comment": "You may obtain a copy of the License at",
+"_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+"_comment": "Unless required by applicable law or agreed to in writing, software",
+"_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+"_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+"_comment": "See the License for the specific language governing permissions and",
+"_comment": "limitations under the License.",
+"gtp": {"type_of_socket": "udp",
+"sut_ip": "192.168.1.14",
+"sut_port": 2123,
+"ignite_ip": "192.168.1.51",
+"ignite_port": 2123,
+"tc_port": 1233
+},
+"s1ap":
+{
+"type_of_socket": "sctp",
+"sut_ip": "192.168.1.14",
+"sut_port": 36412,
+"ignite_ip": "192.168.1.51",
+"ignite_port": 5003,
+"tc_port": 62324
+},
+"diameter": {
+"type_of_socket": "sctp",
+"sut_ip": "192.168.1.14",
+"sut_port": 0,
+"ignite_ip": "192.168.1.51",
+"ignite_port": 3868,
+"tc_port": 4321,
+"ignite_host": "hss.openair4g.eur",
+"ignite_realm": "openair4g.eur",
+"mme_host": "mme.localdomain",
+"mme_realm": "localdomain"
+
+}
+}

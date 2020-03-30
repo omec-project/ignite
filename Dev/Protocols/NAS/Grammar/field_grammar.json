@@ -1,0 +1,5375 @@
+{
+"_comment": "Copyright (c) 2019, Infosys Ltd.",
+"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+"_comment": "you may not use this file except in compliance with the License.",
+"_comment": "You may obtain a copy of the License at",
+"_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+"_comment": "Unless required by applicable law or agreed to in writing, software",
+"_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+"_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+"_comment": "See the License for the specific language governing permissions and",
+"_comment": "limitations under the License.",
+    "protocol_discriminator"    :    {
+        "name"    :    "protocol_discriminator",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+
+"group_call_control":0,
+"broadcast_call_control":1,
+"eps_session_management_messages":2,
+"call_control_call_related_ss_messages":3,
+"gprs_transparent_transport_protocol_gttp":4,
+"mobility_mgmt_messages":5,
+"radio_resources_management_messages":6,
+"eps_mobility_management_messages":7,
+"gprs_mobility_management_messages":8,
+"sms_messages":9,
+"gprs_session_management_messages":10,
+"non_call_related_ss_messages":11,
+"location_services_specified":12,
+"reserved_for_extension_of_the_pd_to_one_octet_length":14,
+"used_by_tests_procedures":15
+},
+
+        "byte_to_json"    :    {
+
+"0":"group_call_control",
+"1":"broadcast_call_control",
+"2":"eps_session_management_messages",
+"3":"call_control_call_related_ss_messages",
+"4":"gprs_transparent_transport_protocol_gttp",
+"5":"mobility_mgmt_messages",
+"6":"radio_resources_management_messages",
+"7":"eps_mobility_management_messages",
+"8":"gprs_mobility_management_messages",
+"9":"sms_messages",
+"10":"gprs_session_management_messages",
+"11":"non_call_related_ss_messages",
+"12":"location_services_specified",
+"14":"reserved_for_extension_of_the_pd_to_one_octet_length",
+"15":"used_by_tests_procedures"
+
+},
+        "format"    :    "V"
+    },
+
+    "security_header_type"    :    {
+        "name"    :    "security_header_type",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {
+            "plain_nas_message_not_security_protected"    :    0,
+            "security_protected_integrity_protected"    :    1,
+            "integrity_protected_and_ciphered"    :    2,
+            "integrity_protected_new_eps_security_context"    :    3,
+            "integrity_protected_ciphered_new_eps_security_context"    :4,
+            "integrity_protected_partially_ciphered_nas_message" :5,
+"security_header_service_request"    :    12
+         
+        },
+        "byte_to_json"  :    {
+            "0"    :    "plain_nas_message_not_security_protected",
+            "1"    :    "security_protected_integrity_protected",
+            "2"    :    "integrity_protected_and_ciphered",
+"3"   : "integrity_protected_new_eps_security_context",
+            "4"    :    "integrity_protected_ciphered_new_eps_security_context",
+            "5"    :    "integrity_protected_partially_ciphered_nas_message",
+            "12"    :    "security_header_service_request"
+           
+        },
+        "format"    :    "V"
+    },
+
+    "mobility_mgmt_message_type"    :    {
+        "name"    :    "mobility_mgmt_message_type",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+            "attach_request"    :    65,
+            "attach_accept"    :    66,
+            "attach_complete"    :    67,
+            "attach_reject"    :    68,
+            "detach_request"    :    69,
+            "detach_accept"    :    70,
+            "tracking_area_update_request"    :    72,
+            "tracking_area_update_accept"    :    73,
+            "tracking_area_update_complete"    :    74,
+            "tracking_area_update_reject"    :    75,
+            "extended_service_request"    :    76,
+            "control_plane_service_request"    :    77,
+            "service_reject"    :    78,
+            "service_accept"    :    79,
+            "guti_reallocation_command"    :    80,
+            "guti_reallocation_complete"    :    81,
+            "authentication_request"    :    82,
+            "authentication_response"    :    83,
+            "authentication_reject"    :    84,
+            "identity_request"    :    85,
+            "identity_response"    :    86,
+            "authentication_failure"    :    92,
+            "security_mode_command"    :    93,
+            "security_mode_complete"    :    94,
+            "security_mode_reject"    :    95,
+            "emm_status"    :    96,
+            "emm_information"    :    97,
+            "downlink_nas_transport"    :    98,
+            "uplink_nas_transport"    :    99,
+            "cs_service_notification"    :    100,
+            "downlink_generic_nas_transport"    :    104,
+            "uplink_generic_nas_transport"    :    105,
+            "esm_information_request":      217,
+            "esm_information_response":    218
+        },
+        "byte_to_json"    :    {
+            "65"    :    "attach_request",
+            "66"    :    "attach_accept",
+            "67"    :    "attach_complete",
+            "68"    :    "attach_reject",
+            "69"    :    "detach_request",
+            "70"    :    "detach_accept",
+            "72"    :    "tracking_area_update_request",
+            "73"    :    "tracking_area_update_accept",
+            "74"    :    "tracking_area_update_complete",
+            "75"    :    "tracking_area_update_reject",
+            "76"    :    "extended_service_request",
+            "77"    :    "control_plane_service_request",
+            "78"    :    "service_reject",
+            "79"    :    "service_accept",
+            "80"    :    "guti_reallocation_command",
+            "81"    :    "guti_reallocation_complete",
+            "82"    :    "authentication_request",
+            "83"    :    "authentication_response",
+            "84"    :    "authentication_reject",
+            "85"    :    "identity_request",
+            "86"    :    "identity_response",
+            "92"    :    "authentication_failure",
+            "93"    :    "security_mode_command",
+            "94"    :    "security_mode_complete",
+            "95"    :    "security_mode_reject",
+            "96"    :    "emm_status",
+            "97"    :    "emm_information",
+            "98"    :    "downlink_nas_transport",
+            "99"    :    "uplink_nas_transport",
+            "100"    :    "cs_service_notification",
+            "104"    :    "downlink_generic_nas_transport",
+            "105"    :    "uplink_generic_nas_transport",
+            "217"    :    "esm_information_request",
+            "218"    :    "esm_information_response"
+        },
+        "format"    :    "V"  
+    },
+
+   
+
+    "eps_mobile_identity"    :    {
+        "name"    :    "eps_mobile_identity",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    8,
+        "min_size"    :    8,
+        "join_sf"    :    [
+       
+         
+            {
+                "union_sf":    ["mcc_digit_1_eps","odd_even_indication","type_of_identity"]
+            },
+            {
+                "union_sf":    ["mcc_digit_3_eps","mcc_digit_2_eps"]
+            },
+{
+                "union_sf":    ["mnc_digit_2_eps","mnc_digit_1_eps"]
+            },
+            {
+                "union_sf":    ["msin_1","mnc_digit_3_eps"]
+},
+{
+                "union_sf":    ["msin_3","msin_2"]
+},
+{
+                "union_sf":    ["msin_5","msin_4"]
+},
+{
+                "union_sf":    ["msin_7","msin_6"]
+},
+{
+                "union_sf":    ["msin_9","msin_8"]
+}
+
+    ]
+    },
+
+   "mcc_digit_1_eps"    :    {
+        "name"    :    "mcc_digit_1_eps",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+ 
+    "mcc_digit_2_eps"    :    {
+        "name"    :    "mcc_digit_2_eps",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "mcc_digit_3_eps"    :    {
+        "name"    :    "mcc_digit_3_eps",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "mnc_digit_1_eps"    :    {
+        "name"    :    "mnc_digit_1_eps",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "mnc_digit_2_eps"    :    {
+        "name"    :    "mnc_digit_2_eps",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "mnc_digit_3_eps"    :    {
+        "name"    :    "mnc_digit_3_eps",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+    "msin_1"    :    {
+        "name"    :    "msin_1",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "msin_2"    :    {
+        "name"    :    "msin_2",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "msin_3"    :    {
+        "name"    :    "msin_3",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "msin_4"    :    {
+        "name"    :    "msin_4",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "msin_5"    :    {
+        "name"    :    "msin_5",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+ "msin_6"    :    {
+        "name"    :    "msin_6",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+ "msin_7"    :    {
+        "name"    :    "msin_7",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+ "msin_8"    :    {
+        "name"    :    "msin_8",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+ "msin_9"    :    {
+        "name"    :    "msin_9",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+ "msin_10"    :    {
+        "name"    :    "msin_10",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+ "msin_11"    :    {
+        "name"    :    "msin_11",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+
+
+
+
+
+
+ 
+
+    "identity_digit_1"    :    {
+        "name"    :    "identity_digit_1",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+    "odd_even_indication"    :    {
+        "name"    :    "odd_even_indication",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+    "type_of_identity"    :    {
+        "name"    :    "type_of_identity",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+    "mcc_digit_2"    :    {
+        "name"    :    "mcc_digit_2",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+    "mcc_digit_1"    :    {
+        "name"    :    "mcc_digit_1",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+    "mnc_digit_3"    :    {
+        "name"    :    "mnc_digit_3",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "mcc_digit_3"    :    {
+        "name"    :    "mcc_digit_3",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "mnc_digit_2"    :    {
+        "name"    :    "mnc_digit_2",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+    "mnc_digit_1"    :    {
+        "name"    :    "mnc_digit_1",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+
+
+
+    "ue_network_capability"    :    {
+        "name"    :    "ue_network_capability",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    12,
+        "min_size"    :    1,
+        "join_sf"    :    [
+       
+           
+           
+            {
+                "union_sf":    ["eea0","128_eea1","128_eea2","128_eea3","eea4","eea5","eea6","eea7"]
+            },
+            {
+                "union_sf":    ["eia0","128_eia1","128_eia2","128_eia3","eia4","eia5","eia6","eia7"]
+            },
+            {
+                "union_sf":    ["uea0","uea1","uea2","uea3","uea4","uea5","uea6","uea7"]
+            },
+            {
+                "union_sf":    ["ucs2","uia1","uia2","uia3","uia4","uia5","uia6","uia7"]
+            },
+            {
+                "union_sf":    ["prose_dd","prose","h.245_ash","acc_csfb","lpp","lcs","1xsr_vcc","nf"]
+            }
+           
+            ]
+    },
+
+   
+
+
+    "eea0"    :    {
+        "name"    :    "eea0",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "128_eea1"    :    {
+        "name"    :    "128_eea1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "128_eea2"    :    {
+        "name"    :    "128_eea2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "128_eea3"    :    {
+        "name"    :    "128_eea3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+
+    "eea4"    :    {
+        "name"    :    "eea4",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"1":"not_supported",
+                                "0":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "eea5"    :    {
+        "name"    :    "eea5",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "eea6"    :    {
+        "name"    :    "eea6",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "eea7"    :    {
+        "name"    :    "eea7",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },      
+   
+
+    "eia0"    :    {
+        "name"    :    "eia0",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "128_eia1"    :    {
+        "name"    :    "128_eia1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "128_eia2"    :    {
+        "name"    :    "128_eia2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "128_eia3"    :    {
+        "name"    :    "128_eia3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+
+    "eia4"    :    {
+        "name"    :    "eia4",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "eia5"    :    {
+        "name"    :    "eia5",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "eia6"    :    {
+        "name"    :    "eia6",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "eia7"    :    {
+        "name"    :    "eia7",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :   0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },      
+
+
+    "uea0"    :    {
+        "name"    :    "uea0",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "uea1"    :    {
+        "name"    :    "uea1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "uea2"    :    {
+        "name"    :    "uea2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "uea3"    :    {
+        "name"    :    "uea3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+
+    "uea4"    :    {
+        "name"    :    "uea4",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :   3,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "uea5"    :    {
+        "name"    :    "uea5",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "uea6"    :    {
+        "name"    :    "uea6",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "uea7"    :    {
+        "name"    :    "uea7",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },              
+
+
+
+    "ucs2"    :    {
+        "name"    :    "ucs2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"the_ue_has_a_preference_for_the_default_alphabet" : 0,
+                "the_ue_has_no_preference_between_the_use_of_the_default_alphabet_and_the_use_of_ucs2" : 1  },
+       
+    "byte_to_json"    :    {"0":"the_ue_has_a_preference_for_the_default_alphabet",
+                "1":"the_ue_has_no_preference_between_the_use_of_the_default_alphabet_and_the_use_of_ucs2"   },
+        "format"    :    "NA"
+    },
+
+    "uia1"    :    {
+        "name"    :    "uia1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "uia2"    :    {
+        "name"    :    "uia2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "uia3"    :    {
+        "name"    :    "uia3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+
+    "uia4"    :    {
+        "name"    :    "uia4",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "uia5"    :    {
+        "name"    :    "uia5",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "uia6"    :    {
+        "name"    :    "uia6",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "uia7"    :    {
+        "name"    :    "uia7",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },      
+
+    "gea1"    :    {
+        "name"    :    "gea1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "gea2"    :    {
+        "name"    :    "gea2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "gea3"    :    {
+        "name"    :    "gea3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+
+    "gea4"    :    {
+        "name"    :    "gea4",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "gea5"    :    {
+        "name"    :    "gea5",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "gea6"    :    {
+        "name"    :    "gea6",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "gea7"    :    {
+        "name"    :    "gea7",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },      
+
+
+    "prose_dd"    :    {
+        "name"    :    "prose_dd",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "prose"    :    {
+        "name"    :    "prose",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "h.245_ash"    :    {
+        "name"    :    "h.245_ash",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "acc_csfb"    :    {
+        "name"    :    "acc_csfb",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+
+    "lpp"    :    {
+        "name"    :    "lpp",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "lcs"    :    {
+        "name"    :    "lcs",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },  
+   
+    "1xsr_vcc"    :    {
+        "name"    :    "1xsr_vcc",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+    "nf"    :    {
+        "name"    :    "nf",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_supported" : 0,
+                                "supported" : 1  },
+        "byte_to_json"    :    {"0":"not_supported",
+                                "1":"supported"   },
+        "format"    :    "NA"
+    },
+
+
+   
+
+
+
+"tracking_area_identity"    :    {
+        "name"    :    "tracking_area_identity",
+        "type"    :    "O",
+        "format"    :    "TV",
+        "max_size"    :    5,
+        "min_size"    :    5,
+    "type_id":         "52",
+        "join_sf"    :    [
+       
+           
+            {
+                "union_sf":    ["mcc_digit_2","mcc_digit_1"]
+            },
+            {
+                "union_sf":    ["mnc_digit_3","mcc_digit_3"]
+            },
+        {
+                "union_sf":    ["mnc_digit_2","mnc_digit_1"]
+            },
+        "tac"    
+                  ]    
+     },
+
+
+
+    "tac"    :    {
+        "name"    :    "tac",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+         "max_size"    :    2,
+        "min_size"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+    "drx_parameter"    :    {
+        "name"    :    "drx_parameter",
+        "type"    :    "M",
+        "format"    :    "TV",
+        "max_size"    :    2,
+        "min_size"    :    2,
+        "type_id"  : "5c",    
+        "join_sf"    :    [
+       
+           
+        "split_pd_cycle_code",
+
+            {
+                "union_sf":    ["cn_specific_drx_cycle_length_coefficient","split_on_ccch","non_drx_timer"]
+            }
+              ]    
+     },
+
+ 
+
+   
+    "split_pd_cycle_code"    :    {
+        "name"    :    "split_pd_cycle_code",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+         "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {"704": 0,
+                "1":1,
+                "2":2,
+                "3":3,
+                "4":4,
+                "5":5,
+                "6":6,
+                "7":7,
+                "8":8,
+                "9":9,
+                "10":10,
+                "11":11,
+                "12":12,
+                "13":13,
+                "14":14,
+                "15":15,
+                "16":16,
+                "17":17,
+                "18":18,
+                "19":19,
+                "20":20,
+                "21":21,
+                "22":22,
+                "23":23,
+                "24":24,
+                "25":25,
+                "26":26,
+                "27":27,
+                "28":28,
+                "29":29,
+                "30":30,
+                "31":31,
+                "32":32,
+                "33":33,
+                "34":34,
+                "35":35,
+                "36":36,
+                "37":37,
+                "38":38,
+                "39":39,
+                "40":40,
+                "41":41,
+                "42":42,
+                "43":43,
+                "44":44,
+                "45":45,
+                   "46":46,
+                "47":47,
+                "48":48,
+                "49":49,
+                "50":50,
+                "51":51,
+                "52":52,
+                "53":53,
+                "54":54,
+                "55":55,
+                "56":56,
+                "57":57,
+                "58":58,
+                "59":59,
+                "60":60,
+                "61":61,
+                "62":62,
+                "63":63,
+                "64":64,
+                "71":65,
+                "72":66,
+                "74":67,
+                "75":68,
+                "77":69,
+                "79":70,
+                "80":71,
+                "83":72,
+                "86":73,
+                "88":74,
+                "90":75,
+                "92":76,
+                "96":77,
+                "101":78,
+                "103":79,
+                "107":80,
+                "112":81,
+                "116":82,
+                "118":83,
+                "128":84,
+                "141":85,
+                "144":86,
+                "150":87,
+                "160":88,
+                "171":89,
+                "176":90,
+                "192":91,
+                "214":92,
+                "224":93,      
+                "235":94,
+                "256":95,
+                "288":96,
+                "320":97,
+                "352":98
+
+                 },
+        "byte_to_json"    :    {"0":"704",
+                "1":"1",
+                "2":"2",
+                "3":"3",
+                "4":"4",
+                "5":"5",
+                "6":"6",
+                "7":"7",
+                "8":"8",
+                "9":"9",
+                "10":"10",
+                "11":"11",
+                "12":"12",
+                "13":"13",
+                "14":"14",
+                "15":"15",
+                "16":"16",
+                "17":"17",
+                "18":"18",
+                "19":"19",
+                "20":"20",
+                "21":"21",
+                "22":"22",
+                "23":"23",
+                "24":"24",
+                "25":"25",
+                "26":"26",
+                "27":"27",
+                "28":"28",
+                "29":"29",
+                "30":"30",
+                "31":"31",
+                "32":"32",
+                "33":"33",
+                "34":"34",
+                "35":"35",
+                "36":"36",
+                "37":"37",
+                "38":"38",
+                "39":"39",
+                "40":"40",
+                "41":"41",
+                "42":"42",
+                "43":"43",
+                "44":"44",
+                "45":"45",
+                   "46":"46",
+                "47":"47",
+                "48":"48",
+                "49":"49",
+                "50":"50",
+                "51":"51",
+                "52":"52",
+                "53":"53",
+                "54":"54",
+                "55":"55",
+                "56":"56",
+                "57":"57",
+                "58":"58",
+                "59":"59",
+                "60":"60",
+                "61":"61",
+                "62":"62",
+                "63":"63",
+                "64":"64",
+                "65":"71",
+                "66":"72",
+                "67":"74",
+                "68":"75",
+                "69":"77",
+                "70":"79",
+                "71":"80",
+                "72":"83",
+                "73":"86",
+                "74":"88",
+                "75":"90",
+                "76":"92",
+                "77":"96",
+                "78":"101",
+                "79":"103",
+                "80":"107",
+                "81":"112",
+                "82":"116",
+                "83":"118",
+                "84":"128",
+                "85":"141",
+                "86":"144",
+                "87":"150",
+                "88":"160",
+                "89":"171",
+                "90":"176",
+                "91":"192",
+                "92":"214",
+                "93":"224",      
+                "94":"235",
+                "95":"256",
+                "96":"288",
+                "97":"320",
+                "98":"352"
+                                                                                                                                   
+                },
+        "format"    :    "NA"
+    },
+
+    "cn_specific_drx_cycle_length_coefficient"    :    {
+        "name"    :    "cn_specific_drx_cycle_length_coefficient",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {
+                "cn_specific_drx_cycle_length_coefficient_not_specified":0,
+                "cn_specific_drx_cycle_length_coefficient_6":6,
+                "cn_specific_drx_cycle_length_coefficient_7":7,
+                "cn_specific_drx_cycle_length_coefficient_8":8,          
+                "cn_specific_drx_cycle_length_coefficient_9":9
+
+                                },
+        "byte_to_json"    :    {
+                                "0":"cn_specific_drx_cycle_length_coefficient_not_specified",
+                "6":"cn_specific_drx_cycle_length_coefficient_6",
+                "7":"cn_specific_drx_cycle_length_coefficient_7",
+                "8":"cn_specific_drx_cycle_length_coefficient_8",          
+                "9":"cn_specific_drx_cycle_length_coefficient_9"
+
+                                },
+        "format"    :    "NA"
+    },
+
+    "split_on_ccch"    :    {
+        "name"    :    "split_on_ccch",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {
+                "split_pg_cycle_on_ccch_is_not_supported_by_the_mobile_station":0,
+                "split_pg_cycle_on_ccch_is_supported_by_the_mobile_station":1
+                    },
+        "byte_to_json"    :    {
+                "1":"split_pg_cycle_on_ccch_is_supported_by_the_mobile_station",
+                "0":"split_pg_cycle_on_ccch_is_not_supported_by_the_mobile_station"
+                            },
+        "format"    :    "NA"
+    },
+
+
+    "non_drx_timer"    :    {
+        "name"    :    "non_drx_timer",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+                "no_non_drx_mode_after_transfer_state":0,
+                "max_1_sec_non_drx_mode_after_transfer_state":1,            
+                "max_2_sec_non_drx_mode_after_transfer_state":2,
+                "max_4_sec_non_drx_mode_after_transfer_state":3,                  
+                "max_8_sec_non_drx_mode_after_transfer_state":4,
+                "max_16_sec_non_drx_mode_after_transfer_state":5,
+                "max_32_sec_non_drx_mode_after_transfer_state":6,
+                "max_64_sec_non_drx_mode_after_transfer_state":7
+
+                        },
+        "byte_to_json"    :    {
+                "0":"no_non_drx_mode_after_transfer_state",
+                "1":"max_1_sec_non_drx_mode_after_transfer_state",            
+                "2":"max_2_sec_non_drx_mode_after_transfer_state",
+                "3":"max_4_sec_non_drx_mode_after_transfer_state",                  
+                "4":"max_8_sec_non_drx_mode_after_transfer_state",
+                "5":"max_16_sec_non_drx_mode_after_transfer_state",
+                "6":"max_32_sec_non_drx_mode_after_transfer_state",
+                "7":"max_64_sec_non_drx_mode_after_transfer_state"
+                                   
+        },
+        "format"    :    "NA"
+    },
+
+    "ms_network_capability"    :    {
+        "name"    :    "ms_network_capability",
+        "type"    :    "O",
+        "format"    :    "TLV",
+        "max_size"    :    8,
+        "min_size"    :    2,
+    "type_id":         "31",
+        "join_sf"    :    [
+       
+         
+    {
+    "union_sf":["gea_1","sm_capabilities_via_dedicated_channels","sm_capabilities_via_gprs_channels",
+"ucs2_support","ss_screening_indicator","solsa_capability","revision_level_indicator"]
+            },
+   
+    {
+"union_sf":["pfc_feature_mode","gea_2","gea_3","gea_4","gea_5","gea_6","gea_7","lcs_va_capability"]
+
+},
+    {
+"union_sf":["ps_inter_rat_ho_from_geran_to_utran_iu_mode_capability",
+    "ps_inter_rat_ho_from_geran_to_e_utran_s1_mode_capability","emm_combined_procedures_capability",
+    "isr_support","srvcc_to_geran_utran_capability","epc_capability","nf_capability","geran_network_sharing_capability"]
+    }
+    ]    
+     },
+
+ 
+     "gea_1"    :    {
+        "name"    :    "gea_1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    : {"encryption_algorithm_not_available":0,
+                "encryption_algorithm_available":1},
+        "byte_to_json"    :    {"0":"encryption_algorithm_not_available",
+                "1":"encryption_algorithm_available"},
+        "format"    :    "NA"
+    },
+
+     "gea_2"    :    {
+        "name"    :    "gea_2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"encryption_algorithm_not_available":0,
+                "encryption_algorithm_available":1},
+        "byte_to_json"    :    {"0":"encryption_algorithm_not_available",
+                "1":"encryption_algorithm_available"},
+        "format"    :    "NA"
+    },
+     "gea_3"    :    {
+        "name"    :    "gea_3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"encryption_algorithm_not_available":0,
+                "encryption_algorithm_available":1},
+        "byte_to_json"    :    {"0":"encryption_algorithm_not_available",
+                "1":"encryption_algorithm_available"},
+        "format"    :    "NA"
+    },
+     "gea_4"    :    {
+        "name"    :    "gea_4",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"encryption_algorithm_not_available":0,
+                "encryption_algorithm_available":1},
+        "byte_to_json"    :    {"0":"encryption_algorithm_not_available",
+                "1":"encryption_algorithm_available"},
+        "format"    :    "NA"
+    },
+
+
+         "gea_5"    :    {
+        "name"    :    "gea_5",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"encryption_algorithm_not_available":0,
+                "encryption_algorithm_available":1},
+        "byte_to_json"    :    {"0":"encryption_algorithm_not_available",
+                "1":"encryption_algorithm_available"},
+        "format"    :    "NA"
+    },
+
+     "gea_6"    :    {
+        "name"    :    "gea_6",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"encryption_algorithm_not_available":0,
+                "encryption_algorithm_available":1},
+        "byte_to_json"    :    {"0":"encryption_algorithm_not_available",
+                "1":"encryption_algorithm_available"},
+        "format"    :    "NA"
+    },
+
+     "gea_7"    :    {
+        "name"    :    "gea_7",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"encryption_algorithm_not_available":0,
+                "encryption_algorithm_available":1},
+        "byte_to_json"    :    {"0":"encryption_algorithm_not_available",
+                "1":"encryption_algorithm_available"},
+        "format"    :    "NA"
+    },
+
+
+"sm_capabilities_via_dedicated_channels": {
+        "name"    :    "sm_capabilities_via_dedicated_channels",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"does_not_support":0,
+                "support":1},
+        "byte_to_json"    :    {"0":"does_not_support",
+                "1":"support"},
+        "format"    :    "NA"
+    },
+
+
+"sm_capabilities_via_gprs_channels":{
+        "name"    :    "sm_capabilities_via_gprs_channels",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"does_not_support":0,
+                "support":1},
+        "byte_to_json"    :    {"0":"does_not_support",
+                "1":"support"},
+        "format"    :    "NA"
+    },
+
+
+
+
+"ucs2_support":{
+ "name"    :    "ucs2_support",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"preference":0,
+                "no_preference":1},
+        "byte_to_json"    :    {"0":"preference",
+                "1":"no_preference"},
+        "format"    :    "NA"
+    },
+
+"ss_screening_indicator":{
+ "name"    :    "ss_screening_indicator",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"default_value_of_phase_1":0,
+                "default_value_of_phase_2":1,
+                "default_value_of_phase_3":2,
+                "default_value_of_phase_4":3
+                },
+        "byte_to_json"    :    {"0":"default_value_of_phase_1",
+                "1":"default_value_of_phase_2",
+                "2":"default_value_of_phase_3",
+                "3":"default_value_of_phase_4"},
+        "format"    :    "NA"
+    },
+
+"solsa_capability":{
+ "name"    :    "solsa_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"does_not_support":0,
+                "support":1
+                },
+        "byte_to_json"    :    {"0":"does_not_support",
+                "1":"support"
+                },
+        "format"    :    "NA"
+    },
+
+"revision_level_indicator":{
+    "name"    :    "revision_level_indicator",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"does_not_support":0,
+                "support":1
+                },
+        "byte_to_json"    :    {"0":"does_not_support",
+                "1":"support"
+                },
+        "format"    :    "NA"
+    },
+
+
+
+"pfc_feature_mode":{
+    "name"    :    "pfc_feature_mode",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"does_not_support":0,
+                "support":1
+                },
+        "byte_to_json"    :    {"0":"does_not_support",
+                "1":"support"
+                },
+        "format"    :    "NA"
+    },
+
+"lcs_va_capability":{
+    "name"    :    "lcs_va_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"does_not_support":0,
+                "support":1
+                },
+        "byte_to_json"    :    {"0":"does_not_support",
+                "1":"support"
+                },
+        "format"    :    "NA"
+    },
+
+"ps_inter_rat_ho_from_geran_to_utran_iu_mode_capability":{
+    "name"    :    "ps_inter_rat_ho_from_geran_to_utran_iu_mode_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+
+
+
+"ps_inter_rat_ho_from_geran_to_e_utran_s1_mode_capability":{
+    "name"    :    "ps_inter_rat_ho_from_geran_to_e_utran_s1_mode_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+"emm_combined_procedures_capability":{
+    "name"    :    "emm_combined_procedures_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+"isr_support":{
+    "name"    :    "isr_support",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+"srvcc_to_geran_utran_capability":{
+    "name"    :    "srvcc_to_geran_utran_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+"epc_capability":{
+    "name"    :    "epc_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+"nf_capability":{
+    "name"    :    "nf_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+"geran_network_sharing_capability":{
+    "name"    :    "geran_network_sharing_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+
+
+    "location_area_identification_old_location_area_identification"    :    {
+        "name"    :    "location_area_identification_old_location_area_identification",
+        "type"    :    "O",
+        "format"    :    "TV",
+        "max_size"    :    5,
+        "min_size"    :    5,
+    "type_id":         "13",
+        "join_sf"    :    [
+       
+           
+           {
+                "union_sf":    ["mcc_digit_2","mcc_digit_1"]
+            },
+            {
+                "union_sf":    ["mnc_digit_3","mcc_digit_3"]
+            },
+        {
+                "union_sf":    ["mnc_digit_2","mnc_digit_1"]
+            },
+       
+        "location_area_code"
+              ]    
+     },
+
+
+
+
+"location_area_code":{
+    "name"    :    "location_area_code",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    2,
+        "min_size"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+"mobile_station_classmark_2"    :    {
+        "name"    :    "mobile_station_classmark_2",
+        "type"    :    "O",
+        "format"    :    "TLV",
+        "max_size"    :    3,
+        "min_size"    :    3,
+"type_id":         "11",
+        "join_sf"    :    [
+
+           
+
+            {
+                "union_sf":    ["spare","revision_level","es_ind","a5_1","rf_power_capability"]
+            },
+            {
+                "union_sf":    ["spare","ps_capability","ss_screening_indicator_1","sm_capability","vbs_notification_reception",
+"vgcs_notification_reception","fc_frequency_capability"]
+            },
+   {
+                "union_sf":    ["cm3","spare_1","lcs_va_capability_1","ucs2_treatment","solsa_1","cmsp","a5_3","a5_2"]
+            }
+   
+
+              ]    
+},
+
+
+
+"spare":{
+"name"    :    "spare",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+"revision_level":{
+"name"    :    "revision_level",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"reserved_for_gsm_phase_1":0,
+"used_by_gsm_phase_2_mobile_stations":1,
+"used_by_mobile_stations_supporting_r99_or_later_versions_of_the_protocol":2,
+"reserved_for_future_use":3
+},
+        "byte_to_json"    :    {"0":"reserved_for_gsm_phase_1",
+"1":"used_by_gsm_phase_2_mobile_stations",
+"2":"used_by_mobile_stations_supporting_r99_or_later_versions_of_the_protocol",
+"3":"reserved_for_future_use"
+
+},
+        "format"    :    "NA"
+    },
+"es_ind":{
+"name"    :    "es_ind",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"controlled_early_classmark_sending_option_is_not_implemented_in_the_ms":0,
+"controlled_early_classmark_sending_option_is_implemented_in_the_ms":1},
+
+
+        "byte_to_json"    :    {"0":"controlled_early_classmark_sending_option_is_not_implemented_in_the_ms",
+"1":"controlled_early_classmark_sending_option_is_implemented_in_the_ms"
+
+
+
+  },
+        "format"    :    "NA"
+    },
+
+"a5_1":{
+"name"    :    "a5_1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"available":0,
+"not_available":1},
+       
+"byte_to_json"    :    {"0":"available",
+"1":"not_available"},
+        "format"    :    "NA"
+    },
+
+"rf_power_capability":{
+"name"    :    "rf_power_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+"class_1":0,
+"class_2":1,
+"class_3":2,
+"class_4":3,
+"class_5":4 },
+        "byte_to_json"    :    {
+"0":"class_1",
+"1":"class_2",
+"2":"class_3",
+"3":"class_4",
+"4":"class_5"
+
+},
+        "format"    :    "NA"
+    },
+
+"ps_capability":{
+"name"    :    "ps_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"not_present":0,
+"present":1 },
+     
+"byte_to_json"    :    {"0":"not_present",
+"1":"present"
+},
+        "format"    :    "NA"
+    },
+
+
+"ss_screening_indicator_1":{
+"name"    :    "ss_screening_indicator_1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"default_value_of_phase_1":0,
+"default_value_of_phase_2":1,
+"default_value_of_phase_3":2,
+"default_value_of_phase_4":3
+},
+        "byte_to_json"    :    {"0":"default_value_of_phase_1",
+"1":"default_value_of_phase_2",
+"2":"default_value_of_phase_3",
+"3":"default_value_of_phase_4"},
+        "format"    :    "NA"
+    },
+
+"sm_capability":{
+"name"    :    "sm_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"not_supported":0,
+"supported":1 },
+       
+"byte_to_json"    :    {"0":"not_supported",
+"1":"supported"
+},
+        "format"    :    "NA"
+    },
+
+
+"vbs_notification_reception":{
+"name"    :    "vbs_notification_reception",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"no_notifications":0,
+"notifications":1 },
+        "byte_to_json"    :    {"0":"no_notifications",
+"1":"notifications"
+},
+        "format"    :    "NA"
+    },
+
+
+"vgcs_notification_reception":{
+"name"    :    "vbs_notification_reception",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"no_notifications":0,
+"notifications":1   },
+        "byte_to_json"    :    {"0":"no_notifications",
+"1":"notifications" },
+        "format"    :    "NA"
+    },
+
+
+"fc_frequency_capability":{
+"name"    :    "fc_frequency_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_supported": 0,
+"supported": 1},
+        "byte_to_json"    :    {"0":"not_supported",
+"1":"supported"},
+        "format"    :    "NA"
+    },
+
+
+"cm3":{
+"name"    :    "cm3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"not_supported":0,
+"supported":1 },
+        "byte_to_json"    :    {"0":"not_supported",
+"1":"supported" },
+        "format"    :    "NA"
+    },
+
+
+
+"spare_1":{
+"name"    :    "spare_1",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+"lcs_va_capability_1":{
+"name"    :    "lcs_va_capability_1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"does_not_support":0,
+"support":1
+},
+        "byte_to_json"    :    {"0":"does_not_support",
+"1":"support"
+},
+        "format"    :    "NA"
+    },
+
+"ucs2_treatment":{
+"name"    :    "ucs2_treatment",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"preference":0,
+"no_preference":1 },
+       
+"byte_to_json"    :    {"0":"preference",
+"1":"no_preference"
+},
+        "format"    :    "NA"
+    },
+
+"solsa_1":{
+ "name"    :    "solsa_1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"does_not_support":0,
+"support":1
+},
+        "byte_to_json"    :    {"0":"does_not_support",
+"1":"support"
+},
+        "format"    :    "NA"
+    },
+
+"cmsp":{
+"name"    :    "cmsp",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_supported":0,
+"supported":1 },
+        "byte_to_json"    :    {"0":"not_supported",
+"1":"supported"},
+        "format"    :    "NA"
+    },
+
+"a5_3":{
+"name"    :    "a5_3",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_available":0,
+"available":1 },
+        "byte_to_json"    :    {"0":"not_available"
+},
+        "format"    :    "NA"
+    },
+"a5_2":{
+"name"    :    "a5_2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_available":0,
+"available":1 },
+        "byte_to_json"    :    {"0":"not_available",
+"1":"available" },
+        "format"    :    "NA"
+    },
+
+
+
+"mobile_station_classmark_3"    :    {
+        "name"    :    "mobile_station_classmark_3",
+        "type"    :    "O",
+        "format"    :    "TLV",
+        "max_size"    :    32,
+        "min_size"    :    0,
+"type_id":         "20",
+        "join_sf"    :    [
+
+         
+
+            {
+                "union_sf":    ["spare","gsm_1800_supported","e_gsm_or_r_gsm_supported","p_gsm_supported","a5_7_algorithm_supported",
+"a5_6_algorithm_supported","a5_5_algorithm_supported","a5_4_algorithm_supported"]
+            },
+            {
+                "union_sf":    ["associated_radio_capability_2","associated_radio_capability_1"]
+            },
+   {
+                "union_sf":    ["r_support","hscsd_multi_slot_capability","hscsd_multi_slot_class","ucs2_treatment_1"]
+            },
+     {
+                "union_sf":    ["extended_measurement_capability","ms_measurement_capability","ms_positioning_method_capability_present",
+"ecsd_multi_slot_capability_present","8_psk_struct_present","gsm_400_band_information_present",
+"gsm_400_bands_supported"]
+            },
+   {
+                "union_sf":    ["gsm_400_associated_radio_capability","gsm_850_associated_radio_capability_present",
+"gsm_850_associated_radio_capability"]
+            }
+   
+
+              ]    
+},
+
+"gsm_1800_supported":{
+"name"    :    "gsm_1800_supported",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"true":1,
+"false":0 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+"e_gsm_or_r_gsm_supported":{
+"name"    :    "e_gsm_or_r_gsm_supported",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {"true":1,
+"false":0 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+"p_gsm_supported":{
+"name"    :    "p_gsm_supported",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {"false":0,
+"true":1 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+"a5_7_algorithm_supported":{
+"name"    :    "a5_7_algorithm_supported",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"not_available":0,
+"available":1 },
+        "byte_to_json"    :    {"0":"not_available",
+"1":"available" },
+        "format"    :    "NA"
+    },
+"a5_6_algorithm_supported":{
+"name"    :    "a5_6_algorithm_supported",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {"not_available":0,
+"available":1 },
+        "byte_to_json"    :    {"0":"not_available",
+"1":"available" },
+        "format"    :    "NA"
+    },
+"a5_5_algorithm_supported":{
+"name"    :    "a5_5_algorithm_supported",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {"not_available":0,
+"available":1 },
+        "byte_to_json"    :    {"0":"not_available",
+"1":"available" },
+        "format"    :    "NA"
+    },
+"a5_4_algorithm_supported":{
+"name"    :    "a5_4_algorithm_supported",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"not_available":0,
+"available":1 },
+        "byte_to_json"    :    {"0":"not_available",
+"1":"available" },
+        "format"    :    "NA"
+    },
+
+"associated_radio_capability_2":{
+"name"    :    "associated_radio_capability_2",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "NA"
+    },
+
+"associated_radio_capability_1":{
+"name"    :    "associated_radio_capability_1",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "NA"
+    },
+
+
+"r_support":{
+"name"    :    "r_support",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"false":0,
+"true":1},
+        "byte_to_json"    :    {"0":"false",
+"1":"true"},
+        "format"    :    "NA"
+    },
+
+
+"hscsd_multi_slot_capability":{
+"name"    :    "hscsd_multi_slot_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {"false":0,
+"true":1},
+        "byte_to_json"    :    {"0":"false",
+"1":"true"},
+        "format"    :    "NA"
+    },
+
+"hscsd_multi_slot_class":{
+"name"    :    "hscsd_multi_slot_class",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    1,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "NA"
+    },
+
+
+"ucs2_treatment_1":{
+"name"    :    "ucs2_treatment_1",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"preference":0,
+"no_preference":1 },
+        "byte_to_json"    :    {"0":"preference",
+"1":"no_preference" },
+        "format"    :    "NA"
+    },
+
+
+"extended_measurement_capability":{
+"name"    :    "extended_measurement_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"false":0,
+"true":1 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+
+
+"ms_measurement_capability":{
+"name"    :    "ms_measurement_capability",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+         "json_to_byte"    :    {"false":0,
+"true":1 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+
+
+"ms_positioning_method_capability_present":{
+"name"    :    "ms_positioning_method_capability_present",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+         "json_to_byte"    :    {"false":0,
+"true":1 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+
+"ecsd_multi_slot_capability_present":{
+"name"    :    "ecsd_multi_slot_capability_present",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+          "json_to_byte"    :    {"false":0,
+"true":1 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+
+"8_psk_struct_present":{
+"name"    :    "8_psk_struct_present",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+            "json_to_byte"    :    {"false":0,
+"true":1 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+
+"gsm_400_band_information_present":{
+"name"    :    "gsm_400_band_information_present",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+          "json_to_byte"    :    {"false":0,
+"true":1 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+
+"gsm_400_bands_supported":{
+"name"    :    "gsm_400_bands_supported",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+"gsm_400_associated_radio_capability":{
+"name"    :    "gsm_400_associated_radio_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "NA"
+    },
+
+"gsm_850_associated_radio_capability_present":{
+"name"    :    "gsm_850_associated_radio_capability_present",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"true":1,
+"false":0 },
+        "byte_to_json"    :    {"0":"false",
+"1":"true" },
+        "format"    :    "NA"
+    },
+
+"gsm_850_associated_radio_capability":{
+"name"    :    "gsm_850_associated_radio_capability",
+        "type"    :       "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {  },
+        "byte_to_json"    :    {  },
+        "format"    :    "NA"
+    },
+
+
+"type_of_security_context_flag":
+{
+"name"    :    "type_of_security_context_flag",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {"native_security_context_for_ksiasme":0,
+"mapped_security_context_for_ksisgsn":1 },
+        "byte_to_json"    :    {"0":"native_security_context_for_ksiasme",
+"1":"mapped_security_context_for_ksisgsn"},
+        "format"    :    "V"
+   
+      },
+
+"nas_key_set_identifier":
+      { "name"    :    "nas_key_set_identifier",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },
+
+"spare_bits":
+      { "name"    :    "spare_bits",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },
+
+
+"eps_attach_type":
+{ "name"    :    "eps_attach_type",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"eps_attach":1,
+"combined_eps_imsi":2,
+"eps_emergency_attach":6,
+"reserved":7
+},
+        "byte_to_json"    :    {"1":"eps_attach",
+"2":"combined_eps_imsi",
+"6":"eps_emergency_attach",
+"7":"reserved"},
+        "format"    :    "V"
+   
+      },
+
+"spare_half_octet":
+      { "name"    :    "spare_half_octet",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },
+ 
+ 
+
+"type_of_security_context_flag_auth_req":
+{
+"name"    :    "type_of_security_context_flag_auth_req",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"native_security_context_for_ksiasme":0,
+"mapped_security_context_for_ksisgsn":1 },
+        "byte_to_json"    :    {"0":"native_security_context_for_ksiasme",
+"1":"mapped_security_context_for_ksisgsn"},
+        "format"    :    "V"
+   
+      },
+
+"nas_key_set_identifier_auth_req":
+      { "name"    :    "nas_key_set_identifier_auth_req",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },  
+ 
+
+   "authentication_parameter_rand"    :    {
+        "name"    :    "authentication_parameter_rand",
+        "type"    :    "M",
+"json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    16,
+        "min_size"    :    16,
+	"json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+
+"format"    :    "V"
+     
+    },
+
+
+  "authentication_parameter_autn"    :    {
+        "name"    :    "authentication_parameter_autn",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    16,
+        "min_size"    :    16,
+        "join_sf"    :    [
+       
+           
+            "autn_value"
+           
+            ]
+    },
+
+
+
+    "autn_value"    :    {
+        "name"    :    "autn_value",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    16,
+        "min_size"    :    16,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+  "authentication_response_parameter"    :    {
+        "name"    :    "authentication_response_parameter",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    8,
+        "min_size"    :    4,
+        "join_sf"    :    [
+       
+           
+            "res"
+           
+            ]
+    },
+
+
+
+
+    "res"    :    {
+        "name"    :    "res",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    8,
+        "min_size"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+
+
+"type_of_security_context_flag_security_mode_command":
+{
+"name"    :    "type_of_security_context_flag_security_mode_command",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {"native_security_context_for_ksiasme":0,
+"mapped_security_context_for_ksisgsn":1 },
+        "byte_to_json"    :    {"0":"native_security_context_for_ksiasme",
+"1":"mapped_security_context_for_ksisgsn"},
+        "format"    :    "V"
+   
+      },
+
+"nas_key_set_identifier_security_mode_command":
+      { "name"    :    "nas_key_set_identifier_security_mode_command",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },
+      
+"message_authentication_code_short":
+    { "name"    :    "service_request_message_authentication_code",
+	    "type"    :    "M",
+	    "json_type"    :    "num",
+	    "byte_type"    :    "num",
+	    "max_size"    :    2,
+	    "min_size"    :    4,
+	    "json_to_byte"    :    {},
+	    "byte_to_json"    :    {},
+	    "format"    :    "V"
+	  },
+ 
+"message_authentication_code":
+    { "name"    :    "message_authentication_code",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    4,
+        "min_size"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },
+
+
+
+"sequence_number":
+{ "name"    :    "sequence_number",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },
+
+
+
+
+ "nas_security_algorithms_selected_nas_security_algorithms"    :    {
+        "name"    :     "nas_security_algorithms_selected_nas_security_algorithms",
+        "type"    :    "M",
+        "format"    :    "V",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "join_sf"    :    [
+
+            {
+                "union_sf":    ["spare","type_of_ciphering_algorithm","spare_bits","type_of_integrity_protection_algorithm"]
+            }
+                ]    
+},
+
+
+"type_of_ciphering_algorithm":
+{ "name"    :    "type_of_ciphering_algorithm",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {
+
+"eps_encryption_algorithm_eea0":0,
+"eps_encryption_algorithm_128_eea1":1,
+"eps_encryption_algorithm_128_eea2":2,
+"eps_encryption_algorithm_eea3":3,
+"eps_encryption_algorithm_eea4":4,
+"eps_encryption_algorithm_eea5":5,
+"eps_encryption_algorithm_eea6":6,
+"eps_encryption_algorithm_eea7":7
+
+},
+        "byte_to_json"    :    {
+
+"0": "eps_encryption_algorithm_eea0",
+"1": "eps_encryption_algorithm_128_eea1",
+"2": "eps_encryption_algorithm_128_eea2",
+"3": "eps_encryption_algorithm_eea3",
+"4": "eps_encryption_algorithm_eea4",
+"5": "eps_encryption_algorithm_eea5",
+"6": "eps_encryption_algorithm_eea6",
+"7": "eps_encryption_algorithm_eea7"
+},
+        "format"    :    "NA"
+   
+      },
+
+"type_of_integrity_protection_algorithm":
+{ "name"    :   "type_of_integrity_protection_algorithm",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+
+"eps_integrity_algorithm_eia0":0,
+"eps_integrity_algorithm_128_eia1":1,
+"eps_integrity_algorithm_128_eia2":2,
+"eps_integrity_algorithm_eia3":3,
+"eps_integrity_algorithm_eia4":4,
+"eps_integrity_algorithm_eia5":5,
+"eps_integrity_algorithm_eia6":6,
+"eps_integrity_algorithm_eia7":7
+
+},
+        "byte_to_json"    :    {
+
+"0":"eps_integrity_algorithm_eia0",
+"1":"eps_integrity_algorithm_128_eia1",
+"2":"eps_integrity_algorithm_128_eia2",
+"3":"eps_integrity_algorithm_eia3",
+"4":"eps_integrity_algorithm_eia4",
+"5":"eps_integrity_algorithm_eia5",
+"6":"eps_integrity_algorithm_eia6",
+"7":"eps_integrity_algorithm_eia7"
+
+},
+        "format"    :    "NA"
+   
+      },
+
+
+
+ 
+"ue_security_capability"    :    {
+        "name"    :     "ue_security_capability",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    5,
+        "min_size"    :    2,
+        "join_sf"    :    [
+
+
+
+            {
+                "union_sf":    ["eea0","128_eea1","128_eea2","128_eea3","eea4","eea5","eea6","eea7"]
+            },
+			{
+                "union_sf":    ["eia0","128_eia1","128_eia2","128_eia3","eia4","eia5","eia6","eia7"]
+            },
+			{
+                "union_sf":    ["uea0","uea1","uea2","uea3","uea4","uea5","uea6","uea7"]
+            },
+			{
+                "union_sf":    ["spare","uia1","uia2","uia3","uia4","uia5","uia6","uia7"]
+            },
+			{
+                "union_sf":    ["spare","gea1","gea2","gea3","gea4","gea5","gea6","gea7"]
+            }
+
+
+                ]    
+},  
+ 
+
+  "imeisv_request"    :    {
+        "name"    :     "imeisv_request",
+        "type"    :    "O",
+        "format"    :    "V",
+        "max_size"    :    1,
+        "min_size"    :    1,
+
+        "join_sf"    :    [
+
+
+            {
+                "union_sf": ["imeisv_request_type_id","spare_bits","imeisv_request_flag"]
+            }
+
+                ]                                                                                                  
+},
+ 
+ 
+
+"imeisv_request_type_id":
+     
+ { "name"    :   "imeisv_request_type_id",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "NA"
+   
+      },
+
+
+"imeisv_request_flag":
+     
+ { "name"    :   "imeisv_request_flag",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"requested":1,
+"not_requested":0 },
+        "byte_to_json"    :    {"0":"not_requested",
+"1":"requested" },
+        "format"    :    "NA"
+   
+      },
+
+
+
+ 
+  "imeisv"    :    {
+        "name"    :     "imeisv",
+        "type"    :    "O",
+        "format"    :    "TLV",
+        "max_size"    :    9,
+        "min_size"    :    9,
+"type_id":         "23",
+        "join_sf"    :    [
+       
+         
+            {
+                "union_sf":    ["mcc_digit_1_eps","odd_even_indication","type_of_identity"]
+            },
+            {
+                "union_sf":    ["mcc_digit_3_eps","mcc_digit_2_eps"]
+            },
+	
+		{
+                "union_sf":    ["mnc_digit_2_eps","mnc_digit_1_eps"]
+            },
+
+            {
+                "union_sf":    ["msin_1","mnc_digit_3_eps"]
+	},
+
+	{
+                "union_sf":    ["msin_3","msin_2"]	
+	},
+	
+	{
+                "union_sf":    ["msin_5","msin_4"]
+	},
+	
+	{
+                "union_sf":    ["msin_7","msin_6"]
+	},
+	
+	{
+                "union_sf":    ["msin_9","msin_8"]
+	},
+	{
+                "union_sf":    ["msin_11","msin_10"]
+	}
+
+    ]                                                                                               
+},  
+ 
+
+   
+  "bcd_digits":
+     
+ { "name"    :   "bcd_digits",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    7,
+        "min_size"    :    7,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+   
+    "filler":
+     
+ { "name"    :   "filler",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+   
+   
+   
+   
+   "attach_result"    :    {
+        "name"    :    "attach_result",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"eps_only" : 1,
+"combined_eps_imsi_attach":2},
+        "byte_to_json"    :    {
+"1":"eps_only",
+"2":"combined_eps_imsi_attach" },
+        "format"    :    "V"
+    },
+ 
+   "gprs_timer_t3412"    :    {
+        "name"    :    "gprs_timer_t3412",
+        "type"    :    "M",
+        "format"    :    "V",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "join_sf"    :    [
+       
+            {
+                "union_sf":    ["unit","timer_value"]
+            }
+       
+    ]
+    },
+ 
+ 
+
+   "unit"    :    {
+        "name"    :    "unit",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {
+"value_is_incremented_in_multiples_of_2_seconds":0,
+"value_is_incremented_in_multiples_of_1_minute":1,
+"value_is_incremented_in_multiples_of_decihours":2,
+"value_indicates_that_the_timer_is_deactivated":7
+
+},
+        "byte_to_json"    :    {
+"0":"value_is_incremented_in_multiples_of_2_seconds",
+"1":"value_is_incremented_in_multiples_of_1_minute",
+"2":"value_is_incremented_in_multiples_of_decihours",
+"7":"value_indicates_that_the_timer_is_deactivated"
+},
+        "format"    :    "V"
+    },
+
+
+
+   "timer_value"    :    {
+        "name"    :    "timer_value",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    0,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "V"
+    },
+
+
+   "tracking_area_identity_list"    :    {
+        "name"    :    "tracking_area_identity_list",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    96,
+        "min_size"    :    6,
+"join_sf"    :    [
+       
+           
+			{
+                "union_sf":    ["spare","type_of_list","number_of_elements"]
+            },
+			{
+                "union_sf":    ["mcc_digit_2","mcc_digit_1"]
+            },
+            {
+                "union_sf":    ["mnc_digit_3","mcc_digit_3"]
+            },
+			{
+                "union_sf":    ["mnc_digit_2","mnc_digit_1"]
+            },
+			"tac"    
+                  ]    
+     },
+
+
+   "type_of_list"    :    {
+        "name"    :    "type_of_list",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    5,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "V"
+    },
+
+
+"number_of_elements":    {
+        "name"    :    "number_of_elements",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    0,
+        "json_to_byte"    :    { },
+        "byte_to_json"    :    { },
+        "format"    :    "V"
+    },
+
+
+"gprs_timer_t3402"    :    {
+        "name"    :    "gprs_timer_t3402",
+        "type"    :    "O",
+        "format"    :    "TV",
+        "max_size"    :    1,
+        "min_size"    :    1,
+"type_id":         "17",
+        "join_sf"    :    [
+       
+
+
+            {
+                "union_sf":    ["unit","timer_value"]
+            }
+       
+    ]
+    },
+ 
+"eps_mobile_identity_guti"    :    {
+        "name"    :    "eps_mobile_identity_guti",
+        "type"    :    "O",
+        "format"    :    "TLV",
+        "max_size"    :    11,
+        "min_size"    :    11,
+"type_id":         "50",
+        "join_sf"    :    [
+       
+       
+            {
+                "union_sf":    ["identity_digit_1","odd_even_indication","type_of_identity"]
+            },
+            {
+                "union_sf":    ["mcc_digit_2","mcc_digit_1"]
+            },
+        {
+                "union_sf":    ["mnc_digit_3","mcc_digit_3"]
+            },
+            {
+                "union_sf":    ["mnc_digit_2","mnc_digit_1"]
+        },
+            "mme_group_id",
+        "mme_code",
+        "m_tmsi"
+    ]
+    },
+
+
+
+"mme_group_id":
+     
+ { "name"    :   "mme_group_id",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    2,
+        "min_size"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :   {},
+        "format"    :    "NA"
+   
+      },
+
+
+"mme_code":
+     
+ { "name"    :   "mme_code",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :   {},
+        "format"    :    "NA"
+   
+      },
+
+"m_tmsi":
+     
+ { "name"    :   "m_tmsi",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    4,
+        "min_size"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :   {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+
+
+
+
+
+
+
+
+
+"supported_codec_list"    :    {
+        "name"    :    "supported_codec_list",
+        "type"    :    "O",
+        "format"    :    "TLV",
+        "max_size"    :    5,
+        "min_size"    :    3,
+"type_id":         "40",
+        "join_sf"    :    [
+       
+"system_identification",
+"bitmap_length",
+            {
+                "union_sf":["tdma_efr","umts_amr_2","umts_amr",
+"hr_amr","fr_amr","gsm_efr","gsm_hr","gsm_fr"]
+            },
+            {
+                "union_sf":["spare_bit_codec","ohr_amr_wb",
+"ofr_amr_wb","ohr_amr","umts_amr_wb","fr_amr_wb",
+"pdc_efr"]
+            }  
+    ]
+    },
+
+
+"system_identification":
+     
+ { "name"    :   "system_identification",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :   {},
+        "format"    :    "NA"
+   
+      },
+
+"bitmap_length":
+     
+ { "name"    :   "bitmap_length",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :   {},
+        "format"    :    "NA"
+   
+      },  
+
+
+"tdma_efr":
+     
+ { "name"    :   "tdma_efr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :   {},
+        "format"    :    "NA"
+   
+      },
+
+"umts_amr_2":
+     
+ { "name"    :   "umts_amr_2",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+   
+
+
+"umts_amr":
+     
+ { "name"    :   "umts_amr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+ 
+"hr_amr":
+     
+ { "name"    :   "hr_amr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+ 
+"fr_amr":
+     
+ { "name"    :   "fr_amr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"gsm_efr":
+
+ { "name"    :   "gsm_efr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"gsm_hr":
+
+ { "name"    :   "gsm_hr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"gsm_fr":
+
+ { "name"    :   "gsm_fr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+"spare_bit_codec":
+     
+ { "name"    :   "spare_bit_codec",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    6,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+   
+
+
+"ohr_amr_wb":
+     
+ { "name"    :   "ohr_amr_wb",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+ 
+"ofr_amr_wb":
+     
+ { "name"    :   "ofr_amr_wb",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :   4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+ 
+"ohr_amr":
+     
+ { "name"    :   "ohr_amr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"umts_amr_wb":
+
+ { "name"    :   "umts_amr_wb",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"fr_amr_wb":
+
+ { "name"    :   "fr_amr_wb",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"pdc_efr":
+
+ { "name"    :   "pdc_efr",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+"esm_message_container"    :    {
+        "name"    :    "esm_message_container",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    4,
+        "min_size"    :    4,
+        "join_sf"    :    [
+       
+	{"union_sf" : ["eps_bearer_identity","protocol_discriminator"]},
+	"procedure_transaction_identity",
+        "nas_eps_session_management_messages",
+            {
+                "union_sf":["pdn_type","request_type"]
+            },
+          "esm_info_tx_flag"
+
+    ]
+    },
+    
+"esm_message_container_attach_request"    :    {
+        "name"    :    "esm_message_container_attach_request",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    4,
+        "min_size"    :    4,
+        "join_sf"    :    [
+
+	{"union_sf" : ["eps_bearer_identity","protocol_discriminator"]},
+	"procedure_transaction_identity",
+        "nas_eps_session_management_messages",
+            {
+                "union_sf":["pdn_type_attach","request_type"]
+            },
+          "esm_info_tx_flag",
+          "protocol_configuration_options_attach_request"
+
+    ]
+    },
+    
+"protocol_configuration_options_attach_request":
+{
+	"name"    :   "protocol_configuration_options_attach_request",
+        "type"    :    "M",
+	"format"    :    "TLV",
+        "max_size"    :    251,
+        "min_size"    :    2,
+        "type_id":     "27",
+  "join_sf"    :    [
+
+            {
+                "union_sf":    ["configuration_protocol"]
+            },
+
+	    "protocol_id",
+	    "protocol_id_2",
+	    "protocol_id_3"
+							]
+
+
+      }  ,
+
+  "configuration_protocol"    :    {
+        "name"    :    "configuration_protocol",
+        "type"    :    "M",
+		"json_type"    :    "str",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    0,
+		"json_to_byte"    :    {"PPP" :  128},
+        "byte_to_json"    :    {"128" :  "PPP"},
+		"format"    :    "NA"
+    },
+
+  "protocol_id":
+
+{ "name"    :   "protocol_id",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    16,
+        "min_size"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "TLV",
+	"type_id" : "80 21",
+	"join_sf" : [
+	"PPP_IP_Control"
+	]
+
+      },
+
+ "PPP_IP_Control"    :    {
+     "name"    :    "PPP_IP_Control",
+	 "type"    :    "M",
+	 "json_type"    :    "num",
+	 "byte_type"    :    "num",
+	 "max_size"    :    16,
+	 "min_size"    :    2,
+	 "json_to_byte"    :    {},
+	 "byte_to_json"    :    {},
+	 "format"    :    "NA"
+
+ },
+
+
+"protocol_id_2": {
+	"name"    :    "protocol_id_2",
+	"type"    :    "M",
+	"json_type"    :    "num",
+	"byte_type"    :    "num",
+	"max_size"    :    16,
+	"min_size"    :    2,
+	"json_to_byte"    :    {},
+	"byte_to_json"    :    {},
+	"format"    :    "TLV",
+	"type_id" : "00 0d",
+	"join_sf" : [
+		"DNS_IP"
+	]
+},
+
+"protocol_id_3": {
+       "name"    :    "protocol_id_3",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    16,
+        "min_size"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "TLV",
+        "type_id" : "00 0a",
+        "join_sf" : [
+                "IP_address_nas_signalling"
+															        ]
+},
+
+
+"DNS_IP"    : {
+	"name"    :    "DNS_IP",
+	"type"    :    "O",
+	"json_type"    :    "num",
+	"byte_type"    :    "num",
+	"max_size"    :    16,
+	"min_size"    :    2,
+	"json_to_byte"    :    {},
+	"byte_to_json"    :    {},
+	"format"    :    "NA"
+
+},
+
+"IP_address_nas_signalling"    : {
+        "name"    :    "IP_address_nas_signalling",
+        "type"    :    "O",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    16,
+        "min_size"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+
+},
+
+"network_name_full"    :    {
+        "name"    :    "network_name_full",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    8,
+        "min_size"    :    0,
+		"type_id"   :"43",
+        "join_sf"    :    [
+		"value"
+  ]
+},
+
+"value":    {
+        "name"    :   "value",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    3,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+
+},
+
+
+"network_name_small"    :    {
+        "name"    :    "network_name_small",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    8,
+        "min_size"    :    0,
+		"type_id"   :"45",
+        "join_sf"    :    [
+		"value"
+  ]
+},
+
+"eps_bearer_identity":
+
+ { "name"    :   "eps_bearer_identity",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"procedure_transaction_identity":
+
+ { "name"    :   "procedure_transaction_identity",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"nas_eps_session_management_messages":
+
+{ "name"    :   "nas_eps_session_management_messages",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+ 
+ 
+"pdn_type_attach":
+
+{ "name"    :   "pdn_type_attach",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },  
+
+ 
+"request_type":
+
+{ "name"    :   "request_type",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+"esm_message_container_attach_complete"    :    {
+        "name"    :    "esm_message_container_attach_complete",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    3,
+        "min_size"    :    3,
+        "join_sf"    :    [
+       
+	{"union_sf" : ["eps_bearer_identity","protocol_discriminator"]},
+	"procedure_transaction_identity",
+        "nas_eps_session_management_messages"
+             
+    ]
+    },
+
+
+
+
+
+ "protocol_discriminator_1"    :    {
+        "name"    :    "protocol_discriminator_1",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+
+"group_call_control":0,
+"broadcast_call_control":1,
+"eps_session_management_messages":2,
+"call_control_call_related_ss_messages":3,
+"gprs_transparent_transport_protocol_gttp":4,
+"mobility_mgmt_messages":5,
+"radio_resources_management_messages":6,
+"eps_mobility_management_messages":7,
+"gprs_mobility_management_messages":8,
+"sms_messages":9,
+"gprs_session_management_messages":10,
+"non_call_related_ss_messages":11,
+"location_services_specified":12,
+"reserved_for_extension_of_the_pd_to_one_octet_length":14,
+"used_by_tests_procedures":15
+},
+
+        "byte_to_json"    :    {
+
+"0":"group_call_control",
+"1":"broadcast_call_control",
+"2":"eps_session_management_messages",
+"3":"call_control_call_related_ss_messages",
+"4":"gprs_transparent_transport_protocol_gttp",
+"5":"mobility_mgmt_messages",
+"6":"radio_resources_management_messages",
+"7":"eps_mobility_management_messages",
+"8":"gprs_mobility_management_messages",
+"9":"sms_messages",
+"10":"gprs_session_management_messages",
+"11":"non_call_related_ss_messages",
+"12":"location_services_specified",
+"14":"reserved_for_extension_of_the_pd_to_one_octet_length",
+"15":"used_by_tests_procedures"
+
+},
+        "format"    :    "V"
+    },
+
+    
+
+
+"security_header_type_1"    :    {
+        "name"    :    "security_header_type_1",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {
+            "plain_nas_message_not_security_protected"    :    0,
+            "security_protected_integrity_protected"    :    1,
+            "integrity_protected_and_ciphered"    :    2,
+            "integrity_protected_new_eps_security_context"    :    3,
+            "integrity_protected_ciphered_new_eps_security_context"    :4,
+            "integrity_protected_partially_ciphered_nas_message" :5,
+"security_header_service_request"    :    12
+         
+        },
+        "byte_to_json"  :    {
+            "0"    :    "plain_nas_message_not_security_protected",
+            "1"    :    "security_protected_integrity_protected",
+            "2"    :    "integrity_protected_and_ciphered",
+"3"   : "integrity_protected_new_eps_security_context",
+            "4"    :    "integrity_protected_ciphered_new_eps_security_context",
+            "5"    :    "integrity_protected_partially_ciphered_nas_message",
+            "12"    :    "security_header_service_request"
+           
+        },
+        "format"    :    "V"
+    },
+
+
+
+
+"esm_message_container_attach_accept"    :    {
+        "name"    :    "esm_message_container_attach_accept",
+        "type"    :    "M",
+        "format"    :    "LV-E",
+        "max_size"    :    65535,
+        "min_size"    :    3,
+        "join_sf"    :    [
+       
+
+	{"union_sf" :["eps_bearer_identity","protocol_discriminator"]},
+	"procedure_transaction_identity",
+    	"nas_eps_session_management_messages",
+
+    	"eps_quality_of_service",
+	"access_point_name",	
+	"pdn_address",
+	"linked_ti_transaction_identifier",
+	"quality_of_service",
+	"llc_service_access_point_identifier",
+	"radio_priority",
+	"packet_flow_identifier",
+	"apn_aggregate_maximum_bit_rate"
+				]
+    },
+
+
+
+"eps_quality_of_service"    :    {
+        "name"    :    "eps_quality_of_service",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "join_sf"    :    [
+       
+"quality_of_service_class_identifier"
+]
+    },
+
+"quality_of_service_class_identifier":
+
+{ "name"    :   "quality_of_service_class_identifier",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+"access_point_name"    :    {
+        "name"    :    "access_point_name",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    102,
+        "min_size"    :    3,
+        "join_sf"    :  
+["apn"]
+    },
+
+"apn":
+
+{ "name"    :   "apn",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "str",
+        "start_bit"    :    28,
+        "end_bit"    :    28,
+        "json_to_byte"    :    {"apn1" :  "0"},
+        "byte_to_json"    :    {"0" :  "apn1"},
+        "format"    :    "NA"
+   
+      },
+
+
+"pdn_address"    :    {
+        "name"    :    "pdn_address",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    15,
+        "min_size"    :    7,
+        "join_sf"    :    [
+       
+{"union_sf" : ["pdn_address_spare_bits","pdn_type"]},
+    
+	"pdn_ipv4"
+                     
+]
+    },
+
+"pdn_address_spare_bits":
+      { "name"    :    "spare_bits",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "V"
+   
+      },
+	  
+"pdn_type":
+
+{ "name"    :   "pdn_type",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"pdn_ipv4":
+
+{ "name"    :   "pdn_ipv4",
+        "type"    :    "M",
+		"format":     "V",
+        "max_size"    :    4,
+        "min_size"    :    4,
+	"join_sf"	:[
+	
+	"pdn_ipv4_1",
+	"pdn_ipv4_2",
+	"pdn_ipv4_3",
+	"pdn_ipv4_4"
+]
+      },
+
+
+"pdn_ipv4_1":
+
+{ "name"    :   "pdn_ipv4_1",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"pdn_ipv4_2":
+
+{ "name"    :   "pdn_ipv4_2",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"pdn_ipv4_3":
+
+{ "name"    :   "pdn_ipv4_3",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"pdn_ipv4_4":
+
+{ "name"    :   "pdn_ipv4_4",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"linked_ti_transaction_identifier"    :    {
+        "name"    :    "linked_ti_transaction_identifier",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    4,
+        "min_size"    :    3,
+"type_id":  "5d",
+        "join_sf"    :    [
+       
+{"union_sf" : ["ti_flag","ti_value"]}
+]
+    },
+
+"ti_flag":
+
+{ "name"    :   "ti_flag",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"ti_value":
+
+{ "name"    :   "ti_value",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+"llc_service_access_point_identifier"    :    {
+        "name"    :    "llc_service_access_point_identifier",
+        "type"    :    "M",
+        "format"    :    "TV",
+        "max_size"    :    1,
+        "min_size"    :    1,
+	"type_id"   :"32",
+        "join_sf"    :    [
+       
+{"union_sf" : ["spare_half_octet","llc_sapi"]}
+]
+    },
+
+"llc_sapi":
+
+{ "name"    :   "llc_sapi",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+"radio_priority"    :    {
+        "name"    :    "radio_priority",
+        "type"    :    "M",
+        "format"    :    "TV",
+        "max_size"    :    1,
+        "min_size"    :    1,
+		"type_id"   :"8",
+        "join_sf"    :    [
+       
+{"union_sf" : ["radio_priority_type_id","radio_priority_pdp_sms"]}
+]
+    },
+
+
+
+"radio_priority_type_id":
+
+{ "name"    :   "radio_priority_type_id",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"radio_priority_pdp_sms":
+
+{ "name"    :   "radio_priority_pdp_sms",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"packet_flow_identifier"    :    {
+        "name"    :    "packet_flow_identifier",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    1,
+        "min_size"    :    1,
+		"type_id"   :"34",
+        "join_sf"    :    [
+       
+{"union_sf" : ["spare","packet_flow_identifier_pfi"]}
+]
+    },
+
+
+"packet_flow_identifier_pfi":
+
+{ "name"    :   "packet_flow_identifier_pfi",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    6,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"apn_aggregate_maximum_bit_rate"    :    {
+        "name"    :    "apn_aggregate_maximum_bit_rate",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    8,
+        "min_size"    :    4,
+		"type_id"   :"5e",
+        "join_sf"    :    [
+		"apn_ambr_for_downlink",
+		"apn_ambr_for_uplink",
+		"apn_ambr_for_downlink_extended",
+		"apn_ambr_for_uplink_extended",
+		"apn_ambr_for_downlink_extended-2",
+		"apn_ambr_for_uplink_extended-2"
+  ]
+    },
+
+"apn_ambr_for_downlink":
+
+{ "name"    :   "apn_ambr_for_downlink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+ 
+ 
+"apn_ambr_for_uplink":
+
+{ "name"    :   "apn_ambr_for_uplink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"apn_ambr_for_downlink_extended":
+
+{ "name"    :   "apn_ambr_for_downlink_extended",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"total_apn_ambr_for_downlink":
+
+{ "name"    :   "total_apn_ambr_for_downlink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+      "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"apn_ambr_for_uplink_extended":
+
+{ "name"    :   "apn_ambr_for_uplink_extended",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"total_apn_ambr_for_uplink":
+
+{ "name"    :   "total_apn_ambr_for_uplink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+       "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },  
+
+"apn_ambr_for_downlink_extended-2":
+
+{ "name"    :   "apn_ambr_for_downlink_extended-2",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"apn_ambr_for_uplink_extended-2":
+
+{ "name"    :   "apn_ambr_for_uplink_extended-2",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+	  
+"quality_of_service"    :    {
+        "name"    :    "quality_of_service",
+        "type"    :    "M",
+        "format"    :    "TLV",
+        "max_size"    :    16,
+        "min_size"    :    16,
+"type_id":    "30",
+        "join_sf"    :    [
+       
+  {"union_sf" : ["spare_bit_codec","quality_of_service_delay_class","reliability_class"]},
+ 
+  {"union_sf" : ["peak_throughput","spare_bits","precedence_class"]},
+ 
+  {"union_sf" : ["spare_bit_qos","mean_throughput"]},
+
+  {"union_sf" : ["traffic_class","delivery_order","delivery_of_erroneous"]},
+ 
+  "maximum_sdu_size",
+ 
+  "maximum_bitrate_for_uplink",
+ 
+  "maximum_bitrate_for_downlink",
+ 
+  {"union_sf" : ["residual_bit_error_rate","sdu_error_ratio"]},
+ 
+  {"union_sf" : ["transfer_delay","traffic_handling_priority"]},
+ 
+  "guaranteed_bitrate_for_uplink",
+ 
+  "guaranteed_bitrate_for_downlink",
+ 
+  {"union_sf" : ["spare_bit_qos","signalling_indication","source_statistics_description"]},
+ 
+  "maximum_bitrate_for_downlink_extended",
+ 
+  "guaranteed_bitrate_for_downlink_extended",
+ 
+  "maximum_bitrate_for_uplink_extended",
+ 
+  "guaranteed_bitrate_for_uplink_extended"
+ 
+ 
+  ]
+    },
+
+"quality_of_service_delay_class":
+
+{ "name"    :   "quality_of_service_delay_class",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    5,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"reliability_class":
+
+{ "name"    :   "reliability_class",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+"peak_throughput":
+
+{ "name"    :   "peak_throughput",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"precedence_class":
+
+{ "name"    :   "precedence_class",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"spare_bit_qos":
+
+{ "name"    :   "spare_bit_qos",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"mean_throughput":
+
+{ "name"    :   "mean_throughput",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"traffic_class":
+
+{ "name"    :   "traffic_class",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    5,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"delivery_order":
+
+{ "name"    :   "delivery_order",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"delivery_of_erroneous":
+
+{ "name"    :   "delivery_of_erroneous",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"maximum_sdu_size":
+
+{ "name"    :   "maximum_sdu_size",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"maximum_bitrate_for_uplink":
+
+{ "name"    :   "maximum_bitrate_for_uplink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"maximum_bitrate_for_downlink":
+
+{ "name"    :   "maximum_bitrate_for_downlink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"residual_bit_error_rate":
+
+{ "name"    :   "residual_bit_error_rate",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"sdu_error_ratio":
+
+{ "name"    :   "sdu_error_ratio",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"transfer_delay":
+
+{ "name"    :   "transfer_delay",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    2,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"traffic_handling_priority":
+
+{ "name"    :   "traffic_handling_priority",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"guaranteed_bitrate_for_uplink":
+
+{ "name"    :   "guaranteed_bitrate_for_uplink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"guaranteed_bitrate_for_downlink":
+
+{ "name"    :   "guaranteed_bitrate_for_downlink",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"signalling_indication":
+
+{ "name"    :   "signalling_indication",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"source_statistics_description":
+
+{ "name"    :   "source_statistics_description",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"maximum_bitrate_for_downlink_extended":
+
+{ "name"    :   "maximum_bitrate_for_downlink_extended",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"guaranteed_bitrate_for_downlink_extended":
+
+{ "name"    :   "guaranteed_bitrate_for_downlink_extended",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+"maximum_bitrate_for_uplink_extended":
+
+{ "name"    :   "maximum_bitrate_for_uplink_extended",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+"guaranteed_bitrate_for_uplink_extended":
+
+{ "name"    :   "guaranteed_bitrate_for_uplink_extended",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+   
+      },
+
+
+
+
+"protocol_configuration_options":
+{
+	"name"    :   "protocol_configuration_options",
+        "type"    :    "O",
+	"format"    :    "TLV",
+        "max_size"    :    251,
+        "min_size"    :    1,
+        "type_id":     "27"
+   
+      }  ,
+ 
+ "detach_type":
+
+{ 
+		"name"    :   "detach_type",
+        "type"    :    "M",
+		"format"    :    "V",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+		"join_sf"    :    [
+       
+            {
+                "union_sf":    ["switch_off","type_of_detach"]
+            }
+							]
+   }	 ,
+   
+   
+   
+   
+   
+   "switch_off":
+
+{ "name"    :   "switch_off",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {
+								"normal_detach":0,
+								"switch_off":1				},
+        "byte_to_json"    :    {
+								"0": "normal_detach",
+								"1": "switch_off"	
+														},
+        "format"    :    "NA"
+   
+      },
+ 
+ 
+   "type_of_detach"    :    {
+        "name"    :    "type_of_detach",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+								"eps_detach" : 1,
+								"imsi_detach":2,
+								"combined_eps_imsi_detach":3,
+								"reserved":6,
+								"reserved_1":7
+								},
+        "byte_to_json"    :    {
+								"1" : "eps_detach",
+								"2" : "imsi_detach",
+								"3" : "combined_eps_imsi_detach",
+								"6" : "reserved",
+								"7" : "reserved_1"	
+							},
+        "format"    :    "NA"
+    },	 
+ 
+
+"emm_cause":
+
+{ 
+		"name"    :   "emm_cause",
+        "type"    :    "O",
+		"format"    :    "TV",
+        "max_size"    :    1,
+        "min_size"    :    1,
+		"type_id":     "53",
+		"join_sf"    :    [
+       
+            {
+                "union_sf":    ["cause"]
+            }
+							]
+   }	 ,
+
+   "cause"    :    {
+        "name"    :    "cause",
+        "type"    :    "M",
+		"json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    1,
+        "min_size"    :    1,
+		"json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+		"format"    :    "NA"
+    },
+	
+	
+	
+	
+	
+	"nas_key_set_identifier_detach_request":
+
+{ 
+		"name"    :   "nas_key_set_identifier_detach_request",
+        "type"    :    "M",
+		"format"    :    "V",
+        "start_bit"    :    3,
+        "end_bit"    :    0,
+		"join_sf"    :    [
+       
+            {
+                "union_sf":    ["tsc","nas_key_set_identifier_detach_request_value"]
+            }
+							]
+   }	 ,
+   
+   
+   
+   
+   
+   "tsc":
+
+{ "name"    :   "tsc",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    3,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {
+								"native_security_context_for_ksiasme":0,
+								"mapped_security_context_for_ksisgsn":1				},
+        "byte_to_json"    :    {
+								"0": "native_security_context_for_ksiasme",
+								"1": "mapped_security_context_for_ksisgsn"
+														},
+        "format"    :    "NA"
+   
+      },
+ 
+ 
+   "nas_key_set_identifier_detach_request_value"    :    {
+        "name"    :    "nas_key_set_identifier_detach_request_value",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+								"possible_value_for_the_nas_key_set_identifier_through" : 1,
+								"no_key_available_ue_to_network":6,
+								"reserved_network_to_ue":7
+								},
+        "byte_to_json"    :    {
+							    "1": "possible_value_for_the_nas_key_set_identifier_through" ,
+								"6": "no_key_available_ue_to_network",
+								"7": "reserved_network_to_ue"
+							},
+        "format"    :    "NA"
+    } ,
+	
+	
+"eps_mobile_identity_guti_detach_request"    :    {
+        "name"    :    "eps_mobile_identity_guti_detach_request",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    11,
+        "min_size"    :    5,
+        "join_sf"    :    [
+       
+       
+            {
+                "union_sf":    ["guti_octet3_high_nibble","odd_even_indication","type_of_identity"]
+            },
+            {
+                "union_sf":    ["mcc_digit_2","mcc_digit_1"]
+            },
+        {
+                "union_sf":    ["mnc_digit_3","mcc_digit_3"]
+            },
+            {
+                "union_sf":    ["mnc_digit_2","mnc_digit_1"]
+        },
+            "mme_group_id",
+        "mme_code",
+        "m_tmsi"
+    ]
+    },
+
+
+    "guti_octet3_high_nibble"    :    {
+        "name"    :    "guti_octet3_high_nibble",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+
+
+"eps_mobile_identity_guti_attach_request"    :    {
+        "name"    :    "eps_mobile_identity_guti",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    11,
+        "min_size"    :    11,
+        "join_sf"    :    [
+
+
+            {
+                "union_sf":    ["identity_digit_1","odd_even_indication","type_of_identity"]
+            },
+            {
+                "union_sf":    ["mcc_digit_2","mcc_digit_1"]
+            },
+        {
+                "union_sf":    ["mnc_digit_3","mcc_digit_3"]
+            },
+            {
+                "union_sf":    ["mnc_digit_2","mnc_digit_1"]
+        },
+            "mme_group_id",
+        "mme_code",
+        "m_tmsi"
+    ]
+    },
+	    "identity_type_2"    :    {
+        "name"    :    "identity_type_2",
+        "type"    :       "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    2,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"imsi":1,
+								"imei":2,
+								"imeisv":3,
+								"tmsi":4},
+        "byte_to_json"    :    {"1":"imsi",
+								"2":"imei",
+								"3":"imeisv",
+								"4":"tmsi"},
+        "format"    :    "NA"
+    },
+
+  "access_point_name_esm_apn":
+
+{
+	"name"    :   "access_point_name_esm_apn",
+        "type"    :    "O",
+	"format"    :    "TLV",
+        "max_size"    :    5,
+        "min_size"    :    5,
+	"type_id":     "28",
+  "join_sf":[
+                "apn_esm"
+
+      ]
+},
+
+"apn_esm":
+
+{ "name"    :   "apn_esm",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "str",
+        "min_size"    :    4,
+        "max_size"    :    4,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+
+      },
+
+  "esm_info_tx_flag":
+{
+ "name"    :    "esm_info_tx_flag",
+        "type"    :    "O",
+        "format"    :    "V",
+	"start_bit"    :    4,
+        "end_bit"    :    4,
+        "join_sf"    :    [
+
+            {
+                "union_sf":    ["eit","spare_bit_esm_flag","eit_value"]
+            }
+
+              ]
+},
+
+
+  "eit":
+
+{ "name"    :   "eit",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    4,
+        "end_bit"    :    7,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+
+      },
+
+
+
+"spare_bit_esm_flag":
+
+{ "name"    :   "spare_bit_esm_flag",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "start_bit"    :    1,
+        "end_bit"    :    3,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+
+      },
+
+
+"eit_value":
+
+ { "name"    :   "eit_value",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    0,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {"security_protected_esm_information_transfer_not_required": 0,
+          "security_protected_esm_information_transfer_required": 1},
+        "byte_to_json"    :    {"0":"security_protected_esm_information_transfer_not_required",
+          "1":"security_protected_esm_information_transfer_required"},
+        "format"    :    "NA"
+
+      },
+
+"emm_cause_reject"    :    {
+        "name"    :    "emm_cause_reject",
+        "type"    :    "M",
+        "json_type"    :    "str",
+        "byte_type"    :    "num",
+        "start_bit"    :    7,
+        "end_bit"    :    0,
+        "json_to_byte"    :    {
+
+"IMSI_unknown_in_HSS":2,
+"Illegal_UE":3,
+"IMEI_not_accepted":5,
+"Illegal_ME":6,
+"EPS_services_not_allowed":7,
+"EPS_services_and_non-EPS_services_not_allowed":8,
+"UE_identity_cannot_be_derived_by_the_network":9,
+"Implicitly_detached":10,
+"PLMN_not_allowed":11,
+"Tracking_Area_not_allowed":12,
+"Roaming_not_allowed_in_this_tracking_area":13,
+"EPS_services_not_allowed_in_this_PLMN":14,
+"No_Suitable_Cells_In_tracking_area":15,
+"MSC_temporarily_not_reachable":16,
+"Network_failure":17,
+"CS_domain_not_available":18,
+"ESM_failure":19,
+"MAC_failure":20,
+"Synch_failure":21,
+"Congestion":22,
+"UE_security_capabilities_mismatch":23,
+"Security_mode_rejected, unspecified":24,
+"Not_authorized_for_this_CSG":25,
+"Non-EPS_authentication_unacceptable":26,
+"Redirection_to_5GCN_required":31,
+"Requested_service_option_not_authorized_in_this_PLMN":35,
+"CS_service_temporarily_not_available":39,
+"No_EPS_bearer_context_activated":40,
+"Severe_network_failure":42,
+"Semantically_incorrect_message":95,
+"Invalid_mandatory_information":96,
+"Message_type_non_existent_or_not_implemented":97,
+"Message_type_not_compatible_with_the_protocol_state":98,
+"Information_element_non_existent_or_not_implemented":99,
+"Conditional_IE_error":100,
+"Message_not_compatible_with_the_protocol_state":101,
+"Protocol_error":111
+
+},
+
+        "byte_to_json"    :    {
+
+"2":"IMSI_unknown_in_HSS",
+"3":"Illegal_UE",
+"5":"IMEI_not_accepted",
+"6":"Illegal_ME",
+"7":"EPS_services_not_allowed",
+"8":"EPS_services_and_non-EPS_services_not_allowed",
+"9":"UE_identity_cannot_be_derived_by_the_network",
+"10":"Implicitly_detached",
+"11":"PLMN_not_allowed",
+"12":"Tracking_Area_not_allowed",
+"13":"Roaming_not_allowed_in_this_tracking_area",
+"14":"EPS_services_not_allowed_in_this_PLMN",
+"15":"No_Suitable_Cells_In_tracking_area",
+"16":"MSC_temporarily_not_reachable",
+"17":"Network_failure",
+"18":"CS_domain_not_available",
+"19":"ESM_failure",
+"20":"MAC_failure",
+"21":"Synch_failure",
+"22":"Congestion",
+"23":"UE_security_capabilities_mismatch",
+"24":"Security_mode_rejected, unspecified",
+"25":"Not_authorized_for_this_CSG",
+"26":"Non-EPS_authentication_unacceptable",
+"31":"Redirection_to_5GCN_required",
+"35":"Requested_service_option_not_authorized_in_this_PLMN",
+"39":"CS_service_temporarily_not_available",
+"40":"No_EPS_bearer_context_activated",
+"42":"Severe_network_failure",
+"95":"Semantically_incorrect_message",
+"96":"Invalid_mandatory_information",
+"97":"Message_type_non_existent_or_not_implemented",
+"98":"Message_type_not_compatible_with_the_protocol_state",
+"99":"Information_element_non_existent_or_not_implemented",
+"100":"Conditional_IE_error",
+"101":"Message_not_compatible_with_the_protocol_state",
+"111":"Protocol_error"
+
+},
+        "format"    :    "V"
+    },
+
+"ue_security_capability_security_mode_command"    :    {
+        "name"    :     "ue_security_capability_security_mode_command",
+        "type"    :    "M",
+        "format"    :    "LV",
+        "max_size"    :    4,
+        "min_size"    :    2,
+        "join_sf"    :    [
+
+
+
+            {
+                "union_sf":    ["eea0","128_eea1","128_eea2","128_eea3","eea4","eea5","eea6","eea7"]
+            },
+                        {
+                "union_sf":    ["eia0","128_eia1","128_eia2","128_eia3","eia4","eia5","eia6","eia7"]
+            },
+                        {
+                "union_sf":    ["uea0","uea1","uea2","uea3","uea4","uea5","uea6","uea7"]
+            },
+                        {
+                "union_sf":    ["spare","uia1","uia2","uia3","uia4","uia5","uia6","uia7"]
+            }
+
+
+                ]
+}
+
+}

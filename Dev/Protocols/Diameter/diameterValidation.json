@@ -1,0 +1,20 @@
+{
+
+"authentication_info_request":{
+        "dataToBeVerified":["user-name","visited-plmn-id"],
+        "fromContextData":["s1apContextData:attach_request:imsi","s1apContextData:attach_request:plmn_identity"]
+},
+
+"update_location_request":{
+        "dataToBeVerified":["user-name","visited-plmn-id","rat-type"],
+        "fromContextData":["s1apContextData:attach_request:imsi","s1apContextData:attach_request:plmn_identity","NOT:APPLICABLE"]
+},
+
+"cancel_location_response":{
+        "dataToBeVerified":["origin-host","origin-realm","session-id"],
+        "fromContextData":["diameterContextData:cancel_location_request:destination_host","diameterContextData:cancel_location_request:destination_realm","diameterContextData:cancel_location_request:session_id"]
+}
+
+
+}
+

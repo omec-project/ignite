@@ -1,0 +1,54 @@
+{
+    "_comment": "Copyright (c) 2019, Infosys Ltd.",
+    "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+    "_comment": "you may not use this file except in compliance with the License.",
+    "_comment": "You may obtain a copy of the License at",
+    "_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+    "_comment": "Unless required by applicable law or agreed to in writing, software",
+    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+    "_comment": "See the License for the specific language governing permissions and",
+    "_comment": "limitations under the License.",
+	"NAS-MESSAGE": {},
+	"S1AP-PDU":
+	{
+		"initiatingMessage":
+		{
+			"procedureCode": 11,
+			"criticality": 1,
+			"value":
+			{
+				"downlinkNASTransport":
+				{
+					"protocolIEs":
+					[
+						{
+							"id": 0,
+							"criticality": 0,
+							"value":
+							{
+								"MME-UE-S1AP-ID": 1
+							}
+						},
+						{
+							"id": 8,
+							"criticality": 0,
+							"value":
+							{
+								"ENB-UE-S1AP-ID": 45
+							}
+						},
+						{
+							"id": 26,
+							"criticality": 0,
+							"value":
+							{
+								"NAS-PDU":""
+							}
+						}
+					]
+				}
+			}
+		}
+	}
+}
