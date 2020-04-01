@@ -1,0 +1,21 @@
+{
+
+"create_session_request":{
+        "dataToBeVerified":["imsi","msisdn","tai","ecgi","interface_type","rat_type"],
+        "fromContextData":["s1apContextData:attach_request:imsi","diameterContextData:update_location_response:msisdn","s1apContextData:attach_request:plmn_identity","s1apContextData:attach_request:plmn_identity","NOT:APPLICABLE","NOT:APPLICABLE","NOT:APPLICABLE","NOT:APPLICABLE"]
+},
+
+"modify_bearer_request":{
+        "dataToBeVerified":["teid_gre_key","ipv4address","eps_bearer_id"],
+        "fromContextData":["s1apContextData:initial_context_setup_response:gtp_teid","s1apContextData:initial_context_setup_response:transport_layer_address","gtpContextData:create_session_response:eps_bearer_id"]
+},
+
+"delete_session_request":{
+        "dataToBeVerified":["eps_bearer_id"],
+        "fromContextData":["gtpContextData:create_session_response:eps_bearer_id"]
+}
+
+
+
+}
+

@@ -1,0 +1,47 @@
+{
+    "msgHeirarchy": ["gtpv2"],
+    "msgDetails": 
+	{
+        "gtpv2": 
+		{
+			"protocol": "gtpv2",
+			"msg": 
+			{
+				"flags": "48",
+				"message_type": 176,
+				"teid": 1,
+            			"sequence_number": 1,
+				"spare": 0,
+				"information_elements":
+				[
+					{
+					  "ie_type": 2,
+					  "spare": 0,
+					  "instance": 0,
+					  "cause_value": 8,						  
+					  "pce": 0,
+					  "pbe": 0,
+					  "cs": 0
+				    },
+					{
+					  "ie_type": 73,
+					  "spare": 0,
+					  "instance": 0,
+					  "spare": 0,
+					  "eps_bearer_id": 5
+			        },
+					{
+                      			  "ie_type": 155,
+					  "spare": 0,
+                      			  "instance": 0,
+		      			  "spare": 0,
+                      			  "pci" :0,
+			        	  "pl" :15,
+		      			  "spare": 0,
+					  "pvi" : 0
+					}
+				]
+			}
+		}
+	}
+}

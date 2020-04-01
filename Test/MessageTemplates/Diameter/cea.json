@@ -1,0 +1,102 @@
+{
+    "_comment": "Copyright (c) 2019, Infosys Ltd.",
+    "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+    "_comment": "you may not use this file except in compliance with the License.",
+    "_comment": "You may obtain a copy of the License at",
+    "_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+    "_comment": "Unless required by applicable law or agreed to in writing, software",
+    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+    "_comment": "See the License for the specific language governing permissions and",
+    "_comment": "limitations under the License.",
+    "msgHeirarchy": ["diameter"],
+    "msgDetails": {
+        "diameter": {
+            "protocol": "diameter",
+            "msg": {
+                "version": 1,
+                "flags": 0,
+                "command-code": 257, 
+                "application-id": 0,  
+                "hop-by-hop-identifier": "737f5129",
+                "end-to-end-identifier": "a02ce8db",
+                "avp": 
+                [
+                        {
+                            "code": 268,
+                            "flags": 64,
+                            "result-code": 2001
+                        },
+			{
+                            "code": 264,
+                            "flags": 64,
+                            "origin-host": "hss.openair4G.eur"
+                        },
+			{
+                            "code": 296,
+                            "flags": 64,
+                            "origin-realm": "openair4G.eur"
+                        },
+			{
+                            "code": 278,
+                            "flags": 64,
+                            "origin-state-id":1553590771
+                        },
+			{
+                            "code": 257,
+                            "flags": 64,
+			    "address-type": 1,
+                            "host-ip-address":"192.168.1.4"
+                        },
+			{
+                            "code": 266,
+                            "flags": 64,
+                            "vendor-id":0
+                        },
+			{
+                            "code": 269,
+                            "flags": 0,
+                            "product-name":"freeDiameter"
+                        },
+			{
+                            "code": 267,
+                            "flags": 0,
+                            "firmware-revision":10201 
+                        },
+			{
+                            "code": 260,
+                            "flags": 64,
+                            "vendor-specific-application-id": 
+                            [    
+                                {
+                                    "code": 258,
+                                    "flags": 64,
+                                    "auth-application-id": 16777251
+                                },
+                                {
+                                    "code": 266,
+                                    "flags": 64,
+                                    "vendor-id": 10415
+                                }
+                            ]
+                        },
+			{
+                            "code": 265,
+                            "flags": 64,
+                            "supported-vendor-id":5535
+                        },
+			{
+                            "code": 265,
+                            "flags": 64,
+                            "supported-vendor-id":10415
+                        },
+			{
+                            "code": 265,
+                            "flags": 64,
+                            "supported-vendor-id":13019
+                        }
+                  ]
+        	}
+             }
+         }
+   }		

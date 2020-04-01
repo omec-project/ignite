@@ -1,0 +1,30 @@
+{
+
+"initial_context_setup_request":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID","gTP-TEID","transportLayerAddress"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id","gtpContextData:create_session_response:teid_gre_key","gtpContextData:create_session_response:ipv4_address"]
+},
+
+"ue_context_release_command":{
+        "dataToBeVerified":["eNB-UE-S1AP-ID","mME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+
+"paging":{
+        "dataToBeVerified":["m-TMSI"],
+        "fromContextData":["s1apContextData:attach_accept:m_tmsi"]
+},
+
+"ue_context_release_command_service":{
+        "dataToBeVerified":["eNB-UE-S1AP-ID","mME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:service_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+
+"initial_context_setup_request_service":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID","gTP-TEID","transportLayerAddress"],
+        "fromContextData":["s1apContextData:service_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id","gtpContextData:create_session_response:teid_gre_key","gtpContextData:create_session_response:ipv4_address"]
+}
+
+
+
+}

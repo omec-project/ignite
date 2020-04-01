@@ -1,0 +1,235 @@
+#
+# Copyright (c) 2019, Infosys Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+<Session-Id> ::= < AVP Header: 263, UTF8String>
+<Vendor-Specific-Application-Id> ::= < AVP Header: 260, Grouped>
+                                     { Vendor-Id }
+                                     [ Auth-Application-Id ]
+                                     [ Acct-Application-Id ]
+<Auth-Session-State> ::= < AVP Header: 277, Enumerated>
+<Origin-Host> ::= < AVP Header: 264, DiameterIdentity>
+<Origin-Realm> ::= < AVP Header: 296, DiameterIdentity>
+<Destination-Host> ::= < AVP Header: 293, DiameterIdentity>
+<Destination-Realm> ::= < AVP Header: 283, DiameterIdentity>
+<User-Name> ::= < AVP Header: 1, UTF8String>
+<Supported-Features> ::= < AVP Header: 628, Grouped>
+                         { Vendor-Id }
+                         { Feature-List-ID }
+                         { Feature-List }
+                        *[ AVP ]
+<Requested-EUTRAN-Authentication-Info> ::= < AVP header: 1408, Grouped>
+                                               [ Number-Of-Requested-Vectors]
+                                               [ Immediate-Response-Preferred ]
+                                               [ Re-synchronization-Info ]
+                                              *[ AVP ]
+<Requested-UTRAN-GERAN-Authentication-Info> ::= < AVP header: 1409, Grouped>
+                                               [ Number-Of-Requested-Vectors]
+                                               [ Immediate-Response-Preferred ]
+                                               [ Re-synchronization-Info ]
+                                              *[ AVP ]
+<Visited-PLMN-Id> ::= < AVP Header: 1407, OctetString>
+<Proxy-Info> ::= < AVP Header: 284 >
+                 { Proxy-Host }
+                 { Proxy-State }
+                *[ AVP ]
+<Route-Record> ::= < AVP Header: 282, DiameterIdentity>
+
+
+
+<Vendor-Id> ::= < AVP Header: 266, Unsigned32>
+<Auth-Application-Id> ::= < AVP Header: 258, Unsigned32>
+<Acct-Application-Id> ::= < AVP Header: 259, Unsigned32>
+<Feature-List-ID> ::= < AVP Header: 629, Unsigned32>
+<Feature-List> ::= < AVP Header: 630, Unsigned32>
+<Number-Of-Requested-Vectors> ::= < AVP Header: 1410, Unsigned32>
+<Immediate-Response-Preferred> ::= < AVP Header: 1412, Unsigned32>
+<Re-synchronization-Info> ::= < AVP Header: 1411, OctetString>
+<Proxy-Host> ::= < AVP Header: 280, DiameterIdentity>
+<Proxy-State> ::= < AVP Header: 33, OctetString>
+
+
+
+<Result-Code> ::= < AVP Header: 268, Unsigned32>
+
+<Experimental-Result> ::= < AVP Header: 297, Grouped>
+                          { Vendor-Id }
+                          { Experimental-Result-Code }
+<Error-Diagnostic> ::= < AVP Header: 1614, Enumerated>
+<Authentication-Info> ::= < AVP header: 1413, Grouped>
+                         *[ E-UTRAN-Vector ]
+                         *[ UTRAN-Vector ]
+                         *[ GERAN-Vector ]
+                         *[ AVP ] 
+<Failed-AVP> ::= < AVP Header: 279, Grouped>
+                 1* {AVP}
+
+
+<Experimental-Result-Code> ::= < AVP Header: 298, Unsigned32>
+<E-UTRAN-Vector> ::= < AVP header: 1414, Grouped>
+                     [ Item-Number ]
+                     { RAND }
+                     { XRES }
+                     { AUTN }
+                     { KASME }
+                    *[ AVP ]
+<UTRAN-Vector> ::= < AVP header: 1415, Grouped>
+                   [ Item-Number ]
+                   { RAND }
+                   { XRES }
+                   { AUTN }
+                   { Confidentiality-Key }
+                   { Integrity-Key }
+                  *[ AVP ]
+<GERAN-Vector> ::= < AVP header: 1416, Grouped>
+                   [ Item-Number ]
+                   { RAND }
+                   { SRES }
+                   { Kc }
+                  *[ AVP ]
+<Item-Number> ::= < AVP Header: 1419, Unsigned32>
+<RAND> ::= < AVP Header: 1447, OctetString>
+<XRES> ::= < AVP Header: 1448, OctetString>
+<AUTN> ::= < AVP Header: 1449, OctetString>
+<KASME> ::= < AVP Header: 1450, OctetString>
+<Confidentiality-Key> ::= < AVP Header: 625, OctetString>
+<Integrity-Key> ::= < AVP Header: 626, OctetString>
+<SRES> ::= < AVP Header: 1454, OctetString>
+<Kc> ::= < AVP Header: 1453, OctetString>
+
+
+
+<Host-IP-Address> ::=< AVP Header: 257, Address>
+<Product-Name> ::=< AVP Header: 269, UTF8String >
+<Origin-State-Id> ::=< AVP Header: 278, Unsigned32>
+<Supported-Vendor-Id> ::=< AVP Header: 265, Unsigned32>
+<Auth-Application-Id> ::=< AVP Header: 258, Unsigned32>
+<Inband-Security-Id> ::=< AVP Header: 299, Unsigned32>
+<Acct-Application-Id> ::=< AVP Header: 259, Unsigned32>
+<Firmware-Revision> ::=< AVP Header: 267, Unsigned32>
+<Error-Message> ::=< AVP Header: 281, UTF8String>
+
+<RAT-Type> ::=< AVP Header: 1032, Enumerated>
+<ULR-Flags> ::=< AVP Header: 1405, Unsigned32>
+<ULA-Flags> ::=< AVP Header: 1406, Unsigned32>
+<Subscription-Data> ::= <AVP header: 1400, Grouped>
+                   [ Subscriber-Status ]
+                   [ MSISDN ] 
+                   [ A-MSISDN ]
+                   [ STN-SR ] 
+                   [ ICS-Indicator ]
+                   [ Network-Access-Mode ]
+                   [ Operator-Determined-Barring ]
+                   [ HPLMN-ODB ]
+                   *10[ Regional-Subscription-Zone-Code ]
+                   [ Access-Restriction-Data ]
+                   [ APN-OI-Replacement ]
+                   [ LCS-Info ]
+                   [ Teleservice-List ]
+                   *[ Call-Barring-Info ]
+                   [ 3GPP-Charging-Characteristics ] 
+                   [ AMBR ]
+                   [ APN-Configuration-Profile ]
+                   [ RAT-Frequency-Selection-Priority-ID ]
+                   [ Trace-Data]
+                   [ GPRS-Subscription-Data ]
+                   *[ CSG-Subscription-Data ] 
+                   [ Roaming-Restricted-Due-To-Unsupported-Feature ] 
+                   [ Subscribed-Periodic-RAU-TAU-Timer ]
+                   [ MPS-Priority ]
+                   [ VPLMN-LIPA-Allowed ]
+                   [ Relay-Node-Indicator ]
+                   [ MDT-User-Consent ]
+                   [ Subscribed-VSRVCC ]
+                   [ ProSe-Subscription-Data ]
+                   [ Subscription-Data-Flags ]
+                   *[ Adjacent-Access-Restriction-Data ]
+                   [ DL-Buffering-Suggested-Packet-Count ]
+                   *[ IMSI-Group-Id ] 
+                   [ UE-Usage-Type ]
+                   *[ AESE-Communication-Pattern ]
+                   *[ Monitoring-Event-Configuration ]
+                   *[ AVP ]
+<MSISDN> ::= <AVP header: 701, OctetString>
+<Subscriber-Status> ::= <AVP header: 1424, Enumerated>
+<Access-Restriction-Data> ::= <AVP header: 1426, Unsigned32>
+<Network-Access-Mode> ::= <AVP header: 1417, Enumerated>
+<AMBR> ::= <AVP header: 1435, Grouped>
+                   { Max-Requested-Bandwidth-UL }
+                   { Max-Requested-Bandwidth-DL }
+                   *[ AVP ]
+<Max-Requested-Bandwidth-UL> ::= <AVP header: 516, Unsigned32>
+<Max-Requested-Bandwidth-DL> ::= <AVP header: 515, Unsigned32>
+<Subscribed-Periodic-RAU-TAU-Timer> ::= <AVP header: 1619, Unsigned32>
+<APN-Configuration-Profile> ::= <AVP header: 1429, Grouped>
+                   { Context-Identifier }
+                   [ Additional-Context-Identifier ]
+                   { All-APN-Configurations-Included-Indicator }
+                   1*{APN-Configuration}
+                   *[ AVP ]
+<Context-Identifier> ::= <AVP header: 1423, Unsigned32>
+<All-APN-Configurations-Included-Indicator> ::= <AVP header: 1428, Enumerated>
+<Additional-Context-Identifier> ::= <AVP header: 1683, Unsigned32>
+<APN-Configuration> ::= <AVP header: 1430, Grouped>
+                   { Context-Identifier }
+                   * 2 [ Served-Party-IP-Address ]
+                   { PDN-Type }
+                   { Service-Selection}
+                   [ EPS-Subscribed-QoS-Profile ]
+                   [ VPLMN-Dynamic-Address-Allowed ]
+                   [MIP6-Agent-Info ] 
+                   [ Visited-Network-Identifier ]
+                   [ PDN-GW-Allocation-Type ]
+                   [ 3GPP-Charging-Characteristics ]
+                   [ AMBR ]
+                   *[ Specific-APN-Info ] 
+                   [ APN-OI-Replacement ] 
+                   [ SIPTO-Permission ] 
+                   [ LIPA-Permission ]
+                   [ Restoration-Priority ]
+                   [ SIPTO-Local-Network-Permission ]
+                   [ WLAN-offloadability ] 
+                   [ Non-IP-PDN-Type-Indicator ]
+                   [ Non-IP-Data-Delivery-Mechanism ]
+                   [ SCEF-ID ]
+                   [ SCEF-Realm ]
+                   [ Preferred-Data-Mode ]
+                   *[ AVP ]
+<PDN-Type> ::= <AVP header: 1456, Enumerated>
+<Service-Selection> ::= <AVP header: 493, UTF8String>
+<Served-Party-IP-Address> ::= <AVP header: 848, Address>
+<EPS-Subscribed-QoS-Profile> ::= <AVP header: 1431, Grouped>
+                   { QoS-Class-Identifier }
+                   { Allocation-Retention-Priority }
+                   *[AVP]
+<QoS-Class-Identifier> ::= <AVP header: 1028, Enumerated>
+<Allocation-Retention-Priority> ::= <AVP header: 1034, Grouped>
+                   { Priority-Level }
+                   [ Pre-emption-Capability ]
+                   [ Pre-emption-Vulnerability ]
+<Priority-Level> ::= <AVP header: 1046, Unsigned32>
+<Pre-emption-Capability> ::= <AVP header: 1047, Enumerated>
+<Pre-emption-Vulnerability> ::= <AVP header: 1048, Enumerated>
+<PDN-GW-Allocation-Type> ::= <AVP header: 1438, Enumerated>
+<MIP6-Agent-Info> ::= <AVP header: 486, Grouped>
+                   *2[ MIP-Home-Agent-Address ]
+                   [ MIP-Home-Agent-Host ]
+                   [ MIP6-Home-Link-Prefix ]
+                   *[ AVP ]
+<MIP-Home-Agent-Address> ::= <AVP header: 334, Address>
+<Cancellation-Type> ::= <AVP header: 1420, Enumerated>
+<Pur-flags> ::= <AVP header: 1635, Unsigned32>
+<Pua-flags> ::= <AVP header: 1442, Unsigned32>
+

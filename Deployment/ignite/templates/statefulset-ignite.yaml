@@ -1,0 +1,213 @@
+{{/*
+Copyright 2019, Infosys Ltd.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{ tuple "ignite" . | include "ignite.service_account" }}
+{{- $configJson := index .Values.config.ignite.cfgFiles "configuration.json" }}
+{{- $configJsonRobo := index .Values.config.ignite.cfgFiles "resources.MMEConfig.txt" }}
+{{- $configJsonGtp := index $configJson "gtp" }}
+{{- $configJsonS1ap := index $configJson "s1ap" }}
+{{- $configJsonDiameter := index $configJson "diameter" }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ignite
+  labels:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 4 }}
+spec:
+  replicas: 1
+  serviceName: ignite
+  selector:
+    matchLabels:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 6 }}
+  template:
+    metadata:
+      labels:
+{{ tuple "ignite" . | include "ignite.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.ignite.label }}: {{ .Values.nodeSelectors.ignite.value }}
+    {{- end }}
+      serviceAccountName: ignite
+      initContainers:
+      - name: ignite-load-sctp-module
+        image: {{ .Values.images.tags.init | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        command: ["bash", "-xc"]
+        args:
+        - >
+          if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then \
+              chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp; \
+          fi
+        volumeMounts:
+        - name: host-rootfs
+          mountPath: /mnt/host-rootfs
+      - name: ignite-dep-check
+        image: {{ .Values.images.tags.depCheck | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: PATH
+            value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+          - name: COMMAND
+            value: "echo done"
+          - name: DEPENDENCY_POD_JSON
+            value: '[{"labels": {"app": "mme"}, "requireSameNode": false}]'
+        command:
+          - kubernetes-entrypoint
+      - name: ignite-init
+        image: {{ .Values.images.tags.ignite | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command: ["/opt/ignite/scripts/ignite-init.sh"]
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/ignite/scripts/ignite-init.sh
+          subPath: ignite-init.sh
+        - name: configs
+          mountPath: /opt/ignite/Dev/Common/config
+        - name: shared-data
+          mountPath: /opt/ignite/Dev/Common/shared
+      containers:
+      - name: diameter
+        image: {{ .Values.images.tags.ignite | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: {{index $configJsonDiameter "ignite_port"}}
+        - containerPort: {{index $configJsonDiameter "tc_port"}}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/ignite/scripts/ignite-run.sh diameter
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.ignite | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/ignite/scripts/ignite-run.sh
+          subPath: ignite-run.sh
+        - name: shared-data
+          mountPath: /opt/ignite/Dev/Common/shared
+      - name: s1ap
+        image: {{ .Values.images.tags.ignite | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: {{index $configJsonS1ap "ignite_port"}}
+          protocol: SCTP
+        - containerPort: {{index $configJsonS1ap "tc_port"}}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/ignite/scripts/ignite-run.sh s1ap
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.ignite | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/ignite/scripts/ignite-run.sh
+          subPath: ignite-run.sh
+        - name: shared-data
+          mountPath: /opt/ignite/Dev/Common/shared
+      - name: gtp
+        image: {{ .Values.images.tags.ignite | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: {{index $configJsonGtp "ignite_port"}}
+          protocol: UDP
+        - containerPort: {{index $configJsonGtp "tc_port"}}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/ignite/scripts/ignite-run.sh gtp
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.ignite | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/ignite/scripts/ignite-run.sh
+          subPath: ignite-run.sh
+        - name: shared-data
+          mountPath: /opt/ignite/Dev/Common/shared
+      - name: runtestcase
+        image: {{ .Values.images.tags.ignite | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        stdin: true
+        tty: true
+        command: ["bash", "-xc"]
+        args:
+        - /usr/sbin/sshd -D
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.ignite | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/ignite/scripts/ignite-runtc.sh
+          subPath: ignite-runtc.sh
+        - name: shared-data
+          mountPath: /opt/ignite/Dev/Common/shared
+        - name: configs
+          mountPath: /opt/ignite/Dev/Common/config
+      volumes:
+      - name: scripts
+        configMap:
+          name: ignite
+          defaultMode: 511
+      - name: configs
+        configMap:
+          name: ignite
+          defaultMode: 420
+      - name: shared-data
+        emptyDir: {}
+      - name: host-rootfs
+        hostPath:
+          path: /
+      - name: logs
+        hostPath:
+          path: /var/log/ignite
+

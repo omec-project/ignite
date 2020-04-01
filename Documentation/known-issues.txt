@@ -1,0 +1,6 @@
+Known Issues
+==================
+
+1. Transport layer address in asn1 spec is modified to OCTET from BITSTRING as a workaround, as the asn1tools=0.137.4  is encoding the transport layer data with extra bits,when specified as BITSTRING.
+2. When Ignite is started in non kubernetes environment and while MME is running in docker, then GRPC validation in ROBO TC needs to be commented, before execution.
+

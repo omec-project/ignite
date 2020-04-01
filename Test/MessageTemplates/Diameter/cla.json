@@ -1,0 +1,96 @@
+{
+    "_comment": "Copyright (c) 2019, Infosys Ltd.",
+    "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+    "_comment": "you may not use this file except in compliance with the License.",
+    "_comment": "You may obtain a copy of the License at",
+    "_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+    "_comment": "Unless required by applicable law or agreed to in writing, software",
+    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+    "_comment": "See the License for the specific language governing permissions and",
+    "_comment": "limitations under the License.",
+    "msgHeirarchy": ["diameter"],
+    "msgDetails": {
+        "diameter": {
+            "protocol": "diameter",
+            "msg": {
+                "version": 1,
+                "flags": 40,
+                "command-code": 317,
+                "application-id": 16777251,
+                "hop-by-hop-identifier": "02515845",
+                "end-to-end-identifier": "02515845",
+                "avp": 
+                [
+                        {
+                            "code": 263,
+                            "flags": 40,
+                            "session-id": "mme.localdoamin;1561353919;1;1"
+                        },
+						{
+                            "code": 260,
+                            "flags": 40,
+                            "vendor-specific-application-id": 
+                            [    
+                                {
+                                    "code": 266,
+                                    "flags": 40,
+									"vendor-id": 10415
+                                },
+                                {
+                                    "code": 258,
+                                    "flags": 40,
+                                    "auth-application-id": 16777251
+                                }
+                            ]
+                        },
+						{
+                            "code": 277,
+                            "flags": 40,
+                            "auth-session-state": 1
+                        },
+						{
+                            "code": 628,
+                            "flags": 80,
+							"vendor-id": 10415,
+                            "supported-features": 
+                            [    
+                                {
+                                    "code": 266,
+                                    "flags": 40,
+									"vendor-id": 10415
+                                },
+                                {
+                                    "code": 629,
+                                    "flags": 80,
+									"vendor-id": 10415,
+                                    "feature-list-id": 1
+                                },
+								{
+                                    "code": 630,
+                                    "flags": 80,
+									"vendor-id": 10415,
+									"feature-list": 0
+                                }
+                            ]
+                        },
+						{
+                            "code": 268,
+                            "flags": 40,
+                            "result-code": 2001
+                        },
+						{
+                            "code": 264,
+                            "flags": 40,
+                            "origin-host": "mme.localdomain"
+                        },
+                        {
+                            "code": 296,
+                            "flags": 40,
+                            "origin-realm": "localdomain"
+                        }
+				]
+			}
+		}				
+	}
+}	

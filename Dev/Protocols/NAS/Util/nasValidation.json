@@ -1,0 +1,53 @@
+{
+
+"authentication_request":{
+	"dataToBeVerified":["ENB-UE-S1AP-ID","authentication_parameter_rand","autn_value"],
+	"fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","diameterContextData:authentication_info_response:rand","diameterContextData:authentication_info_response:autn"]
+},
+
+"security_mode_command":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+
+"detach_accept":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+
+"esm_information_request":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+
+"identity_request":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id"]
+},
+
+"tracking_area_update_accept":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+
+"detach_accept_service":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:service_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+
+"detach_request":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:attach_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+},
+"authentication_request_service":{
+	"dataToBeVerified":["ENB-UE-S1AP-ID","authentication_parameter_rand","autn_value"],
+	"fromContextData":["s1apContextData:service_request:enb_ue_s1ap_id","diameterContextData:authentication_info_response:rand","diameterContextData:authentication_info_response:autn"]
+},
+
+"security_mode_command_service":{
+        "dataToBeVerified":["ENB-UE-S1AP-ID","MME-UE-S1AP-ID"],
+        "fromContextData":["s1apContextData:service_request:enb_ue_s1ap_id","s1apContextData:authentication_request:mme_ue_s1ap_id"]
+}
+
+
+}

@@ -1,0 +1,48 @@
+{
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "NAS-MESSAGE": {},
+  "S1AP-PDU": {
+    "initiatingMessage": {
+      "procedureCode": 23,
+      "criticality": 0,
+      "value": {
+        "UEContextReleaseCommand": {
+          "protocolIEs": [
+            {
+              "id": 99,
+              "criticality": 0,
+              "value": {
+                "UE-S1AP-IDs": [
+                  {
+                    "UE-S1AP-ID-pair": {
+                      "mME-UE-S1AP-ID": 998277135,
+                      "eNB-UE-S1AP-ID": 45
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "id": 2,
+              "criticality": 1,
+              "value": {
+                "Cause": {
+                  "CauseRadioNetwork": 20
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+LTE_4G_Setup
+LTE_4G_IMSIAttachDetach
+LTE_4G_IMSIHSSInitDetach
+LTE_4G_GUTIAttachDetach
+LTE_4G_IMSIGUTIAttachDetach
+LTE_4G_ServiceRequest
+LTE_4G_DDN_ServiceRequest
+LTE_4G_S1_Release
