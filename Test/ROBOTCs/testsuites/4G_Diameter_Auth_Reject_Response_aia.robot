@@ -111,7 +111,9 @@ TC1: LTE 4G IMSI Attach Detach
     ${incrementUeCount}    Evaluate    ${ueCountBeforeAttach}+1
     Should Be Equal    ${incrementUeCount}    ${ueCountAfterAttach}    Expected UE Attach Count: ${incrementUeCount}, but Received UE Attach Count: ${ueCountAfterAttach}    values=False
     Send S1ap    ${enbUeS1APId}    detach_request    ${uplinkNASTransport_DetachReq}    ${nasDetachRequest}    #Send Detach Request to MME
+    ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
+    Send S6aMsg     purge_response    ${msgData_pua}    ${IMSI}   #HSS sends PUA to MME
     Send GTP    delete_session_response    ${gtpMsgHeirarchy_tag3}    ${deleteSessionResp}    #Send Delete Session Response to MME
     ${detAccUE}    Receive S1ap    #MME send Detach Accept to UE
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME

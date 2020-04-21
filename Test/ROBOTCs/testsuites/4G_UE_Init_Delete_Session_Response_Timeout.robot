@@ -71,7 +71,9 @@ TC1: LTE 4G UE Init Delete Session Response Timeout
     ${incrementUeCount}    Evaluate    ${ueCountBeforeAttach}+1
     Should Be Equal    ${incrementUeCount}    ${ueCountAfterAttach}    Expected UE Attach Count: ${incrementUeCount}, but Received UE Attach Count: ${ueCountAfterAttach}    values=False
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
+    ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
+    Send S6aMsg     purge_response    ${msgData_pua}    ${IMSI}   #HSS sends PUA to MME
     Sleep    5s
     ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
     Log    ${procStatOutAfTimeout}

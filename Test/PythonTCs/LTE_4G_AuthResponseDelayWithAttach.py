@@ -116,9 +116,15 @@ try:
     igniteLogger.logger.info("\n---------------------------------------\nSend Detach Request to MME\n---------------------------------------")
     s1.sendS1ap('detach_request', uplinknastransport_detach_request, enbues1ap_id, nas_detach_request)
 
+    igniteLogger.logger.info("\n---------------------------------------\nPurge Request received from MME\n---------------------------------------")
+    ds.receiveS6aMsg()
+
     igniteLogger.logger.info("\n---------------------------------------\nDelete Session Request received from MME\n---------------------------------------")
     gs.receiveGtp()
 
+    igniteLogger.logger.info("\n---------------------------------------\nSend Purge Response to MME\n---------------------------------------")
+    ds.sendS6aMsg('purge_response', msg_data_pua, imsi)
+    
     igniteLogger.logger.info("\n---------------------------------------\nSend Delete Session Response to MME\n---------------------------------------")
     gs.sendGtp('delete_session_response', delete_session_response, msg_hierarchy)
 
