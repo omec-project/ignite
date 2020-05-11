@@ -107,7 +107,9 @@ TC1: LTE 4G IMSI Guti Attach detach
     ${incprocessed_ulaAfCount}    Evaluate    ${processed_ula}+1
     Should Be Equal    ${incprocessed_ulaAfCount}    ${processed_ulaAf}    Expected processed ula Count: ${incprocessed_ulaAfCount}, but Received processed ula Count: ${processed_ulaAf}    values=False
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
+    ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
+    Send S6aMsg     purge_response    ${msgData_pua}    ${IMSI}   #HSS sends PUA to MME
     Send GTP    delete_session_response    ${deleteSessionResp}    ${gtpMsgHeirarchy_tag3}    #Send Delete Session Response to MME
     ${detAccUE}    Receive S1ap    #MME send Detach Accept to UE
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME
@@ -183,7 +185,9 @@ TC1: LTE 4G IMSI Guti Attach detach
     ${incprocessed_ulaAfCountGutiAttach}    Evaluate    ${processed_ulaBefGutiAttach}+1
     Should Be Equal    ${incprocessed_ulaAfCountGutiAttach}    ${processed_ulaAfGutiAttach}    Expected processed ula Count: ${incprocessed_ulaAfCountGutiAttach}, but Received processed ula Count: ${processed_ulaAfGutiAttach}    values=False
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
+    ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
+    Send S6aMsg     purge_response    ${msgData_pua}    ${IMSI}   #HSS sends PUA to MME
     Send GTP    delete_session_response    ${deleteSessionResp}    ${gtpMsgHeirarchy_tag3}    #Send Delete Session Response to MME
     ${detAccUE}    Receive S1ap    #MME send Detach Accept to UE
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME

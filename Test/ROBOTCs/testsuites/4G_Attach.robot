@@ -53,6 +53,9 @@ TC1: LTE 4G IMSI Attach Detach
     ${num_of_processed_init_ctxt_resp}    ${found}    Get Key Value From Dict    ${statsTypes}    init_ctxt_resp
     ${processedInitCtxtResp}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_processed_init_ctxt_resp}
     ${processedInitCtxtResp}    Convert to Integer    ${processedInitCtxtResp}
+    ${processedPurResp}    Get GRPC Stats Response Count    ${procStatOutBfExec}    num_of_processed_pur_resp
+    ${processedPurResp}    Convert to Integer    ${processedPurResp}
+
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Validate Protocol IE    ${air}    visited-plmn-id    02f829
@@ -113,7 +116,9 @@ TC1: LTE 4G IMSI Attach Detach
     ${incprocessed_ulaAfCount}    Evaluate    ${processed_ula}+1
     Should Be Equal    ${incprocessed_ulaAfCount}    ${processed_ulaAf}    Expected processed ula Count: ${incprocessed_ulaAfCount}, but Received processed ula Count: ${processed_ulaAf}    values=False
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
+    ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
+    Send S6aMsg     purge_response    ${msgData_pua}    ${IMSI}   #HSS sends PUA to MME
     Send GTP    delete_session_response    ${deleteSessionResp}    ${gtpMsgHeirarchy_tag3}    #Send Delete Session Response to MME
     ${detAccUE}    Receive S1ap    #MME send Detach Accept to UE
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME
@@ -128,6 +133,10 @@ TC1: LTE 4G IMSI Attach Detach
     ${numDelSessionReqSentAfterDetach}    Convert to Integer    ${numDelSessionReqSentAfterDetach}
     ${inc_numDelSessionReqSent}    Evaluate    ${numDelSessionReqSent}+1
     Should Be Equal    ${inc_numDelSessionReqSent}    ${numDelSessionReqSentAfterDetach}    Expected num Del Session Req Sent After Detach: ${inc_numDelSessionReqSent}, but Received num Del Session Req Sent After Detach: ${numDelSessionReqSentAfterDetach}    values=False
+    ${processedPurRespAf}    Get GRPC Stats Response Count    ${procStatOutAfDetach}    num_of_processed_pur_resp
+    ${processedPurRespAf}    Convert to Integer    ${processedPurRespAf}
+    ${incprocessedPurResp}    Evaluate    ${processedPurResp}+1
+    Should Be Equal    ${incprocessedPurResp}    ${processedPurRespAf}    Expected num Pur Processed Response After Detach: ${incprocessedPurResp}, but Received num Pur Processed Response After Detach: ${processedPurRespAf}    values=False
     [Teardown]    Attach Test Teardown
     
     
