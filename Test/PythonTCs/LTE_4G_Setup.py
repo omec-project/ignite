@@ -18,24 +18,43 @@ import os
 import sys, requests
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'Dev', 'Common'))
 import igniteCommonUtil as icu
+import sshUtils as su
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..','ROBOTCs','keywords','systemkeywords'))
+import dictOperations as do
 
 clr_flag=False
+ssh_client = None
 
 try:
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'MessageTemplates', 'Util'))
     from loadMessage import *
-
+    
+    command = "export LD_LIBRARY_PATH=" + mme_lib_path + " && " + mme_grpc_client_path + "/mme-grpc-client mme-app show procedure-stats"
+    
+    ssh_client = su.sshConnect(mmeIP, mme_username, mme_password, "ssh-password", timeout=10, port=None)
+    proc_stat = su.executeCommand(command,ssh_client)
+    
+    ue_count_before_attach = do.splitProcStats(proc_stat, stats_type["subs_attached"])
+    
     #required message templates
     s1_setup_request = json.loads(open('../MessageTemplates/S1AP/s1setup_request.json').read())
-
+    
     print ("\n-------------------------------------\nSetup Started\n---------------------------------------")
-
+    
     igniteLogger.logger.info("\n---------------------------------------\nSend S1Setup Request to MME\n---------------------------------------")
     s1.sendS1ap('s1_setup_request',s1_setup_request,None)
-
+    
     igniteLogger.logger.info("\n---------------------------------------\nS1 Setup Response received from MME\n---------------------------------------")
     s1.receiveS1ap()
-
+    
+    time.sleep(1)
+    proc_stat_af_detach = su.executeCommand(command,ssh_client)
+    
+    ue_count_after_detach = do.splitProcStats(proc_stat_af_detach, stats_type["subs_attached"])
+    icu.grpcValidation(ue_count_before_attach, ue_count_after_detach, "Number of Subs Attached After Detach")
+    
+    
     print ("\n-------------------------------------\nSetup Successful\n---------------------------------------")
 	
 except Exception as e:
@@ -43,6 +62,7 @@ except Exception as e:
 
 	
 finally:
+    su.sshDisconnect(ssh_client)
     if clr_flag == True:
         igniteLogger.logger.info("\n---------------------------------------\nHSS sends CLR to MME\n---------------------------------------")
         ds.sendS6aMsg('cancel_location_request', msg_data_clr, imsi)

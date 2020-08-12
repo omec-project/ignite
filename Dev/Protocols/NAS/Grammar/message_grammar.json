@@ -220,6 +220,30 @@
 
 },
 
+"authentication_reject":{
+
+"M" : [
+{
+"union_mf" : ["security_header_type","protocol_discriminator"]
+},
+"mobility_mgmt_message_type"
+],
+"O" : []
+
+},
+
+"authentication_failure":{
+
+"M" : [
+{
+"union_mf" : ["security_header_type","protocol_discriminator"]
+},
+"mobility_mgmt_message_type",
+"emm_cause_reject"
+],
+"O" : ["authentication_failure_parameter"]
+
+},
 
 "detach_request_from_ue" : {
 
@@ -434,7 +458,73 @@
 ]
 
 
-}
+},
+
+"tracking_area_update_request" : {
+    "M" : [
+      {
+        "union_mf" : ["security_header_type","protocol_discriminator"]
+      },
+      "mobility_mgmt_message_type",
+      {
+        "union_mf" : ["nas_key_set_identifier","eps_update_type"]
+      },
+      "eps_mobile_identity"
+    ],
+    "O" : [
+      "tracking_area_identity",
+      "eps_bearer_context_status",
+      "ue_network_capability_tau"
+
+    ]
+  },
+
+  "tracking_area_update_accept" : {
+    "M" : [
+      {
+        "union_mf" : ["security_header_type","protocol_discriminator"]
+      },
+      "message_authentication_code",
+      "sequence_number",
+      {
+        "union_mf" : ["security_header_type_1","protocol_discriminator_1"]
+      },
+      "mobility_mgmt_message_type",
+      {
+        "union_mf" : ["spare_half_octet","eps_update_result"]
+      }
+    ],
+    "O" : [
+      "gprs_timer_t3412",
+      "eps_mobile_identity_guti",
+      "mobile_identity_tmsi"
+    ]
+  },
+
+  "tracking_area_update_complete" : {
+    "M" : [
+      {
+        "union_mf" : ["security_header_type","protocol_discriminator"]
+      },
+      "mobility_mgmt_message_type"
+
+    ],
+    "O" : [
+    ]
+  },
+
+  "tracking_area_update_reject" : {
+    "M" : [
+      {
+        "union_mf" : ["security_header_type","protocol_discriminator"]
+      },
+      "mobility_mgmt_message_type",
+      "emm_cause_reject"
+    ],
+    "O" : [
+    ]
+  }
+
 
 
 

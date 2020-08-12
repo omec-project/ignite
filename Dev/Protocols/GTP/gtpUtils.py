@@ -15,6 +15,7 @@
 #
 import os, sys
 import binascii
+import re
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'Common'))
 from protocolMessageTypes import ProtocolMessageTypes as mt
@@ -35,7 +36,8 @@ interface_type_gtp_map={
         "S1-U SGW GTP-U":1,
         "S12 RNC GTP-U":2,
         "S12 SGW GTP-U":3,
-        "S11 MME GTP-C":10
+        "S11 MME GTP-C":10,
+        "S11/S4 SGW GTP-C":11
         }
 
 gtpMessageDict={
@@ -80,8 +82,37 @@ def ipadressToHex(value):
     for x in ip_list:
         tl_list.append(int(x))
     address = binascii.hexlify(bytearray(tl_list))
-    final_address = "1f"+str(address.decode())
+    final_address = str(address.decode())
     return final_address
 
+def updateGtpIp(dictToUpdate, ipAddress):
+    updated_dict = dictToUpdate
+    matched = "false"
 
+    for key, value in dictToUpdate.items():
+
+        if key == 'ipv4address':
+            matched = "true"
+            keywordPatternMatches = re.search('\$SgwIpAddress', value)
+            if keywordPatternMatches:
+                dictToUpdate[key] = ipAddress
+
+        elif isinstance(value, dict):
+            updatedDict_1, matched_1 = updateGtpIp(value, ipAddress)
+            if matched_1 == "true":
+                matched = matched_1
+                value = updatedDict_1
+                dictToUpdate[key] = value
+
+        elif isinstance(value, list):
+            for i in range (len(value)):
+                if isinstance(value[i], dict):
+                    updatedDict_2, matched_2 = updateGtpIp(value[i], ipAddress)
+                    if matched_2 == "true":
+                        matched = matched_2
+                        value[i] = updatedDict_2
+                        dictToUpdate[key]= value
+
+    updated_dict = dictToUpdate
+    return updated_dict, matched
 

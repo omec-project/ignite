@@ -33,9 +33,6 @@ TC1: LTE 4G Nw Init Detach DetachAccept timeout
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_detach_accept_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    detach_accept_timeout
-    ${detachAcceptTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_detach_accept_timeout}
-    ${detachAcceptTimeoutCountBf}    Convert to Integer    ${detachAcceptTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -77,12 +74,6 @@ TC1: LTE 4G Nw Init Detach DetachAccept timeout
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
     Send GTP    delete_session_response    ${deleteSessionResp}    ${gtpMsgHeirarchy_tag3}    #Send Delete Session Response to MME
     Sleep    5s
-    ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
-    Log    ${procStatOutAfTimeout}
-    ${detachAcceptTimeoutCountAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfTimeout}    ${num_of_detach_accept_timeout}
-    ${detachAcceptTimeoutCountAfTimeout}    Convert to Integer    ${detachAcceptTimeoutCountAfTimeout}
-    ${incrementDetachAcceptTimeoutCountAfTimeout}    Evaluate    ${detachAcceptTimeoutCountBf}+1
-    Should Be Equal    ${incrementDetachAcceptTimeoutCountAfTimeout}    ${detachAcceptTimeoutCountAfTimeout}    Expected Detach Accept Timeout Count: ${incrementDetachAcceptTimeoutCountAfTimeout}, but Received Detach Accept Timeout Count: ${detachAcceptTimeoutCountAfTimeout}    values=False
     Send S1ap    detach_accept    ${uplinkNASTransport_DetachAcp}    ${enbUeS1APId}    ${nasDetachAccept}    #Send Detach Accept to MME
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME    #eNB sends UE Context Release Complete to MME

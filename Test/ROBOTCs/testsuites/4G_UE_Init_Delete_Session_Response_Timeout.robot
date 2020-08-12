@@ -33,9 +33,6 @@ TC1: LTE 4G UE Init Delete Session Response Timeout
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_del_session_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    del_session_resp_timeout
-    ${delSessionTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_del_session_resp_timeout}
-    ${delSessionTimeoutCountBf}    Convert to Integer    ${delSessionTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -75,12 +72,6 @@ TC1: LTE 4G UE Init Delete Session Response Timeout
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
     Send S6aMsg     purge_response    ${msgData_pua}    ${IMSI}   #HSS sends PUA to MME
     Sleep    5s
-    ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
-    Log    ${procStatOutAfTimeout}
-    ${delSessionTimeoutCountAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfTimeout}    ${num_of_del_session_resp_timeout}
-    ${delSessionTimeoutCountAfTimeout}    Convert to Integer    ${delSessionTimeoutCountAfTimeout}
-    ${incrementDelSessionTimeoutCountAfTimeout}    Evaluate    ${delSessionTimeoutCountBf}+1
-    Should Be Equal    ${incrementDelSessionTimeoutCountAfTimeout}    ${delSessionTimeoutCountAfTimeout}    Expected Delete Session Response Timeout Count: ${incrementDelSessionTimeoutCountAfTimeout}, but Received Delete Session Response Timeout Count: ${delSessionTimeoutCountAfTimeout}    values=False
     Send GTP    delete_session_response    ${deleteSessionResp}    ${gtpMsgHeirarchy_tag3}    #Send Delete Session Response to MME
     ${detAccUE}    Receive S1ap    #MME send Detach Accept to UE
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME

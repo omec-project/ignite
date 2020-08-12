@@ -15,11 +15,11 @@
 #
 
 MESSAGE_TYPE = {
-        "0":"HandoverPreparation",
-        "1":"HandoverResourceAllocation",
+        "0":{"successfulOutcome":"HandoverCommand","unsuccessfulOutcome":"HandoverPreparationFailure"},
+        "1":{"initiatingMessage":"HandoverRequest"},
         "2":"HandoverNotification",
         "3":"PathSwitchRequest",
-        "4":"HandoverCancel",
+        "4":"HandoverCancelAcknowledge",
         "5":"E-RABSetup",
         "6":"E-RABModify",
         "7":"E-RABRelease",

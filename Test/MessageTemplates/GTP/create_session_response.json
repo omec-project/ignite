@@ -40,9 +40,9 @@
 		    "instance": 0,
                     "ipv4present": 1,
                     "ipv6present": 0,
-		    "interface_type": 10,
+		    "interface_type": 11,
                     "teid_gre_key": 566,
-                    "ipv4address": "127.0.0.1"
+                    "ipv4address": "$SgwIpAddress"
                 },
 		{
 		    "ie_type": 87,
@@ -97,7 +97,7 @@
                           		      "ipv6present": 0,
 					      "interface_type": 1,
 					      "teid_gre_key": 566,
-					      "ipv4address": "127.0.0.1"
+					      "ipv4address": "$SgwIpAddress"
 					 },
 					 {
 					      "ie_type": 87,

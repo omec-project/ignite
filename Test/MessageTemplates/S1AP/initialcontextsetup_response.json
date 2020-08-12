@@ -49,7 +49,7 @@
                                                   "E-RABSetupItemCtxtSURes": 
                                                       {
                                                       "e-RAB-ID" : 5,
-                                                      "transportLayerAddress" : "1fc0e9021f",
+                                                      "transportLayerAddress" : "c0e9021f",
                                                       "gTP-TEID": "00000001"
                                                        }
 

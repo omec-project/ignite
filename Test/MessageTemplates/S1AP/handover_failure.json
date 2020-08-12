@@ -12,11 +12,11 @@
 	"NAS-MESSAGE": {},
 	"S1AP-PDU": {
 		"unsuccessfulOutcome": {
-			"procedure": 1,
+			"procedureCode": 1,
 			"criticality": 0,
 			"value": {
 				"HandoverFailure": {
-					"ProtocallIEs": [{
+					"protocolIEs": [{
 							"id": 0,
 							"criticality": 1,
 							"value": {
@@ -28,7 +28,7 @@
 							"criticality": 1,
 							"value": {
 								"Cause": {
-									"CauseRadioNetwork": 4
+									"radioNetwork": 4
 								}
 							}
 						}

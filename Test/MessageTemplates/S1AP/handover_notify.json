@@ -15,7 +15,7 @@
       "procedureCode": 2,
       "criticality": 0,
       "value": {
-        "HandoverNotification": {
+        "HandoverNotify": {
           "protocolIEs": [
             {
               "id": 0,
@@ -36,8 +36,8 @@
               "criticality": 0,
               "value": {
                 "EUTRAN-CGI": {
-                  "pLMNidentity": "05f613",
-                  "cell-ID": "00000011"
+                  "pLMNidentity": "02f829",
+                  "cell-ID": "07081010"
                 }
               }
             },
@@ -46,8 +46,8 @@
               "criticality": 0,
               "value": {
                 "TAI": {
-                  "pLMNidentity": "05f613",
-                  "tAC": "1002"
+                  "pLMNidentity": "02f829",
+                  "tAC": "1001"
                 }
               }
             }

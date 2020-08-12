@@ -65,7 +65,7 @@ def splitProcStats(stats,string):
     count = 0
     for index,eachVal in enumerate(allValList):
         if eachVal == string:
-            count = allValList[index+1]
+            count = int(allValList[index+1])
             break
     return count
 

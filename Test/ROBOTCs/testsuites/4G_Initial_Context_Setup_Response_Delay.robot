@@ -33,9 +33,6 @@ TC1: LTE 4G S1ap Initial Context Setup Response Delay
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_init_ctxt_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    init_ctxt_resp_timeout
-    ${initCtxtResponseTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_init_ctxt_resp_timeout}
-    ${initCtxtResponseTimeoutCountBf}    Convert to Integer    ${initCtxtResponseTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -58,12 +55,6 @@ TC1: LTE 4G S1ap Initial Context Setup Response Delay
     Send S1ap    detach_accept    ${uplinkNASTransport_DetachAcp}    ${enbUeS1APId}    ${nasDetachAccept}    #Send Detach Accept to MME
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME    #eNB sends UE Context Release Complete to MME
-    ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
-    Log    ${procStatOutAfTimeout}
-    ${initCtxtResponseTimeoutCountAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfTimeout}    ${num_of_init_ctxt_resp_timeout}
-    ${initCtxtResponseTimeoutCountAfTimeout}    Convert to Integer    ${initCtxtResponseTimeoutCountAfTimeout}
-    ${incrementinitCtxtResponseTimeoutCountAfTimeout}    Evaluate    ${initCtxtResponseTimeoutCountBf}+1
-    Should Be Equal    ${incrementinitCtxtResponseTimeoutCountAfTimeout}    ${initCtxtResponseTimeoutCountAfTimeout}    Expected Init Context Response Timeout Count: ${incrementinitCtxtResponseTimeoutCountAfTimeout}, but Received Init Context Response Timeout Count: ${initCtxtResponseTimeoutCountAfTimeout}    values=False
     Send S1ap    attach_request_guti    ${initialUeGuti}    ${enbUeS1APId}    ${nasAttachRequestGuti}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -83,7 +74,6 @@ TC1: LTE 4G S1ap Initial Context Setup Response Delay
     Send S1ap    uplink_nas_transport_attach_cmp    ${uplinkNASTransport_AttachCmp}    ${enbUeS1APId}    ${nasAttachComplete}    #Send Attach Complete to MME
     ${modBearReqRec}    Receive GTP    #Modify Bearer Request received from MME
     Send GTP    modify_bearer_response    ${modifyBearerResp}    ${gtpMsgHeirarchy_tag2}    #Send Modify Bearer Response to MME
-    ${recEMMInfo}    Receive S1ap    #EMM Information received from MME
     Sleep    1s
     ${mmeUeS1APId}    ${mmeUeS1APIdPresent}    Get Key Value From Dict    ${intContSetupReqRec}    MME-UE-S1AP-ID
     ${IMSI_str}    Convert to String    ${IMSI}

@@ -32,6 +32,8 @@ install_run_dep_lib() {
 install_lib_patch() {
         mv /usr/local/lib/python3.6/dist-packages/_sctp.cpython-36m-x86_64-linux-gnu.so /usr/local/lib/python3.6/dist-packages/_sctp.cpython-36m-x86_64-linux-gnu.so_orig
         cp _sctp.cpython-36m-x86_64-linux-gnu.so /usr/local/lib/python3.6/dist-packages/
+        mv /usr/local/lib/python3.6/dist-packages/asn1tools/codecs/per.py /usr/local/lib/python3.6/dist-packages/asn1tools/codecs/per.py_orig
+        cp per.py /usr/local/lib/python3.6/dist-packages/asn1tools/codecs/
 }
 
 install_ssh_server() {

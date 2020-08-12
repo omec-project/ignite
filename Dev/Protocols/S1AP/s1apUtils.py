@@ -30,7 +30,11 @@ s1apMessageDict={
     10:"paging",
     17:"setup_response",
     18:"ue_context_release_request",
-    23:"ue_context_release_command"
+    23:"ue_context_release_command",
+    1:"handover_request",
+    0:"handover_command",
+    4:"handover_cancel_acknowledge",
+    50:"erab_modification_indication"
     }
 
 s1ApCreateContextMessagesList=[mt.authentication_request.name,mt.identity_request.name,mt.attach_accept.name]
@@ -56,5 +60,16 @@ def transportLayerAddressUpdate(value=None):
     for x in ip_list:
         tl_list.append(int(x))
     address = binascii.hexlify(bytearray(tl_list))
-    final_address = "1f"+str(address.decode())
+    final_address = str(address.decode())
     return final_address
+
+
+def taiEcgiTohex(value):
+    hexVal=""
+    mcc_mnc=["mcc_digit_2","mcc_digit_1","mnc_digit_3","mcc_digit_3","mnc_digit_2","mnc_digit_1"]
+    for i in mcc_mnc:
+        hexVal+=format(int(value[i]),'x')
+    val=value["tac"]
+    tAC='{}'.format(value["tac"])
+    tai = {"pLMNidentity":hexVal,"tAC":tAC}
+    return tai

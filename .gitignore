@@ -1,0 +1,8 @@
+
+# Ignoring .pyc files
+.idea/
+.project
+.settings/
+/.ptp-sync/
+*ptp-sync-folder*
+__pycache__/

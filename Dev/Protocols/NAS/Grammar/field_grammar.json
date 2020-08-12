@@ -2804,6 +2804,44 @@
         "format"    :    "NA"
     },
 
+  "authentication_failure_parameter"    :    {
+        "name"    :    "authentication_failure_parameter",
+        "type"    :    "O",
+        "format"    :    "TLV",
+        "max_size"    :    16,
+        "min_size"    :    16,
+        "type_id"    :    30,
+        "join_sf"    :    [
+
+
+            "auts"
+
+            ]
+    },
+
+    "failure_param"    :    {
+        "name"    :    "failure_param",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    16,
+        "min_size"    :    16,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
+
+    "auts"    :    {
+        "name"    :    "auts",
+        "type"    :    "M",
+        "json_type"    :    "num",
+        "byte_type"    :    "num",
+        "max_size"    :    14,
+        "min_size"    :    14,
+        "json_to_byte"    :    {},
+        "byte_to_json"    :    {},
+        "format"    :    "NA"
+    },
 
   "authentication_response_parameter"    :    {
         "name"    :    "authentication_response_parameter",
@@ -5370,6 +5408,369 @@
 
 
                 ]
-}
+},
+
+"eps_update_type"    :    {
+    "name"    :    "eps_update_type",
+    "type"    :    "M",
+    "format"    :    "V",
+    "max_size"    :    1,
+    "min_size"    :    1,
+    "join_sf"    :    [
+
+
+      {
+        "union_sf":    ["active_flag_tau","eps_update_type_value"]
+      }
+
+    ]
+  },
+
+
+  "eps_update_type_value":
+  { "name"    :    "eps_update_type_value",
+    "type"    :    "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    2,
+    "end_bit"    :    0,
+    "json_to_byte"    :    {"ta_updating": 0,"combined_ta_la_updating": 1,"combined_ta_la_with_imsi_updating": 2,"periodic_updating": 3,"unused": 4,"unused": 5
+    },
+    "byte_to_json"    :    {"0":"ta_updating","1": "combined_ta_la_updating","2": "combined_ta_la_with_imsi_updating","3":"periodic_updating","4":"unused","5":"unused"
+    },
+    "format"    :    "V"
+
+  },
+
+  "active_flag_tau":
+  { "name"    :    "active_flag_tau",
+    "type"    :    "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    3,
+    "end_bit"    :    3,
+    "json_to_byte"    :    {"no_bearer_establishment_requested":0
+    },
+    "byte_to_json"    :    {"0":"no_bearer_establishment_requested"
+    },
+    "format"    :    "V"
+
+  },
+  "eps_update_result": {
+    "name"    :    "eps_update_result",
+    "type"    :    "M",
+    "format"    :    "V",
+    "max_size"    :    1,
+    "min_size"    :    1,
+    "join_sf"    :    [
+      {
+        "union_sf":    ["spare","eps_update_result_value"]
+      }
+    ]
+  },
+  "eps_update_result_value": {
+    "name"    :    "eps_update_result_value",
+    "type"    :    "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    2,
+    "end_bit"    :    0,
+    "json_to_byte"    :    {"ta_updated":0
+    },
+    "byte_to_json"    :    {"0":"ta_updated"
+    },
+    "format"    :    "V"
+  },
+
+  "ue_network_capability_tau"    :    {
+    "name"    :    "ue_network_capability_tau",
+    "type"    :    "O",
+    "format"    :    "TLV",
+    "max_size"    :    15,
+    "min_size"    :    4,
+    "type_id":         "58",
+    "join_sf"    :    [
+
+      {
+        "union_sf":    ["eea0","128_eea1","128_eea2","128_eea3","eea4","eea5","eea6","eea7"]
+      },
+      {
+        "union_sf":    ["eia0","128_eia1","128_eia2","128_eia3","eia4","eia5","eia6","eia7"]
+      },
+      {
+        "union_sf":    ["uea0","uea1","uea2","uea3","uea4","uea5","uea6","uea7"]
+      },
+      {
+        "union_sf":    ["ucs2","uia1","uia2","uia3","uia4","uia5","uia6","uia7"]
+      },
+      {
+        "union_sf":    ["prose_dd","prose","h.245_ash","acc_csfb","lpp","lcs","1xsr_vcc","nf"]
+      }
+
+    ]
+  },
+  "eps_bearer_context_status" : {
+    "name"    :    "eps_bearer_context_status",
+    "type"    :    "O",
+    "format"    :    "TLV",
+    "max_size"    :    4,
+    "min_size"    :    4,
+    "type_id":         "57",
+    "join_sf"    :    [
+
+      {
+        "union_sf":    ["ebi7","ebi6","ebi5","ebi4","ebi3","ebi2","ebi1","ebi0"]
+      },
+      {
+        "union_sf":    ["ebi15","ebi14","ebi13","ebi12","ebi11","ebi10","ebi9","ebi8"]
+      }
+    ]
+  },
+  "ebi7"    :    {
+    "name"    :    "ebi7",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    7,
+    "end_bit"    :    7,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi6"    :    {
+    "name"    :    "ebi6",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    6,
+    "end_bit"    :    6,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi5"    :    {
+    "name"    :    "ebi5",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    5,
+    "end_bit"    :    5,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi4"    :    {
+    "name"    :    "ebi4",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    4,
+    "end_bit"    :    4,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi3"    :    {
+    "name"    :    "ebi3",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    3,
+    "end_bit"    :    3,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi2"    :    {
+    "name"    :    "ebi2",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    2,
+    "end_bit"    :    2,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi1"    :    {
+    "name"    :    "ebi1",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    1,
+    "end_bit"    :    1,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi0"    :    {
+    "name"    :    "ebi0",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    0,
+    "end_bit"    :    0,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi15"    :    {
+    "name"    :    "ebi15",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    7,
+    "end_bit"    :    7,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi14"    :    {
+    "name"    :    "ebi14",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    6,
+    "end_bit"    :    6,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi13"    :    {
+    "name"    :    "ebi13",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    5,
+    "end_bit"    :    5,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi12"    :    {
+    "name"    :    "ebi12",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    4,
+    "end_bit"    :    4,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi11"    :    {
+    "name"    :    "ebi11",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    3,
+    "end_bit"    :    3,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi10"    :    {
+    "name"    :    "ebi10",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    2,
+    "end_bit"    :    2,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi9"    :    {
+    "name"    :    "ebi9",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    1,
+    "end_bit"    :    1,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+  "ebi8"    :    {
+    "name"    :    "ebi8",
+    "type"    :       "M",
+    "json_type"    :    "str",
+    "byte_type"    :    "num",
+    "start_bit"    :    0,
+    "end_bit"    :    0,
+    "json_to_byte"    :    {"INACTIVE" : 0,
+      "ACTIVE" : 1  },
+    "byte_to_json"    :    {"0":"INACTIVE",
+      "1":"ACTIVE"   },
+    "format"    :    "NA"
+  },
+
+  "mobile_identity_tmsi":
+  {
+    "name"    :    "mobile_identity_tmsi",
+    "type"    :    "O",
+    "format"    :    "TLV",
+    "max_size"    :    10,
+    "min_size"    :    7,
+    "type_id":         "23",
+    "join_sf"    :    [
+      {
+        "union_sf":    ["identity_type_1_tmsi","odd_even_indication","type_of_identity"]
+      },
+      "p_tmsi"
+    ]
+  },
+  "identity_type_1_tmsi":    {
+    "name"    :    "identity_type_1_tmsi",
+    "type"    :    "M",
+    "json_type"    :    "num",
+    "byte_type"    :    "num",
+    "start_bit"    :    7,
+    "end_bit"    :    4,
+    "json_to_byte"    :    {},
+    "byte_to_json"    :    {},
+    "format"    :    "NA"
+  },
+  "p_tmsi": {
+    "name"    :    "p_tmsi",
+    "type"    :    "M",
+    "json_type"    :    "num",
+    "byte_type"    :    "num",
+    "max_size"    :    4,
+    "min_size"    :    4,
+    "json_to_byte"    :    {},
+    "byte_to_json"    :    {},
+    "format"    :    "NA"
+  }
 
 }

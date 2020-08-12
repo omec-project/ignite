@@ -12,7 +12,7 @@
   "NAS-MESSAGE": {},
   "S1AP-PDU": {
     "successfulOutcome": {
-      "procedureCode": 0,
+      "procedureCode": 1,
       "criticality": 0,
       "value": {
         "HandoverRequestAcknowledge": {
@@ -35,40 +35,38 @@
               "id": 18,
               "criticality": 1,
               "value": {
-                "E-RABAdmittedList": {
+                "E-RABAdmittedList": [{
                   "id": 20,
                   "criticality": 1,
                   "value": {
-                    "E-RABAdmittedItem": [
-                      {
-                        "id": 14,
-                        "criticality": 0,
-                        "value": {
-                          "E-RAB ID": 5
-                        }
-                      },
-                      {
-                        "id": 14,
-                        "criticality": 0,
-                        "value": {
-                          "E-RAB ID": 6
-                        }
-                      }
-                    ]
+                    "E-RABAdmittedItem": 
+                     {
+                                                      "e-RAB-ID" : 5,
+                                                      "transportLayerAddress" : "c0e9021f",
+                                                      "gTP-TEID": "00000001",
+						      "dL-transportLayerAddress" : "c0e9021f",
+						      "dL-gTP-TEID": "00000001"
+                                                       }
+ 
+                    
                   }
                 }
+]
               }
             },
+
             {
-              "id": 139,
+              "id": 123,
               "criticality": 1,
               "value": {
-                "TargetToSourseTransparentContailner": "4f3bc21e"
+                "Target-ToSource-TransparentContainer": "5c005a02c110dc001e180a374cc1400f1fe714254bd7058f28000a020000040141e0faabd51a035b00f51c03307638055340332760bea25f1c2180bdf61af8e12e05e7cc01f23f05123f860c10001f032007900090c00009c02024c400"
               }
             }
-          ]
+
+                    ]
         }
       }
     }
   }
 }
+

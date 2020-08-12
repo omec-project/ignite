@@ -1065,7 +1065,7 @@ mandatory}|
 PRESENCE optional},
 ...
 }
-E-RABSubjecttoDataForwardingList ::= E-RAB-IE-ContainerList { {E-RABDataForwardingItemIEs} }
+E-RABSubjecttoDataForwardingList ::= SEQUENCE (SIZE(1.. maxnoofE-RABs)) OF ProtocolIE-SingleContainer { {E-RABDataForwardingItemIEs} }
 E-RABDataForwardingItemIEs S1AP-PROTOCOL-IES ::= {
 { ID id-E-RABDataForwardingItem CRITICALITY ignore TYPE E-RABDataForwardingItem
 PRESENCE mandatory },
@@ -1168,7 +1168,7 @@ PRESENCE optional}|
 { ID id-UEUserPlaneCIoTSupportIndicator CRITICALITY ignore TYPE UEUserPlaneCIoTSupportIndicator PRESENCE optional},
 ...
 }
-E-RABToBeSetupListHOReq ::= E-RAB-IE-ContainerList { {E-RABToBeSetupItemHOReqIEs} }
+E-RABToBeSetupListHOReq ::= SEQUENCE (SIZE(1.. maxnoofE-RABs)) OF ProtocolIE-SingleContainer { {E-RABToBeSetupItemHOReqIEs} }
 E-RABToBeSetupItemHOReqIEs S1AP-PROTOCOL-IES ::= {
 { ID id-E-RABToBeSetupItemHOReq CRITICALITY reject TYPE E-RABToBeSetupItemHOReq
 PRESENCE mandatory },
@@ -1217,7 +1217,7 @@ PRESENCE optional}|
 PRESENCE optional},
 ...
 }
-E-RABAdmittedList ::= E-RAB-IE-ContainerList { {E-RABAdmittedItemIEs} }
+E-RABAdmittedList ::= SEQUENCE (SIZE(1.. maxnoofE-RABs)) OF ProtocolIE-SingleContainer { {E-RABAdmittedItemIEs} }
 E-RABAdmittedItemIEs S1AP-PROTOCOL-IES ::= {
 { ID id-E-RABAdmittedItem CRITICALITY ignore TYPE E-RABAdmittedItem PRESENCE mandatory },
 ...
@@ -3104,7 +3104,7 @@ PRESENCE optional}|
 PRESENCE optional},
 ...
 }
-E-RABToBeModifiedListBearerModInd ::= E-RAB-IE-ContainerList { {E-RABToBeModifiedItemBearerModIndIEs} }
+E-RABToBeModifiedListBearerModInd ::= SEQUENCE (SIZE(1.. maxnoofE-RABs)) OF ProtocolIE-SingleContainer { {E-RABToBeModifiedItemBearerModIndIEs} }
 E-RABToBeModifiedItemBearerModIndIEs S1AP-PROTOCOL-IES ::= {
 { ID id-E-RABToBeModifiedItemBearerModInd CRITICALITY reject TYPE E-RABToBeModifiedItemBearerModInd PRESENCE
 mandatory},
@@ -3902,7 +3902,7 @@ CompletedCellinEAI-Item-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 ECGI-List ::= SEQUENCE (SIZE(1..maxnoofCellsineNB)) OF EUTRAN-CGI
 EmergencyAreaIDListForRestart ::= SEQUENCE (SIZE(1..maxnoofRestartEmergencyAreaIDs)) OF EmergencyAreaID
 ENB-ID ::= CHOICE {
-macroENB-ID  OCTET STRING (SIZE(20)),
+macroENB-ID  BIT STRING (SIZE(20)),
 homeENB-ID BIT STRING (SIZE(28)),
 ...
 }
@@ -4890,8 +4890,8 @@ transportLayerAddress TransportLayerAddress,
 uL-GTP-TEID GTP-TEID,
 ...
 }
-TransportLayerAddress ::= OCTET STRING (SIZE(5))
---TransportLayerAddress ::= BIT STRING (SIZE(1..160, ...))
+--TransportLayerAddress ::= OCTET STRING (SIZE(5))
+TransportLayerAddress ::= BIT STRING (SIZE(1..160, ...))
 TraceActivation ::= SEQUENCE {
 e-UTRAN-Trace-ID E-UTRAN-Trace-ID,
 interfacesToTrace InterfacesToTrace,

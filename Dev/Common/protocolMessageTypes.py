@@ -35,6 +35,11 @@ class ProtocolMessageTypes(enum.Enum):
     update_location_request = enum.auto()
     update_location_response = enum.auto()
     esm_information_response = enum.auto()
+    handover_required = enum.auto()
+    handover_request_acknowledge = enum.auto()
+    handover_notify = enum.auto()
+    s1_setup_request_target = enum.auto()
+    erab_modification_indication = enum.auto()
     other_messages = enum.auto()
 
 

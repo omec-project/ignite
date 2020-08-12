@@ -23,6 +23,7 @@ import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'Logger'))
 import igniteLogger
 
+
 configuration_file = os.path.join(os.path.dirname(__file__), 'configuration.json')
 with open(configuration_file) as configuration:
             config_file=json.loads(configuration.read())
@@ -48,10 +49,9 @@ def getKeyValueFromDict(dictToSearch, searchKey):
     and searches all dicts for a key of the field
     provided. Returns the value for the searched key.
     """
-
     return_value = ""
     matched = "false"
-
+    
     for key, value in dictToSearch.items():
 
         if key == searchKey:
@@ -89,9 +89,9 @@ def updateKeyValueInDict(dictToUpdate, searchKey, newValue):
     for key, value in dictToUpdate.items():
 
         if key == searchKey:
-            matched = "true"
-            dictToUpdate[key] = newValue
-            break
+           matched = "true"
+           dictToUpdate[key] = newValue
+           break
 
         elif isinstance(value, dict):
             updatedDict_1, matched_1 = updateKeyValueInDict(value, searchKey, newValue)
@@ -101,12 +101,12 @@ def updateKeyValueInDict(dictToUpdate, searchKey, newValue):
                 dictToUpdate[key] = value
                 break
 
-        elif isinstance(value, list):
+        elif isinstance(value, list):            
             for i in range (len(value)):
                 if isinstance(value[i], dict):
                     updatedDict_2, matched_2 = updateKeyValueInDict(value[i], searchKey, newValue)
                     if matched_2 == "true":
-                        matched = matched_2
+                        matched = matched_2                        
                         value[i] = updatedDict_2
                         dictToUpdate[key]= value
                         break
@@ -188,5 +188,34 @@ def setValueFromTC(msg,ieUpdateValDict):
     for key in ieUpdateValDict.keys():
         updateKeyValueInDict(msg,key,ieUpdateValDict[key])
 	
-
+def grpcValidation(expected_count,received_count, messagename):
+    if(expected_count == received_count):
+        igniteLogger.logger.info(f"**********\n Validation for: {messagename}  \n Expected count : {expected_count} , count received : {received_count} \n**********")
+        
+    else:
+        igniteLogger.logger.error(f"**********\n ERROR:Validation failed for: {messagename}  \n Expected count : {expected_count} , count received : {received_count} \n**********")
+        raise ValidationException(f"**********\n ERROR:Validation failed for: {messagename}  \n Expected count : {expected_count} , count received : {received_count} \n**********")
+    
+def mobileContextValidation(imsi, mobile_ctxt):
+    if imsi in mobile_ctxt :
+        igniteLogger.logger.info(f"**********\n Validation for Mobile Context after Attach \n Expected count : {imsi} , count received : {mobile_ctxt} \n**********")
+    
+        if "EpsAttached" in mobile_ctxt:
+            igniteLogger.logger.info(
+                f"**********\n Validation for Mobile Context after Attach \n Expected count : {imsi} , count received : {mobile_ctxt} \n**********")
+        else :
+            print(
+                "**********\n Validation for Mobile Context after Attach \n Expected  EpsAttached  , count received : " + mobile_ctxt + " \n**********")
+            igniteLogger.logger.error(
+                f"**********\n Validation for Mobile Context after Attach \n Expected  EpsAttached , count received : {mobile_ctxt} \n**********")
+            raise ValidationException(
+                f"**********\n Validation for Mobile Context after Attach \n Expected  EpsAttached , count received : {mobile_ctxt} \n**********")
+    
+    else :
+        print("**********\n Validation for Mobile Context after Attach \n Expected count : "+imsi+" , count received : "+mobile_ctxt+" \n**********")
+        igniteLogger.logger.error(
+            f"**********\n Validation for Mobile Context after Attach \n Expected count : {imsi} , count received : {mobile_ctxt} \n**********")
+        raise ValidationException(f"**********\n Validation for Mobile Context after Attach \n Expected count : {imsi} , count received : {mobile_ctxt} \n**********")
+    
+    
 

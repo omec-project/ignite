@@ -53,6 +53,31 @@
 			    "vendor-id": 10415,
                             "ula-flags": 1
                         },
+                        {
+                            "code": 628,
+                            "flags": 192,
+                            "vendor-id": 10415,
+                            "supported-features":
+                            [
+                                {
+                                    "code": 266,
+                                    "flags": 64,
+                                    "vendor-id": 10415
+                                },
+                                {
+                                    "code": 629,
+                                    "flags": 192,
+                                    "vendor-id": 10415,
+                                    "feature-list-id": 2
+                                },
+                                {
+                                    "code": 630,
+                                    "flags": 192,
+                                    "vendor-id": 10415,
+                                    "feature-list": 0
+                                }
+                            ]
+                        },
 			{
                             "code": 1400,
                             "flags": 192,
@@ -127,6 +152,13 @@
 							"vendor-id": 10415,
 							"context-identifier": 1
 						},
+						{
+                                                        "code": 848,
+                                                        "flags": 192,
+                                                        "vendor-id": 10415,
+                                                        "address-type": 1,
+                                                        "served-party-ip-address": "106.192.63.122"
+                                                },
 						{
 							"code": 493,
 							"flags": 64,

@@ -6,3 +6,8 @@ LTE_4G_IMSIGUTIAttachDetach
 LTE_4G_ServiceRequest
 LTE_4G_DDN_ServiceRequest
 LTE_4G_S1_Release
+LTE_4G_S1HandOverWithTAI
+LTE_4G_S1HandOverWithoutTAI
+LTE_4G_IMSIAttachTAU
+LTE_4G_IMSIAttacheRABModInd
+

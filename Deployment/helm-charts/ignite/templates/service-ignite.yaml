@@ -18,6 +18,7 @@ limitations under the License.
 {{- $configJsonDiameter := index $configJson "diameter"}}
 {{- $configJsonGtp := index $configJson "gtp" }}
 {{- $configJsonS1ap := index $configJson "s1ap" }}
+{{- $configJsonS1apTarget := index $configJson "s1ap_target" }}
 {{- $configJsonTc := index $configJson "runtestcase" }}
 
 ---
@@ -49,6 +50,12 @@ spec:
       protocol: TCP
     - name: s1aptc
       port: {{ index $configJsonS1ap "tc_port" }}
+      protocol: TCP
+    - name: s1aptarget
+      port: {{ index $configJsonS1apTarget "ignite_port" }}
+      protocol: TCP
+    - name: s1aptctarget
+      port: {{ index $configJsonS1apTarget "tc_port" }}
       protocol: TCP
     - name: ssh
       port: {{ index $configJsonTc "ssh_port" }}
@@ -83,6 +90,12 @@ spec:
       protocol: TCP
     - name: s1aptc
       port: {{ index $configJsonS1ap "tc_port" }}
+      protocol: TCP
+    - name: s1aptarget
+      port: {{ index $configJsonS1apTarget "ignite_port" }}
+      protocol: TCP
+    - name: s1aptctarget
+      port: {{ index $configJsonS1apTarget "tc_port" }}
       protocol: TCP
     - name: ssh
       port: {{ index $configJsonTc "ssh_port" }}
@@ -124,8 +137,15 @@ spec:
       port: {{ index $configJsonS1ap "tc_port" }}
       protocol: TCP
       nodePort: {{ index $configJsonS1ap "tc_port" }}
+    - name: s1aptarget
+      port: {{ index $configJsonS1apTarget "ignite_port" }}
+      protocol: TCP
+      nodePort: {{ index $configJsonS1apTarget "ignite_port" }}
+    - name: s1aptctarget
+      port: {{ index $configJsonS1apTarget "tc_port" }}
+      protocol: TCP
+      nodePort: {{ index $configJsonS1apTarget "tc_port" }}
     - name: ssh
       port: {{ index $configJsonTc "ssh_port" }}
       nodePort: {{ index $configJsonTc "ssh_port_external" }}
       protocol: TCP
-

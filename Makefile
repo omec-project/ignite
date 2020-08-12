@@ -33,7 +33,7 @@ DOCKER_LABEL_BUILD_DATE  ?= $(shell date -u "+%Y-%m-%dT%H:%M:%SZ")
 
 # https://docs.docker.com/engine/reference/commandline/build/#specifying-target-build-stage---target
 docker-build:
-	docker build \
+        docker build \
                 -t ${DOCKER_IMAGENAME} \
                 --build-arg org_label_schema_version="${VERSION}" \
                 --build-arg org_label_schema_vcs_url="${DOCKER_LABEL_VCS_URL}" \

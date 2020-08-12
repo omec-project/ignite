@@ -18,13 +18,25 @@ import os
 import sys, requests
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'Dev', 'Common'))
 import igniteCommonUtil as icu
+import sshUtils as su
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..','ROBOTCs','keywords','systemkeywords'))
+import dictOperations as do
 
 clr_flag=False
+ssh_client = None
 
 try:
 
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'MessageTemplates', 'Util'))
     from loadMessage import *
+
+    command = "export LD_LIBRARY_PATH=" + mme_lib_path + " && " + mme_grpc_client_path + "/mme-grpc-client mme-app show procedure-stats"
+    ssh_client = su.sshConnect(mmeIP, mme_username, mme_password, "ssh-password", timeout=10, port=None)
+
+    proc_stat = su.executeCommand(command,ssh_client)
+
+    ue_count_before_attach = int(do.splitProcStats(proc_stat, stats_type["subs_attached"]))
 
     #required message templates
     uecontextrelease_request = json.loads(open('../MessageTemplates/S1AP/uecontextrelease_request.json').read())
@@ -76,7 +88,7 @@ try:
     gs.sendGtp('create_session_response', create_session_response, msg_hierarchy)
 
     igniteLogger.logger.info("\n---------------------------------------\nInitial Context Setup Request received from MME\n---------------------------------------")
-    s1.receiveS1ap()
+    init_ctxt_setup_req=s1.receiveS1ap()
 
     igniteLogger.logger.info("\n---------------------------------------\nSend Initial Context Setup Response to MME\n---------------------------------------")
     s1.sendS1ap('initial_context_setup_response', initialcontextsetup_response, enbues1ap_id)
@@ -98,6 +110,17 @@ try:
     igniteLogger.logger.info("\n---------------------------------------\nUE is Attached\n---------------------------------------")
 
     time.sleep(2)
+
+    mme_ue_S1AP_id , mme_ue_S1AP_id_present = icu.getKeyValueFromDict(init_ctxt_setup_req, "MME-UE-S1AP-ID")
+    mob_ctxt_command = "export LD_LIBRARY_PATH=" + mme_lib_path + " && " + mme_grpc_client_path + "/mme-grpc-client mme-app show mobile-context "+str(mme_ue_S1AP_id)
+    mob_ctxt_af_attach = su.executeCommand(mob_ctxt_command,ssh_client)
+    icu.mobileContextValidation(str(imsi),mob_ctxt_af_attach)
+
+
+    proc_stat_af_attach = su.executeCommand(command,ssh_client)
+
+    ue_count_after_attach = int(do.splitProcStats(proc_stat_af_attach, stats_type["subs_attached"]))
+    icu.grpcValidation(ue_count_before_attach + 1, ue_count_after_attach, "Number of Subs Attached")
 
     igniteLogger.logger.info("\n---------------------------------------\neNB sends UE Context Release Request to MME\n---------------------------------------")
     s1.sendS1ap('uecontextrelease_request',uecontextrelease_request, enbues1ap_id)
@@ -139,6 +162,12 @@ try:
 
     igniteLogger.logger.info("\n---------------------------------------\neNB sends UE Context Release Complete to MME\n---------------------------------------")
     s1.sendS1ap('uecontextrelease_complete', uecontextrelease_complete, enbues1ap_id)
+
+    time.sleep(1)
+    proc_stat_af_detach = su.executeCommand(command,ssh_client)
+
+    ue_count_after_detach = int(do.splitProcStats(proc_stat_af_detach, stats_type["subs_attached"]))
+    icu.grpcValidation(ue_count_before_attach, ue_count_after_detach, "Number of Subs Attached After Detach")
 
     print ("\n-------------------------------------\nRelease Access Bearer Response Timeout Execution Successful\n---------------------------------------")
 	

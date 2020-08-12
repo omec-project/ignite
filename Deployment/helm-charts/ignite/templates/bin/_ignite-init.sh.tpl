@@ -24,11 +24,14 @@ MME_IP=$(curl -ks -X GET  -H "Authorization: Bearer $(cat /var/run/secrets/kuber
 # Set local IP address for diamter, s1ap and s11 networks to the config
 jq --arg GTP_IGNITE_LOCAL_IP "$POD_IP" '.gtp.ignite_ip=$GTP_IGNITE_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
 jq --arg S1AP_IGNITE_LOCAL_IP "$POD_IP" '.s1ap.ignite_ip=$S1AP_IGNITE_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
+jq --arg S1AP_IGNITE_TARGET_LOCAL_IP "$POD_IP" '.s1ap_target.ignite_ip=$S1AP_IGNITE_TARGET_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
 jq --arg DIAMETER_IGNITE_LOCAL_IP "$POD_IP" '.diameter.ignite_ip=$DIAMETER_IGNITE_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
-#jq --arg GTP_MME_LOCAL_IP "$MME_IP" '.gtp.sut_ip=$GTP_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
-#jq --arg S1AP_MME_LOCAL_IP "$MME_IP" '.s1ap.sut_ip=$S1AP_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
-#jq --arg DIAMETER_MME_LOCAL_IP "$MME_IP" '.diameter.sut_ip=$DIAMETER_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
-
+jq --arg RUNTC_IGNITE_LOCAL_IP "$POD_IP" '.runtestcase.ignite_ip=$RUNTC_IGNITE_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
+jq --arg GTP_MME_LOCAL_IP "$MME_IP" '.gtp.sut_ip=$GTP_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
+jq --arg S1AP_MME_LOCAL_IP "$MME_IP" '.s1ap.sut_ip=$S1AP_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
+jq --arg S1AP_TARGET_MME_LOCAL_IP "$MME_IP" '.s1ap_target.sut_ip=$S1AP_TARGET_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
+jq --arg DIAMETER_MME_LOCAL_IP "$MME_IP" '.diameter.sut_ip=$DIAMETER_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
+jq --arg RUNTC_MME_LOCAL_IP "$MME_IP" '.runtestcase.sut_ip=$RUNTC_MME_LOCAL_IP' configuration.json > config.tmp && mv config.tmp configuration.json
 
 cp /opt/ignite/Dev/Common/config/resources.MMEConfig.txt /opt/ignite/Dev/Common/shared/resources.MMEConfig.txt
 cd /opt/ignite/Dev/Common/shared/

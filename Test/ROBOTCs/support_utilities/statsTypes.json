@@ -37,7 +37,7 @@
     "del_session_req_sent":"num_of_del_session_req_sent",
     "del_session_resp":"num_of_processed_del_session_resp",
     "purge_req_sent":"num_of_purge_req_sent",
-    "pur_resp":"num_of_processed_pur_resp",
+    "purge_resp":"num_of_processed_pur_resp",
     "detach_accept_to_ue":"num_of_detach_accept_to_ue_sent",
     "detach_accept":"num_of_processed_detach_accept",
     "detach_complete":"num_of_detach_complete",
@@ -58,6 +58,8 @@
     "tau_req_received":"num_of_tau_req_received",
     "tau_response_to_ue":"num_of_tau_response_to_ue_sent",
     "attach_reject_sent":"num_of_attach_reject_sent",
+    "service_reject_sent":"num_of_service_reject_sent",
+    "tau_reject_sent":"num_of_tau_reject_sent",
     "aia_timeout":"num_of_aia_timeout",
     "id_resp_timeout":"num_of_id_resp_timeout",
     "auth_resp_timeout":"num_of_auth_resp_timeout",
@@ -74,6 +76,17 @@
     "del_session_resp_timeout":"num_of_del_session_resp_timeout",
     "detach_accept_timeout":"num_of_detach_accept_timeout",
     "rel_ab_resp_timeout":"num_of_rel_ab_resp_timeout",
-    "s1_rel_comp_timeout":"num_of_s1_rel_comp_timeout"
+    "s1_rel_comp_timeout":"num_of_s1_rel_comp_timeout",
+    "ho_required":"num_of_ho_required_received",
+    "ho_request_ack":"num_of_ho_request_ack_received",
+    "ho_notify":"num_of_ho_notify_received",
+    "ho_failure":"num_of_ho_failure_received",
+    "ho_cancel":"num_of_ho_cancel_received",
+    "ho_prep_failure":"num_of_ho_prep_failure_sent",
+    "erab_mod_ind":"num_of_erab_mod_ind_received",
+    "erab_mod_conf":"num_of_erab_mod_conf_sent",
+    "erab_mod_ind_timeout":"num_of_erab_mod_ind_timeout",
+    "abort_erab_mod_ind":"num_of_abort_erab_mod_indication"
+
   }
 }
