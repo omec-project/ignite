@@ -1,25 +1,21 @@
 {
-	"_comment": "Copyright (c) 2019, Infosys Ltd.",
-	"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
-	"_comment": "you may not use this file except in compliance with the License.",
-	"_comment": "You may obtain a copy of the License at",
-	"_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
-	"_comment": "Unless required by applicable law or agreed to in writing, software",
-	"_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
-	"_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
-	"_comment": "See the License for the specific language governing permissions and",
-	"_comment": "limitations under the License.",
-
-
-	"security_header_type":"integrity_protected_and_ciphered",
-	"protocol_discriminator":"eps_mobility_management_messages",
-	"message_authentication_code":1361124443,
-	"sequence_number":2,
-	"security_header_type_1":"plain_nas_message_not_security_protected",
-	"protocol_discriminator_1":"eps_mobility_management_messages",
-	"mobility_mgmt_message_type":"tracking_area_update_accept",
-	"eps_update_result":"ta_updated",
-	"spare_half_octet":0
-
-
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "security_header_type": "integrity_protected_and_ciphered",
+  "protocol_discriminator": "eps_mobility_management_messages",
+  "message_authentication_code": 1361124443,
+  "sequence_number": 2,
+  "security_header_type_1": "plain_nas_message_not_security_protected",
+  "protocol_discriminator_1": "eps_mobility_management_messages",
+  "mobility_mgmt_message_type": "tracking_area_update_accept",
+  "eps_update_result": "ta_updated",
+  "spare_half_octet": 0
 }

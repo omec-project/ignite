@@ -1,9 +1,9 @@
 {
-  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Copyright (c) 2020, Infosys Ltd.",
   "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
   "_comment": "you may not use this file except in compliance with the License.",
   "_comment": "You may obtain a copy of the License at",
-  "_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
   "_comment": "Unless required by applicable law or agreed to in writing, software",
   "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
   "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
@@ -38,8 +38,7 @@
                 "Target-ToSource-TransparentContainer": "5c005a02c110dc001e180a374cc1400f1fe714254bd7058f28000a020000040141e0faabd51a035b00f51c03307638055340332760bea25f1c2180bdf61af8e12e05e7cc01f23f05123f860c10001f032007900090c00009c02024c400"
               }
             }
-
-                    ]
+          ]
         }
       }
     }

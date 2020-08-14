@@ -1,5 +1,5 @@
 {
-  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Copyright (c) 2020, Infosys Ltd.",
   "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
   "_comment": "you may not use this file except in compliance with the License.",
   "_comment": "You may obtain a copy of the License at",
@@ -34,24 +34,23 @@
             "auth-session-state": 1
           },
           {
-			"code": 297,
-			"flags": 64,
-			"vendor-id": 10415,
-			"experimental-result":
-			[
-				{
-					"code": 266,
-					"flags": 64,
-					"vendor-id": 10415
-				},
-				{
-					"code": 298 ,
-					"flags": 64,
-					"vendor-id": 10415,
-					"experimental-result-code": 5004
-				}
-			]
-		  },
+            "code": 297,
+            "flags": 64,
+            "vendor-id": 10415,
+            "experimental-result": [
+              {
+                "code": 266,
+                "flags": 64,
+                "vendor-id": 10415
+              },
+              {
+                "code": 298,
+                "flags": 64,
+                "vendor-id": 10415,
+                "experimental-result-code": 5004
+              }
+            ]
+          },
           {
             "code": 264,
             "flags": 64,

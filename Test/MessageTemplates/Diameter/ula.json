@@ -1,249 +1,242 @@
 {
-	"_comment": "Copyright (c) 2019, Infosys Ltd.",
-    "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
-    "_comment": "you may not use this file except in compliance with the License.",
-    "_comment": "You may obtain a copy of the License at",
-    "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
-    "_comment": "Unless required by applicable law or agreed to in writing, software",
-    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
-    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
-    "_comment": "See the License for the specific language governing permissions and",
-    "_comment": "limitations under the License.",
-    "msgHeirarchy": ["diameter"],
-    "msgDetails": {
-        "diameter": {
-            "protocol": "diameter",
-            "msg": {
-                "version": 1,
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "msgHeirarchy": [
+    "diameter"
+  ],
+  "msgDetails": {
+    "diameter": {
+      "protocol": "diameter",
+      "msg": {
+        "version": 1,
+        "flags": 64,
+        "command-code": 316,
+        "application-id": 16777251,
+        "hop-by-hop-identifier": "",
+        "end-to-end-identifier": "",
+        "avp": [
+          {
+            "code": 263,
+            "flags": 64,
+            "session-id": ""
+          },
+          {
+            "code": 277,
+            "flags": 64,
+            "auth-session-state": 1
+          },
+          {
+            "code": 268,
+            "flags": 64,
+            "result-code": 2001
+          },
+          {
+            "code": 264,
+            "flags": 64,
+            "origin-host": "hss.openair4g.eur"
+          },
+          {
+            "code": 296,
+            "flags": 64,
+            "origin-realm": "openair4g.eur"
+          },
+          {
+            "code": 1406,
+            "flags": 192,
+            "vendor-id": 10415,
+            "ula-flags": 1
+          },
+          {
+            "code": 628,
+            "flags": 192,
+            "vendor-id": 10415,
+            "supported-features": [
+              {
+                "code": 266,
                 "flags": 64,
-                "command-code": 316,
-                "application-id": 16777251,
-                "hop-by-hop-identifier": "",
-                "end-to-end-identifier": "",
-                "avp": 
-                [
-                        {
-                            "code": 263,
-                            "flags": 64,
-                            "session-id": ""
-                        },
-			{
-                            "code": 277,
-                            "flags": 64,
-                            "auth-session-state": 1
-                        },
-			{
-                            "code": 268,
-                            "flags": 64,
-                            "result-code": 2001
-                        },
-			{
-                            "code": 264,
-                            "flags": 64,
-                            "origin-host": "hss.openair4g.eur"
-                        },
-			{
-                            "code": 296,
-                            "flags": 64,
-                            "origin-realm": "openair4g.eur"
-                        },
-			{
-                            "code": 1406,
-                            "flags": 192,
-			    "vendor-id": 10415,
-                            "ula-flags": 1
-                        },
-                        {
-                            "code": 628,
+                "vendor-id": 10415
+              },
+              {
+                "code": 629,
+                "flags": 192,
+                "vendor-id": 10415,
+                "feature-list-id": 2
+              },
+              {
+                "code": 630,
+                "flags": 192,
+                "vendor-id": 10415,
+                "feature-list": 0
+              }
+            ]
+          },
+          {
+            "code": 1400,
+            "flags": 192,
+            "vendor-id": 10415,
+            "subscription-data": [
+              {
+                "code": 701,
+                "flags": 192,
+                "vendor-id": 10415,
+                "msisdn": "1122334455"
+              },
+              {
+                "code": 1424,
+                "flags": 192,
+                "vendor-id": 10415,
+                "subscriber-status": 0
+              },
+              {
+                "code": 1426,
+                "flags": 192,
+                "vendor-id": 10415,
+                "access-restriction-data": 41
+              },
+              {
+                "code": 1435,
+                "flags": 192,
+                "vendor-id": 10415,
+                "ambr": [
+                  {
+                    "code": 516,
+                    "flags": 192,
+                    "vendor-id": 10415,
+                    "max-requested-bandwidth-ul": 16000000
+                  },
+                  {
+                    "code": 515,
+                    "flags": 192,
+                    "vendor-id": 10415,
+                    "max-requested-bandwidth-dl": 16000000
+                  }
+                ]
+              },
+              {
+                "code": 1429,
+                "flags": 192,
+                "vendor-id": 10415,
+                "apn-configuration-profile": [
+                  {
+                    "code": 1423,
+                    "flags": 192,
+                    "vendor-id": 10415,
+                    "context-identifier": 1
+                  },
+                  {
+                    "code": 1428,
+                    "flags": 192,
+                    "vendor-id": 10415,
+                    "all-apn-configurations-included-indicator": 0
+                  },
+                  {
+                    "code": 1430,
+                    "flags": 192,
+                    "vendor-id": 10415,
+                    "apn-configuration": [
+                      {
+                        "code": 1423,
+                        "flags": 192,
+                        "vendor-id": 10415,
+                        "context-identifier": 1
+                      },
+                      {
+                        "code": 848,
+                        "flags": 192,
+                        "vendor-id": 10415,
+                        "address-type": 1,
+                        "served-party-ip-address": "106.192.63.122"
+                      },
+                      {
+                        "code": 493,
+                        "flags": 64,
+                        "service-selection": "test-apn"
+                      },
+                      {
+                        "code": 1456,
+                        "flags": 192,
+                        "vendor-id": 10415,
+                        "pdn-type": 0
+                      },
+                      {
+                        "code": 1431,
+                        "flags": 192,
+                        "vendor-id": 10415,
+                        "eps-subscribed-qos-profile": [
+                          {
+                            "code": 1028,
                             "flags": 192,
                             "vendor-id": 10415,
-                            "supported-features":
-                            [
-                                {
-                                    "code": 266,
-                                    "flags": 64,
-                                    "vendor-id": 10415
-                                },
-                                {
-                                    "code": 629,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "feature-list-id": 2
-                                },
-                                {
-                                    "code": 630,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "feature-list": 0
-                                }
-                            ]
-                        },
-			{
-                            "code": 1400,
+                            "qos-class-identifier": 1
+                          },
+                          {
+                            "code": 1034,
                             "flags": 192,
                             "vendor-id": 10415,
-                            "subscription-data": 
-                            [
-                                {
-                                    "code": 701,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "msisdn": "1122334455"
-                                },
-                                {
-                                    "code": 1424,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "subscriber-status": 0
-                                },
-				{
-                                    "code": 1426,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "access-restriction-data": 41
-                                },
-				{
-                                    "code": 1435,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "ambr": 
-					[
-					{
-                                    	    "code": 516,
-                                    	    "flags": 192,
-                                    	    "vendor-id": 10415,
-                                    	    "max-requested-bandwidth-ul": 16000000
-					},
-					{
-					    "code": 515,
-					    "flags": 192,
-					    "vendor-id": 10415,
-                                    	    "max-requested-bandwidth-dl": 16000000
-                              	        }
-                                    	]
-                                },
-                                {
-                                    "code": 1429,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "apn-configuration-profile":
-					[
-					{
-                                    	    "code": 1423,
-                                    	    "flags": 192,
-                                    	    "vendor-id": 10415,
-                                    	    "context-identifier": 1
-					},
-					{
-					    "code": 1428,
-					    "flags": 192,
-					    "vendor-id": 10415,
-                                    	    "all-apn-configurations-included-indicator": 0
-                              	        },
-					{
-                                    	    "code": 1430,
-                                    	    "flags": 192,
-                                    	    "vendor-id": 10415,
-                                    	    "apn-configuration": 
-						[
-						{
-							"code": 1423,
-							"flags": 192,
-							"vendor-id": 10415,
-							"context-identifier": 1
-						},
-						{
-                                                        "code": 848,
-                                                        "flags": 192,
-                                                        "vendor-id": 10415,
-                                                        "address-type": 1,
-                                                        "served-party-ip-address": "106.192.63.122"
-                                                },
-						{
-							"code": 493,
-							"flags": 64,
-							"service-selection": "test-apn"
-						},
-						{
-							"code": 1456,
-							"flags": 192,
-							"vendor-id": 10415,
-							"pdn-type": 0
-						},
-						{
-							"code": 1431,
-							"flags": 192,
-							"vendor-id": 10415,
-							"eps-subscribed-qos-profile":
-							[
-								{
-									"code": 1028,
-									"flags": 192,
-									"vendor-id": 10415,
-									"qos-class-identifier": 1
-								},
-								{
-									"code": 1034,
-									"flags": 192,
-									"vendor-id": 10415,
-									"allocation-retention-priority":
-									[
-										{
-											"code": 1046,
-											"flags": 192,
-											"vendor-id": 10415,
-											"priority-level": 1
-										},
-										{
-											"code": 1047,
-											"flags": 192,
-											"vendor-id": 10415,
-											"pre-emption-capability": 0
-										},
-										{
-											"code": 1048,
-											"flags": 192,
-											"vendor-id": 10415,
-											"pre-emption-vulnerability": 0
-										}
-									]
-								}
-							]	
-						},
-						{
-							"code": 1438,
-							"flags": 192,
-							"vendor-id": 10415,
-							"pdn-gw-allocation-type": 1
-						},
-						{
-							"code": 1435,
-							"flags": 192,
-							"vendor-id": 10415,
-							"ambr": 
-							[
-								{
-									"code": 516,
-									"flags": 192,
-									"vendor-id": 10415,
-									"max-requested-bandwidth-ul": 16000000
-								},
-								{
-									"code": 515,
-									"flags": 192,
-									"vendor-id": 10415,
-									"max-requested-bandwidth-dl": 16000000
-								}
-							]
-						}
-						]
-					}
-                                    ]
-                                }
+                            "allocation-retention-priority": [
+                              {
+                                "code": 1046,
+                                "flags": 192,
+                                "vendor-id": 10415,
+                                "priority-level": 1
+                              },
+                              {
+                                "code": 1047,
+                                "flags": 192,
+                                "vendor-id": 10415,
+                                "pre-emption-capability": 0
+                              },
+                              {
+                                "code": 1048,
+                                "flags": 192,
+                                "vendor-id": 10415,
+                                "pre-emption-vulnerability": 0
+                              }
                             ]
-                        }
-		]
-	}
-	}
-	}
+                          }
+                        ]
+                      },
+                      {
+                        "code": 1438,
+                        "flags": 192,
+                        "vendor-id": 10415,
+                        "pdn-gw-allocation-type": 1
+                      },
+                      {
+                        "code": 1435,
+                        "flags": 192,
+                        "vendor-id": 10415,
+                        "ambr": [
+                          {
+                            "code": 516,
+                            "flags": 192,
+                            "vendor-id": 10415,
+                            "max-requested-bandwidth-ul": 16000000
+                          },
+                          {
+                            "code": 515,
+                            "flags": 192,
+                            "vendor-id": 10415,
+                            "max-requested-bandwidth-dl": 16000000
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
 }	

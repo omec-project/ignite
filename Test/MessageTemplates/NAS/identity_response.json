@@ -1,41 +1,34 @@
 {
-	"_comment": "Copyright (c) 2019, Infosys Ltd.",
-	"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
-    "_comment": "you may not use this file except in compliance with the License.",
-    "_comment": "You may obtain a copy of the License at",
-    "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
-    "_comment": "Unless required by applicable law or agreed to in writing, software",
-    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
-    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
-    "_comment": "See the License for the specific language governing permissions and",
-    "_comment": "limitations under the License.",
-
-
-   "security_header_type":"plain_nas_message_not_security_protected",
-    "protocol_discriminator":"eps_mobility_management_messages",
-    "mobility_mgmt_message_type":"identity_response",
-	"eps_mobile_identity":
-                            {                  
-                                "odd_even_indication":1,
-                                "type_of_identity":1,
-				"mcc_digit_1_eps":2,
-                                "mcc_digit_3_eps":8,
-                                "mcc_digit_2_eps":0,
-				"mnc_digit_2_eps":2,
-                                "mnc_digit_1_eps":9,
-                                "msin_1":9,
-                                "mnc_digit_3_eps":0,
-				"msin_3":1,
-				"msin_2":1,
-				"msin_5":0,
-				"msin_4":0,
-				"msin_7":2,
-				"msin_6":0,
-				"msin_9":9,
-				"msin_8":6
-                            }
-	
-
-
-
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "security_header_type": "plain_nas_message_not_security_protected",
+  "protocol_discriminator": "eps_mobility_management_messages",
+  "mobility_mgmt_message_type": "identity_response",
+  "eps_mobile_identity": {
+    "odd_even_indication": 1,
+    "type_of_identity": 1,
+    "mcc_digit_1_eps": 2,
+    "mcc_digit_3_eps": 8,
+    "mcc_digit_2_eps": 0,
+    "mnc_digit_2_eps": 2,
+    "mnc_digit_1_eps": 9,
+    "msin_1": 9,
+    "mnc_digit_3_eps": 0,
+    "msin_3": 1,
+    "msin_2": 1,
+    "msin_5": 0,
+    "msin_4": 0,
+    "msin_7": 2,
+    "msin_6": 0,
+    "msin_9": 9,
+    "msin_8": 6
+  }
 }

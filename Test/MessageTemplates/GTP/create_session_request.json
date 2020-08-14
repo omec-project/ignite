@@ -1,177 +1,172 @@
 {
-  	"_comment": "Copyright (c) 2019, Infosys Ltd.",
-	"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
-    "_comment": "you may not use this file except in compliance with the License.",
-    "_comment": "You may obtain a copy of the License at",
-    "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
-    "_comment": "Unless required by applicable law or agreed to in writing, software",
-    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
-    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
-    "_comment": "See the License for the specific language governing permissions and",
-    "_comment": "limitations under the License.",
-    "msgHeirarchy": ["gtpv2"],
-    "msgDetails": 
-	{
-        "gtpv2": 
-	{
-        "protocol": "gtpv2",
-        "msg": 
-		{
-            "flags": "48",
-            "message_type": 32,
-            "teid": 0,
-            "sequence_number": 4260216,
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "msgHeirarchy": [
+    "gtpv2"
+  ],
+  "msgDetails": {
+    "gtpv2": {
+      "protocol": "gtpv2",
+      "msg": {
+        "flags": "48",
+        "message_type": 32,
+        "teid": 0,
+        "sequence_number": 4260216,
+        "spare": 0,
+        "information_elements": [
+          {
+            "ie_type": 1,
             "spare": 0,
-            "information_elements":
-	    [
-                {
-                    "ie_type": 1,
-                    "spare": 0,
-                    "instance": 0,
-                    "imsi": "312980911000269"
-		},
-                {
-                    "ie_type": 76,
-                    "spare": 0,
-                    "instance": 0,
-                    "msisdn": "460111000269" 
-		},
-                {
-                    "ie_type": 75,
-                    "spare": 0,
-                    "instance": 0,
-                    "mei": "2100000110000269"
-                },
-		{
-		    "ie_type": 86,
-		    "spare": 0,
-		    "instance": 0,
-		    "spare": 0,
-		    "laipresent": 0,
-		    "ecgipresent": 1,
-		    "taipresent": 1,
-		    "raipresent": 0,
-		    "saipresent": 0,
-		    "cgipresent": 0,
-		    "tai":
-		    {
-			"mcc": "506",
-			"mnc": "31",
-			"tracking_area_code": 4097
-		    },
-		    "ecgi":
-		    {
-			"mcc": "506",
-			"mnc": "31",
-			"eutran_cell_id": 1
-		    }
-		},
-                {
-                    "ie_type": 82,
-                    "spare": 0,
-                    "instance": 0,
-                    "rat_type": 6
-                },
-                {
-		    "ie_type": 87,
-                    "spare": 0,
-		    "instance": 0,
-                    "ipv4present": 1,
-                    "ipv6present": 0,
-		    "interface_type": 10,
-                    "teid_gre_key": 3749740559,
-                    "ipv4address": "172.18.240.22"
-                },
-                {
-		    "ie_type": 87,
-                    "spare": 0,
-		    "instance": 1,
-		    "ipv4present": 1,
-                    "ipv6present": 0,
-		    "interface_type": 7,
-                    "teid_gre_key": 0,
-                    "ipv4address": "172.16.236.14"
-                },
-                {
-                    "ie_type": 71,
-		    "spare": 0,
-		    "instance": 0,
-                    "apn": "test-apn.mnc098.mcc312.gprs"
-                },
-                {
-                    "ie_type": 128,
-                    "spare": 0,
-                    "instance": 0,
-		    "spare": 0,
-                    "selection_mode": 0
-                },
-                {
-		    "ie_type": 79,
-		    "spare": 0,
-		    "instance": 0,
-		    "spare": 0,
-                    "pdn_type": 1,
-                    "prefix_and_ipv4address": "0.0.0.0"
-                },
-                {
-                    "ie_type":127,
-		    "spare": 0,
-		    "instance": 0,
-                    "restriction_value": 0
-                },
-                {
-		    "ie_type": 72,
-		    "spare": 0,
-		    "instance": 0,
-                    "max_mbr_downlink": 16000,
-                    "max_mbr_uplink": 16000
-                },
-                {
-                    "ie_type": 93,
-                    "spare": 0,
-                    "instance": 0,
-                    "bearer_context":
-                    [
-                        {
-                            "ie_type": 73,
-                            "spare": 0,
-                            "instance": 0,
-                            "spare": 0,
-                            "eps_bearer_id": 5
-                        },
-                        {
-                            "ie_type": 80,
-                            "spare": 0,
-                            "instance": 0,
-                            "spare": 0,
-                            "pci": 0,
-                            "pl": 1,
-                            "spare": 0,
-                            "pvi": 0,
-                            "qci": 9,
-                            "max_bit_rate_ul": "0000000000",
-                            "max_bit_rate_dl": "0000000000",
-                            "guaranteed_bit_rate_ul": "0000000000",
-                            "guaranteed_bit_rate_dl": "0000000000"
-                        }
-                    ]
-                },
-		{
-                    "ie_type": 95,
-		    "spare": 0,
-		    "instance": 0,
-                    "charging_characteristic": 3
-                }, 
-		{
-                    "ie_type": 114,
-		    "spare": 0,
-		    "instance": 0,
-                    "timezone": "8e",
-		    "spare": 0,
-		    "daylight_saving_time": 1
-		}
+            "instance": 0,
+            "imsi": "312980911000269"
+          },
+          {
+            "ie_type": 76,
+            "spare": 0,
+            "instance": 0,
+            "msisdn": "460111000269"
+          },
+          {
+            "ie_type": 75,
+            "spare": 0,
+            "instance": 0,
+            "mei": "2100000110000269"
+          },
+          {
+            "ie_type": 86,
+            "spare": 0,
+            "instance": 0,
+            "spare": 0,
+            "laipresent": 0,
+            "ecgipresent": 1,
+            "taipresent": 1,
+            "raipresent": 0,
+            "saipresent": 0,
+            "cgipresent": 0,
+            "tai": {
+              "mcc": "506",
+              "mnc": "31",
+              "tracking_area_code": 4097
+            },
+            "ecgi": {
+              "mcc": "506",
+              "mnc": "31",
+              "eutran_cell_id": 1
+            }
+          },
+          {
+            "ie_type": 82,
+            "spare": 0,
+            "instance": 0,
+            "rat_type": 6
+          },
+          {
+            "ie_type": 87,
+            "spare": 0,
+            "instance": 0,
+            "ipv4present": 1,
+            "ipv6present": 0,
+            "interface_type": 10,
+            "teid_gre_key": 3749740559,
+            "ipv4address": "172.18.240.22"
+          },
+          {
+            "ie_type": 87,
+            "spare": 0,
+            "instance": 1,
+            "ipv4present": 1,
+            "ipv6present": 0,
+            "interface_type": 7,
+            "teid_gre_key": 0,
+            "ipv4address": "172.16.236.14"
+          },
+          {
+            "ie_type": 71,
+            "spare": 0,
+            "instance": 0,
+            "apn": "test-apn.mnc098.mcc312.gprs"
+          },
+          {
+            "ie_type": 128,
+            "spare": 0,
+            "instance": 0,
+            "spare": 0,
+            "selection_mode": 0
+          },
+          {
+            "ie_type": 79,
+            "spare": 0,
+            "instance": 0,
+            "spare": 0,
+            "pdn_type": 1,
+            "prefix_and_ipv4address": "0.0.0.0"
+          },
+          {
+            "ie_type": 127,
+            "spare": 0,
+            "instance": 0,
+            "restriction_value": 0
+          },
+          {
+            "ie_type": 72,
+            "spare": 0,
+            "instance": 0,
+            "max_mbr_downlink": 16000,
+            "max_mbr_uplink": 16000
+          },
+          {
+            "ie_type": 93,
+            "spare": 0,
+            "instance": 0,
+            "bearer_context": [
+              {
+                "ie_type": 73,
+                "spare": 0,
+                "instance": 0,
+                "spare": 0,
+                "eps_bearer_id": 5
+              },
+              {
+                "ie_type": 80,
+                "spare": 0,
+                "instance": 0,
+                "spare": 0,
+                "pci": 0,
+                "pl": 1,
+                "spare": 0,
+                "pvi": 0,
+                "qci": 9,
+                "max_bit_rate_ul": "0000000000",
+                "max_bit_rate_dl": "0000000000",
+                "guaranteed_bit_rate_ul": "0000000000",
+                "guaranteed_bit_rate_dl": "0000000000"
+              }
             ]
-        }
+          },
+          {
+            "ie_type": 95,
+            "spare": 0,
+            "instance": 0,
+            "charging_characteristic": 3
+          },
+          {
+            "ie_type": 114,
+            "spare": 0,
+            "instance": 0,
+            "timezone": "8e",
+            "spare": 0,
+            "daylight_saving_time": 1
+          }
+        ]
+      }
     }
-}
+  }
 }

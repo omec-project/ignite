@@ -23,384 +23,320 @@ HOME_DIR = os.path.dirname(__file__)
 MESSAGE_GRAMMAR = os.path.join(HOME_DIR, '..', 'Grammar', 'message_grammar.json')
 FEILD_GRAMMAR = os.path.join(HOME_DIR, '..', 'Grammar', 'field_grammar.json')
 
-def convertByteToJson(output_list,msg_type):
 
+def convertByteToJson(output_list, msg_type):
+    message = open(MESSAGE_GRAMMAR, 'r')
+    msg = json.load(message)
+    message.close()
 
-	message = open(MESSAGE_GRAMMAR,'r')
-	msg = json.load(message)
-	message.close()
-	
-	message_fields = open(FEILD_GRAMMAR,'r')
-	msg_fields = json.load(message_fields)
-	message_fields.close()
-	
-	decoded_output=" "
-	msg_structure = []
+    message_fields = open(FEILD_GRAMMAR, 'r')
+    msg_fields = json.load(message_fields)
+    message_fields.close()
 
-	for key,value in msg[msg_type].items():
+    decoded_output = " "
+    msg_structure = []
 
+    for key, value in msg[msg_type].items():
 
-	
-		if(type(value) is list):
+        if (type(value) is list):
 
-		
-			if len(value) > 0:
-			
-				for field in value:
-				
-					msg_structure.append(field)
+            if len(value) > 0:
 
-		else:
-		
-			msg_structure.append(value)
-	
-	count = 0
-	
-	for field in msg_structure:
-	
-		field_count = len(msg_structure)
+                for field in value:
+                    msg_structure.append(field)
 
-		if("union_mf" in field):
+        else:
 
+            msg_structure.append(value)
 
-			for sub_field in field["union_mf"]:
+    count = 0
 
-				sub_field_grammar=msg_fields[sub_field]
+    for field in msg_structure:
 
+        field_count = len(msg_structure)
 
+        if ("union_mf" in field):
 
-				format_of_field=sub_field_grammar['format']
+            for sub_field in field["union_mf"]:
 
-				if not(checkOptional(format_of_field,sub_field_grammar,output_list)):
-				
-					count +=1
-					continue
+                sub_field_grammar = msg_fields[sub_field]
 
-				decoded_output=decoded_output+decoder(sub_field_grammar,output_list)
+                format_of_field = sub_field_grammar['format']
 
+                if not (checkOptional(format_of_field, sub_field_grammar, output_list)):
+                    count += 1
+                    continue
 
+                decoded_output = decoded_output + decoder(sub_field_grammar, output_list)
 
-				if count < (field_count - 1):
-				
-					decoded_output=decoded_output+","
+                if count < (field_count - 1):
+                    decoded_output = decoded_output + ","
 
-			output_list.pop(0)
+            output_list.pop(0)
 
-		elif("join_mf" in field):
+        elif ("join_mf" in field):
 
-			for sub_field in field["join_mf"]:
-			
-				sub_field_grammar=msg_fields[sub_field]
+            for sub_field in field["join_mf"]:
 
-				format_of_field=sub_field_grammar['format']
-				
-				if not(checkOptional(format_of_field,sub_field_grammar,output_list)):
-					continue
-					
-				decoded_output=decoded_output+decoder(sub_field_grammar,output_list)
-				
-				output_list.pop(0)
+                sub_field_grammar = msg_fields[sub_field]
 
-		else:
+                format_of_field = sub_field_grammar['format']
 
-			msg_field_grammar=msg_fields[field]
+                if not (checkOptional(format_of_field, sub_field_grammar, output_list)):
+                    continue
 
+                decoded_output = decoded_output + decoder(sub_field_grammar, output_list)
 
-			format_of_field=msg_field_grammar['format']
+                output_list.pop(0)
 
+        else:
 
-			if not(checkOptional(format_of_field,msg_field_grammar,output_list)):
+            msg_field_grammar = msg_fields[field]
 
+            format_of_field = msg_field_grammar['format']
 
-				count +=1
-				continue
+            if not (checkOptional(format_of_field, msg_field_grammar, output_list)):
+                count += 1
+                continue
 
-			num_of_bytes_to_pop = msg_field_grammar["max_size"] if ("max_size" in msg_field_grammar) else 1
+            num_of_bytes_to_pop = msg_field_grammar["max_size"] if ("max_size" in msg_field_grammar) else 1
 
+            if ('L' in msg_field_grammar["format"]):
 
-			
-			if('L' in msg_field_grammar["format"]):
+                if (msg_field_grammar["format"] == "LV"):
+                    num_of_bytes_to_pop = int(output_list[0], 16)
+                elif (msg_field_grammar["format"] == "TLV"):
+                    num_of_bytes_to_pop = int(output_list[1], 16)
 
-				if (msg_field_grammar["format"] == "LV"):
-					num_of_bytes_to_pop = int(output_list[0], 16)
-				elif (msg_field_grammar["format"] == "TLV"):
-					num_of_bytes_to_pop = int(output_list[1], 16)
+                elif (msg_field_grammar["format"] == "LV-E"):
+                    num_of_bytes_to_pop = int(output_list[0] + output_list[1], 16)
+                elif (msg_field_grammar["format"] == "TLV-E"):
+                    num_of_bytes_to_pop = int(output_list[1] + output_list[2], 16)
 
-				elif (msg_field_grammar["format"] == "LV-E"):
-					num_of_bytes_to_pop = int(output_list[0] + output_list[1], 16)
-				elif (msg_field_grammar["format"] == "TLV-E"):
-					num_of_bytes_to_pop = int(output_list[1] + output_list[2], 16)
+            decoded_output = decoded_output + decoder(msg_field_grammar, output_list)
 
+            if count < (field_count - 1):
+                decoded_output = decoded_output + ","
 
+            if (output_list):
 
+                for i in range(0, num_of_bytes_to_pop):
+                    output_list.pop(0)
 
+        count += 1
 
+    if decoded_output[-1] == ",":
+        decoded_output = decoded_output[0:len(decoded_output) - 1]
 
+    return ("{" + decoded_output + "}")
 
 
-			decoded_output=decoded_output+decoder(msg_field_grammar,output_list)
+def decoder(msg_field_grammar, output_list):
+    final_value = ""
+    decoded_value = ""
 
-			
-			if count < (field_count - 1):
-			
-				decoded_output=decoded_output+","
-			
-			if(output_list):
-			
-				for i in range(0,num_of_bytes_to_pop):
+    max_size = msg_field_grammar["max_size"] if ("max_size" in msg_field_grammar) else 1
 
+    byte_to_json = msg_field_grammar["byte_to_json"] if ("byte_to_json" in msg_field_grammar) else {}
 
+    end_bit = msg_field_grammar["end_bit"] if ("end_bit" in msg_field_grammar) else 0
 
-					output_list.pop(0)
+    json_type = msg_field_grammar["json_type"] if ("json_type" in msg_field_grammar) else ""
 
+    name = msg_field_grammar["name"]
 
-		
-		count +=1
+    final_value = final_value + '"' + name + '"' + " : "
 
-	if decoded_output[-1] == ",":
-	
-		decoded_output = decoded_output[0:len(decoded_output)-1]
+    if ("start_bit" in msg_field_grammar):
 
-	return ("{" + decoded_output + "}")
+        start_bit = int(msg_field_grammar["start_bit"])
 
-def decoder(msg_field_grammar,output_list):
 
 
-	final_value=""
-	decoded_value = ""
 
-	max_size=msg_field_grammar["max_size"] if ("max_size" in msg_field_grammar) else 1 
+    else:
 
-	byte_to_json=msg_field_grammar["byte_to_json"] if ("byte_to_json" in msg_field_grammar) else {}
+        start_bit = max_size * 8 - 1
 
-	end_bit=msg_field_grammar["end_bit"] if ("end_bit" in msg_field_grammar) else 0
+    format_value = msg_field_grammar["format"]
 
-	json_type=msg_field_grammar["json_type"] if ("json_type"in msg_field_grammar) else ""
+    if ("join_sf" in msg_field_grammar):
 
-	name=msg_field_grammar["name"]
+        joined_sub_fields = msg_field_grammar["join_sf"]
 
-	final_value = final_value + '"'+name +'"'+ " : "
+        if ('L' in msg_field_grammar["format"]):
 
+            if msg_field_grammar["format"] == "LV":  # Length indicator is 1 octet long
 
-	if ("start_bit"in msg_field_grammar):
-	
-		start_bit = int(msg_field_grammar["start_bit"])
+                length = int(output_list[0], 16)
+                output_list.pop(0)
 
+            elif msg_field_grammar["format"] == "TLV":  # Length indicator is in 2nd octet
 
+                length = int(output_list[1], 16)
 
-		
-	else:
-		
-		start_bit = max_size * 8 - 1
+                for i in range(0, 2):
+                    output_list.pop(0)
 
 
-	format_value = msg_field_grammar["format"]
 
+            elif msg_field_grammar["format"] == "LV-E" or msg_field_grammar[
+                "format"] == "TLV-E":  # Length indicator is 2 octet long
 
-	
-	if("join_sf" in msg_field_grammar):
+                length = (int(output_list[0], 16) << 8) | (int(output_list[1], 16))
 
-		joined_sub_fields=msg_field_grammar["join_sf"]
+                for i in range(0, 2):
+                    output_list.pop(0)
 
+        else:
 
-		
-		if('L' in msg_field_grammar["format"]):
+            length = msg_field_grammar["max_size"]
 
-		
-			if msg_field_grammar["format"] == "LV": # Length indicator is 1 octet long
+        sub_encoded_list = []
 
-				length = int(output_list[0],16)
-				output_list.pop(0)
-				
-			elif msg_field_grammar["format"] == "TLV": # Length indicator is in 2nd octet
+        for i in range(0, length):
+            sub_encoded_list.append(output_list[i])
 
+        final_value = final_value + "{"
+        decoded_value = join(joined_sub_fields, sub_encoded_list)
 
-				length = int(output_list[1],16)
+        decoded_value = decoded_value + "}"
 
-				
-				for i in range(0,2):
+    elif ("union_sf" in msg_field_grammar):
 
-					output_list.pop(0)
+        for sub_field in field["union_sf"]:
+            sub_field_grammar = msg_fields[sub_field]
 
+            decoded_output = decoded_output + decoder(sub_field_grammar, output_list)
 
-					
-			elif msg_field_grammar["format"] == "LV-E" or msg_field_grammar["format"] == "TLV-E": # Length indicator is 2 octet long
-			
-				length = (int(output_list[0],16) << 8) | (int(output_list[1],16))
-				
-				for i in range(0,2):
-				
-					output_list.pop(0)					
-			
-		else:	
-		
-			length = msg_field_grammar["max_size"]
-			
-		sub_encoded_list = []
-		
-		for i in range(0,length):
-		
-			sub_encoded_list.append(output_list[i])
+    else:
 
+        output_field = ""
 
-		final_value=final_value+"{"
-		decoded_value = join(joined_sub_fields,sub_encoded_list)
+        if (max_size > 1):
 
-		decoded_value=decoded_value+"}" 
+            if ('L' in msg_field_grammar["format"]):
+                length = int(output_list[0], 16)
 
-	elif("union_sf" in msg_field_grammar):
-	
-			for sub_field in field["union_sf"]:
+            for i in range(0, max_size):
+                output_field = output_field + output_list[i]
 
-				sub_field_grammar=msg_fields[sub_field]
+            start_bit = (max_size * 8) - 1
 
-				decoded_output=decoded_output+decoder(sub_field_grammar,output_list) 
+        elif json_type == "str" and start_bit > 7:
 
-	else:
-	
-		output_field = ""
-		
-		if(max_size > 1): 
+            for i in range(0, len(output_list)):
+                output_field = output_field + output_list[i]
 
-			if('L' in msg_field_grammar["format"]):
-			
-				length = int(output_list[0],16)
+            output_field = output_field.rstrip()
 
-			for i in range(0,max_size):
-			
-				output_field = output_field + output_list[i]
+        else:
 
-			start_bit = (max_size * 8 ) - 1
-			
-		elif json_type=="str" and start_bit > 7:
+            output_field = output_list[0]
 
-			for i in range(0,len(output_list)):
-			
-				output_field = output_field + output_list[i]
+        if (byte_to_json):
 
-			output_field = output_field.rstrip()
+            decoded_value = byteToJsonConversion(end_bit, start_bit, output_field, byte_to_json, max_size)
 
-		else:
+        else:
 
-			output_field = output_list[0]
-		
-		if(byte_to_json):
+            if (end_bit == 0 and start_bit == 0 and json_type == "num" and max_size == 0):
 
-			decoded_value = byteToJsonConversion(end_bit,start_bit,output_field,byte_to_json,max_size)
+                integer_value = str(int(output_field[0], 16))
+                decoded_value = str(integer_value)
 
-		else:
-		
-			if(end_bit==0 and start_bit==0 and json_type=="num" and max_size == 0):
-			
-				integer_value=str(int(output_field[0],16))
-				decoded_value = str(integer_value)
-				
-			elif json_type=="str":
-			
-				decoded_value = hexstrToAscii(output_field)
-				
-			else:
-			
-				decoded_value =  str(byteToJsonConversion(end_bit,start_bit,output_field,byte_to_json,max_size))
+            elif json_type == "str":
 
-	if json_type == "str":
-	
-		final_value = final_value + '"' + decoded_value + '"'
-		
-	else:
-	
-		final_value = final_value+decoded_value
-	
-	return final_value
+                decoded_value = hexstrToAscii(output_field)
 
-def join(joined_sub_fields,output_list):
+            else:
 
+                decoded_value = str(byteToJsonConversion(end_bit, start_bit, output_field, byte_to_json, max_size))
 
-	message_fields = open(FEILD_GRAMMAR,'r')
-	msg_fields = json.load(message_fields)
-	message_fields.close()
-	decoded_output=""
-	count = 0
-	
-	for field in joined_sub_fields:
-	
-		num_of_fields = len(joined_sub_fields)
+    if json_type == "str":
 
+        final_value = final_value + '"' + decoded_value + '"'
 
-		if type(field) == str:
+    else:
 
-			msg_field_grammar = msg_fields[field]
+        final_value = final_value + decoded_value
 
+    return final_value
 
-			if not(checkOptional(msg_field_grammar["format"],msg_field_grammar,output_list)):
 
-				count += 1
-				continue
-				
-		if("union_sf" in field):
+def join(joined_sub_fields, output_list):
+    message_fields = open(FEILD_GRAMMAR, 'r')
+    msg_fields = json.load(message_fields)
+    message_fields.close()
+    decoded_output = ""
+    count = 0
 
-			subFieldCount = 0
-			num_of_subFields = len(field["union_sf"])
+    for field in joined_sub_fields:
 
-			
-			for sub_field in field["union_sf"]:			
+        num_of_fields = len(joined_sub_fields)
 
-				sub_field_grammar=msg_fields[sub_field]
+        if type(field) == str:
 
-				
-				if decoded_output != "" and decoded_output[-1] != ",":
-				
-					decoded_output = decoded_output+","
-					
-				decoded_output=decoded_output+decoder(sub_field_grammar,output_list)
+            msg_field_grammar = msg_fields[field]
 
-				if subFieldCount < (num_of_subFields - 1):
-				
-					decoded_output=decoded_output+","
+            if not (checkOptional(msg_field_grammar["format"], msg_field_grammar, output_list)):
+                count += 1
+                continue
 
-				subFieldCount += 1
-				
-			output_list.pop(0)
+        if ("union_sf" in field):
 
-		else:
+            subFieldCount = 0
+            num_of_subFields = len(field["union_sf"])
 
-			msg_field_grammar = msg_fields[field]			
-			
-			json_type=msg_field_grammar["json_type"] if ("json_type"in msg_field_grammar) else ""
+            for sub_field in field["union_sf"]:
 
-			
-			num_of_bytes_to_pop = msg_field_grammar["max_size"] if ("max_size" in msg_field_grammar) else 1
+                sub_field_grammar = msg_fields[sub_field]
 
-			
-			if('L' in msg_field_grammar["format"]):
-			
-				if msg_field_grammar["format"] == "LV":
-				
-					num_of_bytes_to_pop = int(output_list[0],16)
-					
-				elif msg_field_grammar["format"] == "TLV":
-				
-					num_of_bytes_to_pop = int(output_list[1],16)
-					
-			elif json_type == "str":
+                if decoded_output != "" and decoded_output[-1] != ",":
+                    decoded_output = decoded_output + ","
 
-				num_of_bytes_to_pop = len(output_list)
-				
-			if decoded_output != "" and decoded_output[-1] != ",":
-			
-				decoded_output = decoded_output+","
+                decoded_output = decoded_output + decoder(sub_field_grammar, output_list)
 
-				
-			decoded_output=decoded_output+decoder(msg_field_grammar,output_list)
-	
-			if count < (num_of_fields - 1):
-			
-				decoded_output=decoded_output+","
-			
-			for i in range(0, num_of_bytes_to_pop):
-			
-				output_list.pop(0)
-				
-		count += 1
+                if subFieldCount < (num_of_subFields - 1):
+                    decoded_output = decoded_output + ","
 
-	return decoded_output
+                subFieldCount += 1
+
+            output_list.pop(0)
+
+        else:
+
+            msg_field_grammar = msg_fields[field]
+
+            json_type = msg_field_grammar["json_type"] if ("json_type" in msg_field_grammar) else ""
+
+            num_of_bytes_to_pop = msg_field_grammar["max_size"] if ("max_size" in msg_field_grammar) else 1
+
+            if ('L' in msg_field_grammar["format"]):
+
+                if msg_field_grammar["format"] == "LV":
+
+                    num_of_bytes_to_pop = int(output_list[0], 16)
+
+                elif msg_field_grammar["format"] == "TLV":
+
+                    num_of_bytes_to_pop = int(output_list[1], 16)
+
+            elif json_type == "str":
+
+                num_of_bytes_to_pop = len(output_list)
+
+            if decoded_output != "" and decoded_output[-1] != ",":
+                decoded_output = decoded_output + ","
+
+            decoded_output = decoded_output + decoder(msg_field_grammar, output_list)
+
+            if count < (num_of_fields - 1):
+                decoded_output = decoded_output + ","
+
+            for i in range(0, num_of_bytes_to_pop):
+                output_list.pop(0)
+
+        count += 1
+
+    return decoded_output

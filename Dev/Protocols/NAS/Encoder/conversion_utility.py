@@ -15,11 +15,12 @@
 #
 
 import nasEncoder
-import os,sys
+import os, sys
+
 currDir = os.path.dirname(__file__)
 sys.path.append(os.path.join(currDir, '..', '..', '..', 'Logger'))
 import igniteLogger
- 
+
 
 # Conversion Of String to Hexadecimal
 
@@ -31,7 +32,7 @@ def stringToHexConversion(string_value):
         for letter in string_value:
             converted_byte_array.append(hex(ord(letter)))
 
-        converted_byte_array.insert(0,str(len(string_value)))
+        converted_byte_array.insert(0, str(len(string_value)))
         converted_byte_array = " ".join(val for val in converted_byte_array)
 
         return converted_byte_array
@@ -39,7 +40,6 @@ def stringToHexConversion(string_value):
 
 
     except Exception as error:
-
 
         igniteLogger.logger.error("ERROR : " f"{str(error)} exception occurred")
 
@@ -53,18 +53,13 @@ def leftShiftValues(digit, start_bit, end_bit):
 
         nibble_value = end_bit
 
-
-
         shifted_value = digit << nibble_value
-
-
 
         return shifted_value
 
 
 
     except Exception as error:
-
 
         igniteLogger.logger.error("ERROR : "f"{str(error)}  exception occurred")
 
@@ -101,7 +96,6 @@ def formatCheck(final_value, format_value, max_size, min_size):
 
 
     except Exception as error:
-
 
         igniteLogger.logger.error("ERROR : "f"{str(error)}  exception occurred")
 
@@ -145,13 +139,11 @@ def byteConversion(final_value, max_size):
 
                 final_value = final_value + str(hex_value)
 
-
         return final_value.strip(" ")
 
 
 
     except Exception as error:
-
 
         igniteLogger.logger.error("ERROR : "f"{str(error)}  exception occurred")
 
