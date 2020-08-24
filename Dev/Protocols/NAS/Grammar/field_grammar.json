@@ -5121,6 +5121,54 @@
     "byte_to_json": {},
     "format": "NA"
   },
+  "eps_mobile_identity_guti_tau_request": {
+    "name": "eps_mobile_identity_guti_detach_request",
+    "type": "M",
+    "format": "LV",
+    "max_size": 11,
+    "min_size": 5,
+    "join_sf": [
+      {
+        "union_sf": [
+          "guti_octet3_high_nibble",
+          "odd_even_indication",
+          "type_of_identity"
+        ]
+      },
+      {
+        "union_sf": [
+          "mcc_digit_2",
+          "mcc_digit_1"
+        ]
+      },
+      {
+        "union_sf": [
+          "mnc_digit_3",
+          "mcc_digit_3"
+        ]
+      },
+      {
+        "union_sf": [
+          "mnc_digit_2",
+          "mnc_digit_1"
+        ]
+      },
+      "mme_group_id",
+      "mme_code",
+      "m_tmsi"
+    ]
+  },
+  "guti_octet3_high_nibble": {
+    "name": "guti_octet3_high_nibble",
+    "type": "M",
+    "json_type": "num",
+    "byte_type": "num",
+    "start_bit": 7,
+    "end_bit": 4,
+    "json_to_byte": {},
+    "byte_to_json": {},
+    "format": "NA"
+  },
   "eps_mobile_identity_guti_attach_request": {
     "name": "eps_mobile_identity_guti",
     "type": "M",

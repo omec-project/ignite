@@ -274,6 +274,9 @@ def updateMessageFromContextData(s1apMsg,requestType):
     if requestType==mt.detach_request.name:
         nu.setGuti(S1APCTXDATA[IMSI][mt.attach_accept.name]["guti_list"],s1apMsg)
 
+    if requestType==mt.tau_request.name:
+        nu.setGuti(S1APCTXDATA[IMSI][mt.attach_accept.name]["guti_list"],s1apMsg)
+
     elif requestType==mt.handover_required.name:
         icu.updateKeyValueInDict(s1apMsg, "selected-TAI", S1APCTXDATA[IMSI][mt.attach_accept.name]["tai_dict"])
 

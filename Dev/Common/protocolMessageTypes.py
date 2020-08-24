@@ -30,6 +30,7 @@ class ProtocolMessageTypes(enum.Enum):
     release_bearer_response = enum.auto()
     security_mode_command = enum.auto()
     service_request = enum.auto()
+    tau_request = enum.auto()
     ue_context_release_command = enum.auto()
     ue_context_release_complete = enum.auto()
     update_location_request = enum.auto()

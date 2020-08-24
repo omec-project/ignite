@@ -463,7 +463,7 @@
           "eps_update_type"
         ]
       },
-      "eps_mobile_identity"
+      "eps_mobile_identity_guti_tau_request"
     ],
     "O": [
       "tracking_area_identity",

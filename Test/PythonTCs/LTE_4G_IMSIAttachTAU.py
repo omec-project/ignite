@@ -192,7 +192,7 @@ try:
     time.sleep(1)
 
     print("\n---------------------------------------\nSend Tau Request to MME\n---------------------------------------")
-    s1.sendS1ap('tau_request', uplinknastransport_tau_request, enbues1ap_id, nas_tau_request, imsi)
+    s1.sendS1ap('tau_request', init_ue_tau_request, enbues1ap_id, nas_tau_request)
 
     print("\n---------------------------------------\nTau accept received from MME\n---------------------------------------")
     s1.receiveS1ap()

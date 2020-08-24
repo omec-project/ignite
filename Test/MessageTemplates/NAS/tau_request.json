@@ -17,24 +17,20 @@
     "active_flag_tau": "no_bearer_establishment_requested"
   },
   "nas_key_set_identifier": 7,
-  "eps_mobile_identity": {
-    "odd_even_indication": 1,
-    "type_of_identity": 1,
-    "mcc_digit_1_eps": 2,
-    "mcc_digit_3_eps": 8,
-    "mcc_digit_2_eps": 0,
-    "mnc_digit_2_eps": 2,
-    "mnc_digit_1_eps": 9,
-    "msin_1": 9,
-    "mnc_digit_3_eps": 0,
-    "msin_3": 1,
-    "msin_2": 1,
-    "msin_5": 0,
-    "msin_4": 0,
-    "msin_7": 2,
-    "msin_6": 0,
-    "msin_9": 9,
-    "msin_8": 6
+  "eps_mobile_identity_guti_tau_request": {
+    "guti_octet3_high_nibble": 15,
+    "odd_even_indication": 0,
+    "type_of_identity": 6,
+    "identity_digit_1": 15,
+    "mcc_digit_2": 0,
+    "mcc_digit_1": 2,
+    "mnc_digit_3": 15,
+    "mcc_digit_3": 8,
+    "mnc_digit_2": 2,
+    "mnc_digit_1": 9,
+    "mme_group_id": 1,
+    "mme_code": 2,
+    "m_tmsi": 1
   },
   "tracking_area_identity": {
     "mcc_digit_2": 0,

@@ -50,6 +50,7 @@ try:
     uplinknastransport_detach_request = json.loads(open('../MessageTemplates/S1AP/uplinknastransport_detachrequest.json').read())
     uecontextrelease_complete = json.loads(open('../MessageTemplates/S1AP/uecontextrelease_complete.json').read())
     uplinknastransport_tau_request = json.loads(open('../MessageTemplates/S1AP/uplinknastransport_tau_request.json').read())
+    init_ue_tau_request = json.loads(open('../MessageTemplates/S1AP/init_ue_taurequest.json').read())
     uplinknastransport_tau_complete = json.loads(open('../MessageTemplates/S1AP/uplinknastransport_tau_complete.json').read())
     handover_required = json.loads(open('../MessageTemplates/S1AP/handoverrequired.json').read())
     handover_request_acknowledge = json.loads(open('../MessageTemplates/S1AP/handoverrequest_ack.json').read())

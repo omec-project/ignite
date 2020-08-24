@@ -180,7 +180,7 @@ try:
     time.sleep(2)
 	
     igniteLogger.logger.info("\n---------------------------------------\nSend Tau Request to MME\n---------------------------------------")
-    s1.sendS1ap('tau_request', uplinknastransport_tau_request, enbues1ap_id, nas_tau_request, imsi)
+    s1.sendS1ap('tau_request', uplinknastransport_tau_request, enbues1ap_id, nas_tau_request)
     
     igniteLogger.logger.info("\n---------------------------------------\nTau accept received from MME\n---------------------------------------")
     s1.receiveS1ap(target=True)	
