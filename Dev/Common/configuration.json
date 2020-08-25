@@ -25,6 +25,17 @@
 "ignite_port": 5003,
 "tc_port": 62324
 },
+
+  "s1ap_target":
+  {
+    "type_of_socket": "sctp",
+    "sut_ip": "192.168.1.14",
+    "sut_port": 36412,
+    "ignite_ip": "192.168.1.51",
+    "ignite_port": 5008,
+    "tc_port": 62325
+  },
+
 "diameter": {
 "type_of_socket": "sctp",
 "sut_ip": "192.168.1.14",
@@ -37,5 +48,19 @@
 "mme_host": "mme.localdomain",
 "mme_realm": "localdomain"
 
-}
+},
+
+  "runtestcase":
+  {"sut_ip": "192.168.1.14",
+    "ignite_ip": "192.168.1.51",
+    "mme_username": "mme",
+    "mme_password": "mypass",
+    "ignite_username": "ignite",
+    "ignite_password": "mypass",
+    "mme_lib_path": "/home/onos/onf/omec-mme-project/target/lib/",
+    "mme_grpc_client_path": "/home/onos/onf/omec-mme-project/target/bin"
+  }
+
+
+
 }

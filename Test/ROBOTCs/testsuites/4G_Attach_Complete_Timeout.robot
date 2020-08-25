@@ -33,9 +33,6 @@ TC1: LTE 4G IMSI Attach Detach
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_att_cmp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    att_cmp_timeout
-    ${attCmpTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_att_cmp_timeout}
-    ${attCmpTimeoutCountBf}    Convert to Integer    ${attCmpTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -59,14 +56,7 @@ TC1: LTE 4G IMSI Attach Detach
     Send S1ap    detach_accept    ${uplinkNASTransport_DetachAcp}    ${enbUeS1APId}    ${nasDetachAccept}    #Send Detach Accept to MME
     ${eNBUeRelReqFromMME}    Receive S1ap    #eNB receives UE Context Release Request from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME    #eNB sends UE Context Release Complete to MME
-    Sleep    1s
-    ${procStatTimeOut}    ${stderr}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s    return_stderr=True
-    Log    ${procStatTimeOut}
-    ${attCmpTimeoutCountAf}    Get GRPC Stats Response Count    ${procStatTimeOut}    ${num_of_att_cmp_timeout}
-    ${attCmpTimeoutCountAf}    Convert to Integer    ${attCmpTimeoutCountAf}
-    ${incrementattCmpTimeoutCount}    Evaluate    ${attCmpTimeoutCountBf}+1
-    Should Be Equal    ${incrementattCmpTimeoutCount}    ${attCmpTimeoutCountAf}    Expected attach comp Count: ${incrementattCmpTimeoutCount}, but Received Attach comp Count: ${attCmpTimeoutCountAf}    values=False
-    
+      
     Send S1ap    attach_request_guti    ${initialUeGuti}    ${enbUeS1APId}    ${nasAttachRequestGuti}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -86,7 +76,6 @@ TC1: LTE 4G IMSI Attach Detach
     Send S1ap    uplink_nas_transport_attach_cmp    ${uplinkNASTransport_AttachCmp}    ${enbUeS1APId}    ${nasAttachComplete}    #Send Attach Complete to MME
     ${modBearReqRec}    Receive GTP    #Modify Bearer Request received from MME
     Send GTP    modify_bearer_response    ${modifyBearerResp}    ${gtpMsgHeirarchy_tag2}    #Send Modify Bearer Response to MME
-    ${recEMMInfo}    Receive S1ap    #EMM Information received from MME
     Sleep    1s
     ${mmeUeS1APId}    ${mmeUeS1APIdPresent}    Get Key Value From Dict    ${intContSetupReqRec}    MME-UE-S1AP-ID
     ${IMSI_str}    Convert to String    ${IMSI}
@@ -94,6 +83,12 @@ TC1: LTE 4G IMSI Attach Detach
     Log    ${mobContextAftExec}
     Should Contain    ${mobContextAftExec}    ${IMSI_str}    Expected IMSI: ${IMSI_str}, but Received ${mobContextAftExec}    values=False
     Should Contain    ${mobContextAftExec}    EpsAttached    Expected UE State: EpsAttached, but Received ${mobContextAftExec}    values=False
+    ${procStatOutAfAttach}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
+    Log    ${procStatOutAfAttach}
+    ${ueCountAfterAttach}    Get GRPC Stats Response Count    ${procStatOutAfAttach}    ${num_of_subscribers_attached}
+    ${ueCountAfterAttach}    Convert to Integer    ${ueCountAfterAttach}
+    ${incrementUeCount}    Evaluate    ${ueCountBeforeAttach}+1
+    Should Be Equal    ${incrementUeCount}    ${ueCountAfterAttach}    Expected UE Attach Count: ${incrementUeCount}, but Received UE Attach Count: ${ueCountAfterAttach}    values=False
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
     ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME

@@ -33,9 +33,6 @@ TC1: LTE 4G Paging Timeout
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_service_request_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    service_request_timeout
-    ${serviceRequestTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_service_request_timeout}
-    ${serviceRequestTimeoutCountBf}    Convert to Integer    ${serviceRequestTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -82,12 +79,6 @@ TC1: LTE 4G Paging Timeout
     Log    ${ddn_failure}
     ${intlCntxReleaseCmd}    Receive S1ap    #Initial Context Release Command received from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME    #eNB sends UE Context Release Complete to MME
-    ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
-    Log    ${procStatOutAfTimeout}
-    ${serviceRequestTimeoutCounAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfTimeout}    ${num_of_service_request_timeout}
-    ${serviceRequestTimeoutCounAfTimeout}    Convert to Integer    ${serviceRequestTimeoutCounAfTimeout}
-    ${incrementServiceRequestTimeoutCountAfTimeout}    Evaluate    ${serviceRequestTimeoutCountBf}+1
-    Should Be Equal    ${incrementServiceRequestTimeoutCountAfTimeout}    ${serviceRequestTimeoutCounAfTimeout}    Expected Service Request Timeout Count: ${incrementServiceRequestTimeoutCountAfTimeout}, but Received Service Request Timeout Count: ${serviceRequestTimeoutCounAfTimeout}    values=False
     Send GTP    downlink_data_notification    ${downlinkDataNotification}    ${gtpMsgHeirarchy_tag5}    #Send DDN to MME
     ${pagingReq}    Receive S1ap    #Paging Request received from MME
     Send S1ap    service_request    ${initUeServiceReq}    ${enbUeS1APId}    ${nasServiceRequest}    #Send Service Request to MME

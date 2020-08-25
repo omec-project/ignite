@@ -95,7 +95,10 @@ def setGuti(guti_digits_list, nasMsg):
     epsMobileIdentityGuti, epsMobileIdentityGutiAttachPresent = icu.getKeyValueFromDict(nasMsg, "eps_mobile_identity_guti_attach_request")
     if epsMobileIdentityGutiAttachPresent == 'true':
         epsGuti=epsMobileIdentityGuti
-    if epsMobileIdentityGutiDetachPresent == 'true' or epsMobileIdentityGutiAttachPresent == 'true':
+    epsMobileIdentityGuti, epsMobileIdentityGutiTauPresent = icu.getKeyValueFromDict(nasMsg, "eps_mobile_identity_guti_tau_request")
+    if epsMobileIdentityGutiTauPresent == 'true':
+        epsGuti=epsMobileIdentityGuti
+    if epsMobileIdentityGutiDetachPresent == 'true' or epsMobileIdentityGutiAttachPresent == 'true' or epsMobileIdentityGutiTauPresent == 'true':
         epsGuti["mcc_digit_1"] = guti_digits_list[0]
         epsGuti["mcc_digit_2"] = guti_digits_list[1]
         epsGuti["mcc_digit_3"] = guti_digits_list[2]

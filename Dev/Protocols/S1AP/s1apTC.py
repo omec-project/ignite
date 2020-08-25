@@ -22,6 +22,7 @@ import sys
 import requests
 import time
 from s1apUtils import *
+from s1apMsgUtils import *
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'Common'))
 import igniteCommonUtil as icu
@@ -55,6 +56,8 @@ global SERFLAG
 SERFLAG=False
 global TIMEOUTFLAG
 TIMEOUTFLAG=True
+global GTP_TEID_LIST
+GTP_TEID_LIST =[]
 
 url={
 "send_url":"http://"+str(config_file["s1ap"]["ignite_ip"])+":"+str(config_file["s1ap"]["tc_port"])+"/sendMessagesToProxy",
@@ -63,18 +66,25 @@ url={
 "gtp_ctx_data_url":"http://"+str(config_file["gtp"]["ignite_ip"])+":"+str(config_file["gtp"]["tc_port"])+"/getContextData",
 }
 
-def receiveS1ap(ResponseWaitTime=10):
+def receiveS1ap(ResponseWaitTime=10,target=None):
     global SERFLAG
     global TIMEOUTFLAG
     service="_service"
     time_out="_time_out"
     received_msg={}
+    if target:
+        url["receive_url"]= "http://" + str(config_file["s1ap_target"]["ignite_ip"]) + ":" + str(
+            config_file["s1ap_target"]["tc_port"]) + "/getMessagesfromProxy"
+    else:
+        url["receive_url"]= "http://" + str(config_file["s1ap"]["ignite_ip"]) + ":" + str(
+                            config_file["s1ap"]["tc_port"]) + "/getMessagesfromProxy"
+
     received_response =requests.get(url=url["receive_url"],timeout=ResponseWaitTime)
     igniteLogger.logger.info(f"URL response for receive s1ap data : {str(received_response)}")
     igniteLogger.logger.info(f"S1AP Data Received : {received_response.json()}")
     received_msg=received_response.json()
     procedure_code=s1apMessageDict[icu.getKeyValueFromDict(received_msg,'procedureCode')[0]]
-    
+
     if procedure_code == mt.downlink_nas_transport.name:
         mobility_mgmt_message_type,mobility_mgmt_message_type_present=icu.getKeyValueFromDict(received_msg, "mobility_mgmt_message_type")
         if mobility_mgmt_message_type_present=='true':
@@ -94,11 +104,11 @@ def receiveS1ap(ResponseWaitTime=10):
         if TIMEOUTFLAG:
             procedure_code+=time_out
         if SERFLAG:
-            procedure_code+=service            
+            procedure_code+=service
         validateS1apIE(procedure_code,received_msg)
 
     return received_msg
-	
+
 def sendS1ap(requestType,s1apData,enbUeS1apId,nasData={},imsi=None,ieUpdateValDict=None):
 
     global SERFLAG
@@ -135,13 +145,13 @@ def sendS1ap(requestType,s1apData,enbUeS1apId,nasData={},imsi=None,ieUpdateValDi
                 nu.setGuti(imsi,s1apData)
             else:
                 nu.setGuti(S1APCTXDATA[IMSI][mt.attach_accept.name]["guti_list"],s1apData)
-                
+
         elif requestType==mt.service_request.name:
             SERFLAG=True
             icu.updateKeyValueInDict(s1apData, "ENB-UE-S1AP-ID", enbUeS1apId)
             icu.updateKeyValueInDict(s1apData,"m-TMSI", icu.formatHex(S1APCTXDATA[IMSI][mt.attach_accept.name]["m_tmsi"]))
             icu.updateKeyValueInDict(s1apData,"mMEC", '0'+str(S1APCTXDATA[IMSI][mt.attach_accept.name]["mme_code"]))
- 
+
         else:
             if requestType == mt.initial_context_setup_response.name:
                 if count == 0:
@@ -157,6 +167,20 @@ def sendS1ap(requestType,s1apData,enbUeS1apId,nasData={},imsi=None,ieUpdateValDi
                     count+=1
                 icu.updateKeyValueInDict(s1apData, "transportLayerAddress",transportLayerAddressUpdate())
 
+            elif requestType == mt.handover_request_acknowledge.name:
+                gtp_teid=icu.generateUniqueId('gTP-TEID')
+                gtp_teid_1=icu.generateUniqueId('gTP-TEID')
+                S1APCTXDATA[IMSI]["gTP_TEID_2"]=gtp_teid
+                icu.updateKeyValueInDict(s1apData, "gTP-TEID", gtp_teid)
+                icu.updateKeyValueInDict(s1apData, "transportLayerAddress",transportLayerAddressUpdate())
+                icu.updateKeyValueInDict(s1apData, "dL-transportLayerAddress",transportLayerAddressUpdate())
+                icu.updateKeyValueInDict(s1apData, "gTP-TEID", gtp_teid_1)
+
+            elif requestType == mt.erab_modification_indication.name:
+                tl_address=transportLayerAddressUpdate()
+                generateIeValueForErabModInd(s1apData,tl_address,GTP_TEID_LIST)
+                S1APCTXDATA[IMSI]["gTP_TEID"]=GTP_TEID_LIST
+            
             elif requestType==mt.authentication_response.name:
                 TIMEOUTFLAG=False
 
@@ -164,19 +188,25 @@ def sendS1ap(requestType,s1apData,enbUeS1apId,nasData={},imsi=None,ieUpdateValDi
                 SERFLAG=False
 
             updateMessageFromContextData(s1apData,requestType)
-            
+
     if ieUpdateValDict != None:
         icu.setValueFromTC(s1apData,ieUpdateValDict)
     setContextData(s1apData,requestType)
-    
+
     igniteLogger.logger.info(f"s1ap data send : {s1apData}")
-    send_response = requests.post(url["send_url"], json=[s1apData,S1APCTXDATA,"s1ap"])
+    if requestType in [mt.s1_setup_request_target.name,mt.handover_request_acknowledge.name,mt.handover_notify.name]:
+        send_url = "http://"+str(config_file["s1ap_target"]["ignite_ip"])+":"+str(config_file["s1ap_target"]["tc_port"])+"/sendMessagesToProxy"
+        send_response = requests.post(url["send_url"], json=[None,S1APCTXDATA,"s1ap"])
+    else:
+        send_url = url["send_url"]
+
+    send_response = requests.post(send_url, json=[s1apData,S1APCTXDATA,"s1ap"])
     igniteLogger.logger.info(f"URL response for send s1ap data : {str(send_response)}")
-    
+
 def setContextData(s1apMsg,requestType):
     global IMSI
     enb_ue_s1ap_id, enb_ue_s1ap_id_present = icu.getKeyValueFromDict(s1apMsg, "ENB-UE-S1AP-ID")
-    
+
     if requestType==mt.attach_request.name or requestType==mt.attach_request_guti.name:
         if S1APCTXDATA.get(enb_ue_s1ap_id,None)==None:
             key = IMSI
@@ -196,19 +226,31 @@ def setContextData(s1apMsg,requestType):
 
     elif  requestType==mt.identity_request.name:
         mme_ue_s1ap_id, mme_ue_s1ap_id_present = icu.getKeyValueFromDict(s1apMsg, "MME-UE-S1AP-ID")
-        S1APCTXDATA[enb_ue_s1ap_id][requestType]={"mme_ue_s1ap_id":mme_ue_s1ap_id}       
+        S1APCTXDATA[enb_ue_s1ap_id][requestType]={"mme_ue_s1ap_id":mme_ue_s1ap_id}
 
     elif requestType==mt.attach_accept.name:
         guti_list=nu.getGuti(s1apMsg)
         m_tmsi, m_tmsi_present = icu.getKeyValueFromDict(s1apMsg, "m_tmsi")
         mme_code, mme_code_present = icu.getKeyValueFromDict(s1apMsg, "mme_code")
-        S1APCTXDATA[IMSI][requestType]={"guti_list":guti_list,"m_tmsi":m_tmsi,"mme_code":mme_code}
+        tai_list, tai_list_present = icu.getKeyValueFromDict(s1apMsg,"tracking_area_identity_list")
+        selected_tai = taiEcgiTohex(tai_list)
+        S1APCTXDATA[IMSI][requestType]={"guti_list":guti_list,"m_tmsi":m_tmsi,"mme_code":mme_code,"tai_dict":selected_tai}
 
     elif requestType == mt.initial_context_setup_response.name:
         transport_layer_address,transport_layer_address_present = icu.getKeyValueFromDict(s1apMsg,"transportLayerAddress")
         gtp_teid,gtp_teid_present = icu.getKeyValueFromDict(s1apMsg,"gTP-TEID")
         S1APCTXDATA[IMSI][requestType]={"transport_layer_address":transport_layer_address,"gtp_teid":int(gtp_teid,16)}
 
+    elif requestType == mt.handover_request_acknowledge.name:
+        transport_layer_address,transport_layer_address_present = icu.getKeyValueFromDict(s1apMsg,"transportLayerAddress")
+        gtp_teid,gtp_teid_present = icu.getKeyValueFromDict(s1apMsg,"gTP-TEID")
+        S1APCTXDATA[IMSI][mt.initial_context_setup_response.name]={"transport_layer_address":transport_layer_address,"gtp_teid":int(gtp_teid,16)}
+
+    elif requestType == mt.erab_modification_indication.name:
+        transport_layer_address,transport_layer_address_present = icu.getKeyValueFromDict(s1apMsg,"transportLayerAddress")
+        gtp_teid, gtp_teid_present = icu.getKeyValueFromDict(s1apMsg, "dL-GTP-TEID")
+        S1APCTXDATA[IMSI][mt.initial_context_setup_response.name] = {"transport_layer_address": transport_layer_address,"gtp_teid": int(gtp_teid, 16)}
+    
     elif requestType==mt.service_request.name:
         S1APCTXDATA[IMSI][requestType]={"enb_ue_s1ap_id":enb_ue_s1ap_id}
 
@@ -218,19 +260,25 @@ def setContextData(s1apMsg,requestType):
             S1APCTXDATA[enb_ue_s1ap_id][requestType]={"mme_ue_s1ap_id":mme_ue_s1ap_id}
         else:
             S1APCTXDATA[IMSI][requestType]={"mme_ue_s1ap_id":mme_ue_s1ap_id}
-            
+
     elif requestType == mt.esm_information_response.name:
         apn , apn_present = icu.getKeyValueFromDict(s1apMsg, "apn_esm")
         S1APCTXDATA[IMSI][requestType]={"apn":apn}
 
     igniteLogger.logger.info(f"s1ap context data : {S1APCTXDATA}")
 
-           
+
 def updateMessageFromContextData(s1apMsg,requestType):
     global IMSI
 
     if requestType==mt.detach_request.name:
         nu.setGuti(S1APCTXDATA[IMSI][mt.attach_accept.name]["guti_list"],s1apMsg)
+
+    if requestType==mt.tau_request.name:
+        nu.setGuti(S1APCTXDATA[IMSI][mt.attach_accept.name]["guti_list"],s1apMsg)
+
+    elif requestType==mt.handover_required.name:
+        icu.updateKeyValueInDict(s1apMsg, "selected-TAI", S1APCTXDATA[IMSI][mt.attach_accept.name]["tai_dict"])
 
     if S1APCTXDATA[IMSI].get(mt.service_request.name,None)!=None:
         icu.updateKeyValueInDict(s1apMsg, "ENB-UE-S1AP-ID", S1APCTXDATA[IMSI][mt.service_request.name]["enb_ue_s1ap_id"])
@@ -277,13 +325,13 @@ def validateS1apIE(requestType,s1apMsg):
                 if requestType == mt.identity_request.name:
                     data_to_compare=S1APCTXDATA[icu.getKeyValueFromDict(s1apMsg,"ENB-UE-S1AP-ID")[0]]
                 else:
-                    data_to_compare=S1APCTXDATA[IMSI]          
+                    data_to_compare=S1APCTXDATA[IMSI]
             elif data_to_compare_path[0] == "diameterContextData":
                 data_to_compare = diameter_data
 
             elif data_to_compare_path[0] == "gtpContextData":
                 data_to_compare = gtp_data
-                
+
             data_to_compare_value,data_to_compare_value_present=icu.getKeyValueFromDict(data_to_compare[data_to_compare_path[1]],data_to_compare_path[2])
 
             if ie_to_validate == "transportLayerAddress":
@@ -301,5 +349,6 @@ def validateS1apIE(requestType,s1apMsg):
             else:
                 igniteLogger.logger.error(f"request/response name:{requestType} ,IEname:{ie_to_validate} ,expected value:{data_to_compare_value} ,received value:{ie_to_validate_value}")
                 raise icu.ValidationException(f"***** ***** *****\nERROR :: Validation fail \nrequest/response name:{requestType} ,IEname:{ie_to_validate} ,expected value:{data_to_compare_value} ,received value:{ie_to_validate_value}***** ***** *****")
+
 
 

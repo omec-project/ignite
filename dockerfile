@@ -3,7 +3,7 @@ ARG BASE_OS=ubuntu:18.04
 FROM quay.io/stackanetes/kubernetes-entrypoint:v0.3.1 as kube-entrypoint
 FROM $BASE_OS
 
-COPY ./install_rundeps.sh _sctp.cpython-36m-x86_64-linux-gnu.so /root/
+COPY ./install_rundeps.sh _sctp.cpython-36m-x86_64-linux-gnu.so per.py /root/
 WORKDIR /root
 RUN ./install_rundeps.sh
 WORKDIR /opt/ignite

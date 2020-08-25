@@ -33,9 +33,6 @@ TC1: LTE 4G Release Access Bearer Response Timeout
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_rel_ab_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    rel_ab_resp_timeout
-    ${releaseABRespTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_rel_ab_resp_timeout}
-    ${releaseABRespTimeoutCountBf}    Convert to Integer    ${releaseABRespTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -73,12 +70,6 @@ TC1: LTE 4G Release Access Bearer Response Timeout
     Send S1ap    ue_context_release_req    ${ueContextReleaseRequest}    ${enbUeS1APId}    #eNB sends UE Context Release Request to MME
     ${releaseBearerRequest}    Receive GTP    #Release Bearer Request received from MME
     Sleep    5s
-    ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
-    Log    ${procStatOutAfTimeout}
-    ${releaseABRespTimeoutCounAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfTimeout}    ${num_of_rel_ab_resp_timeout}
-    ${releaseABRespTimeoutCounAfTimeout}    Convert to Integer    ${releaseABRespTimeoutCounAfTimeout}
-    ${incrementreleaseABRespTimeoutCountAfTimeout}    Evaluate    ${releaseABRespTimeoutCountBf}+1
-    Should Be Equal    ${incrementreleaseABRespTimeoutCountAfTimeout}    ${releaseABRespTimeoutCounAfTimeout}    Expected Release Access Bearer Response Timeout Count: ${incrementreleaseABRespTimeoutCountAfTimeout}, but Received Release Access Bearer Response Timeout Count: ${releaseABRespTimeoutCounAfTimeout}    values=False
     Send GTP    release_bearer_response    ${releaseBearerResponse}    ${gtpMsgHeirarchy_tag4}    #Send Release Bearer Response to MME
     ${intlCntxReleaseCmd}    Receive S1ap    #Initial Context Release Command received from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME    #eNB sends UE Context Release Complete to MME

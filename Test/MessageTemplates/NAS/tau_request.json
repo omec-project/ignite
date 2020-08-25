@@ -1,0 +1,62 @@
+{
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "security_header_type": "plain_nas_message_not_security_protected",
+  "protocol_discriminator": "eps_mobility_management_messages",
+  "mobility_mgmt_message_type": "tracking_area_update_request",
+  "eps_update_type": {
+    "eps_update_type_value": "ta_updating",
+    "active_flag_tau": "no_bearer_establishment_requested"
+  },
+  "nas_key_set_identifier": 7,
+  "eps_mobile_identity_guti_tau_request": {
+    "guti_octet3_high_nibble": 15,
+    "odd_even_indication": 0,
+    "type_of_identity": 6,
+    "identity_digit_1": 15,
+    "mcc_digit_2": 0,
+    "mcc_digit_1": 2,
+    "mnc_digit_3": 15,
+    "mcc_digit_3": 8,
+    "mnc_digit_2": 2,
+    "mnc_digit_1": 9,
+    "mme_group_id": 1,
+    "mme_code": 2,
+    "m_tmsi": 1
+  },
+  "tracking_area_identity": {
+    "mcc_digit_2": 0,
+    "mcc_digit_1": 2,
+    "mnc_digit_3": 0,
+    "mcc_digit_3": 8,
+    "mnc_digit_2": 2,
+    "mnc_digit_1": 9,
+    "tac": 4097
+  },
+  "eps_bearer_context_status": {
+    "ebi0": "ACTIVE",
+    "ebi1": "ACTIVE",
+    "ebi2": "ACTIVE",
+    "ebi3": "ACTIVE",
+    "ebi4": "ACTIVE",
+    "ebi5": "ACTIVE",
+    "ebi6": "ACTIVE",
+    "ebi7": "ACTIVE",
+    "ebi8": "ACTIVE",
+    "ebi9": "ACTIVE",
+    "ebi10": "ACTIVE",
+    "ebi11": "ACTIVE",
+    "ebi12": "ACTIVE",
+    "ebi13": "ACTIVE",
+    "ebi14": "ACTIVE",
+    "ebi15": "ACTIVE"
+  }
+}

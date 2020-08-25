@@ -19,6 +19,7 @@ limitations under the License.
 {{- $configJsonRobo := index .Values.config.ignite.cfgFiles "resources.MMEConfig.txt" }}
 {{- $configJsonGtp := index $configJson "gtp" }}
 {{- $configJsonS1ap := index $configJson "s1ap" }}
+{{- $configJsonS1apTarget := index $configJson "s1ap_target" }}
 {{- $configJsonDiameter := index $configJson "diameter" }}
 ---
 apiVersion: apps/v1
@@ -141,6 +142,28 @@ spec:
         command: ["bash", "-xc"]
         args:
         - /opt/ignite/scripts/ignite-run.sh s1ap
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.ignite | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/ignite/scripts/ignite-run.sh
+          subPath: ignite-run.sh
+        - name: shared-data
+          mountPath: /opt/ignite/Dev/Common/shared
+      - name: s1aptarget
+        image: {{ .Values.images.tags.ignite | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        stdin: true
+        tty: true
+        ports:
+        - containerPort: {{index $configJsonS1apTarget "ignite_port"}}
+          protocol: SCTP
+        - containerPort: {{index $configJsonS1apTarget "tc_port"}}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/ignite/scripts/ignite-run.sh s1aptarget
       {{- if .Values.resources.enabled }}
         resources:
 {{ toYaml .Values.resources.ignite | indent 10 }}

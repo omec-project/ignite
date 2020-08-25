@@ -19,8 +19,11 @@ REQUEST_TYPE = {
     "ATTACH_REQUEST_GUTI": "attach_request_guti",
     "AUTHENTICATION_REQUEST": "authentication_request",
     "AUTHENTICATION_RESPONSE": "authentication_response",
+    "AUTHENTICATION_REJECT": "authentication_reject",
+    "AUTHENTICATION_FAILURE": "authentication_failure",
     "SECURITY_MODE_COMMAND": "security_mode_command",
     "SECURITY_MODE_COMPLETE": "security_mode_complete",
+    "SECURITY_MODE_REJECT": "security_mode_reject",
     "ATTACH_ACCEPT": "attach_accept",
     "ATTACH_COMPLETE":"attach_complete",
     "DETACH_REQUEST_FROM_UE": "detach_request_from_ue",
@@ -29,5 +32,9 @@ REQUEST_TYPE = {
     "ESM_INFORMATION_REQUEST": "esm_information_request",
     "ESM_INFORMATION_RESPONSE": "esm_information_response",
     "IDENTITY_RESPONSE": "identity_response",
-    "SECURITY_MODE_REJECT": "security_mode_reject"
+    "TRACKING_AREA_UPDATE_REQUEST": "tracking_area_update_request",
+    "TRACKING_AREA_UPDATE_ACCEPT": "tracking_area_update_accept",
+    "TRACKING_AREA_UPDATE_COMPLETE": "tracking_area_update_complete",
+    "TRACKING_AREA_UPDATE_REJECT": "tracking_area_update_reject"
+
 }

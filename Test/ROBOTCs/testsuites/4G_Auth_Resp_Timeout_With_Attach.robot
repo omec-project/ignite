@@ -33,9 +33,6 @@ TC1: LTE 4G Auth Response Delay With Attach
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_auth_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    auth_resp_timeout
-    ${authRespTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_auth_resp_timeout}
-    ${authRespTimeoutCountBf}    Convert to Integer    ${authRespTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -43,13 +40,6 @@ TC1: LTE 4G Auth Response Delay With Attach
     Sleep    5s
     ${intlCntxReleaseCmd}    Receive S1ap    #Initial Context Release Command received from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME
-    Sleep    1s
-    ${procStatAiaTimeOut}    ${stderr}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s    return_stderr=True
-    Log    ${procStatAiaTimeOut}
-    ${authRespTimeoutCountAf}    Get GRPC Stats Response Count    ${procStatAiaTimeOut}    ${num_of_auth_resp_timeout}
-    ${authRespTimeoutCountAf}    Convert to Integer    ${authRespTimeoutCountAf}
-    ${incrementauthRespTimeoutCount}    Evaluate    ${authRespTimeoutCountBf}+1
-    Should Be Equal    ${incrementauthRespTimeoutCount}    ${authRespTimeoutCountAf}    Expected authResp Count: ${incrementauthRespTimeoutCount}, but Received authResp Count: ${authRespTimeoutCountAf}    values=False
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -78,6 +68,12 @@ TC1: LTE 4G Auth Response Delay With Attach
     Log    ${mobContextAftExec}
     Should Contain    ${mobContextAftExec}    ${IMSI_str}    Expected IMSI: ${IMSI_str}, but Received ${mobContextAftExec}    values=False
     Should Contain    ${mobContextAftExec}    EpsAttached    Expected UE State: EpsAttached, but Received ${mobContextAftExec}    values=False
+    ${procStatOutAfAttach}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
+    Log    ${procStatOutAfAttach}
+    ${ueCountAfterAttach}    Get GRPC Stats Response Count    ${procStatOutAfAttach}    ${num_of_subscribers_attached}
+    ${ueCountAfterAttach}    Convert to Integer    ${ueCountAfterAttach}
+    ${incrementUeCount}    Evaluate    ${ueCountBeforeAttach}+1
+    Should Be Equal    ${incrementUeCount}    ${ueCountAfterAttach}    Expected UE Attach Count: ${incrementUeCount}, but Received UE Attach Count: ${ueCountAfterAttach}    values=False
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
     ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME

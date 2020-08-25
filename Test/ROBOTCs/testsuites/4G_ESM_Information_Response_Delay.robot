@@ -33,9 +33,6 @@ TC1: LTE 4G enodeB ESM Information Response Delay
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_esm_info_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    esm_info_resp_timeout
-    ${esmInfoRespTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_esm_info_resp_timeout}
-    ${esmInfoRespTimeoutCountBf}    Convert to Integer    ${esmInfoRespTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -47,12 +44,7 @@ TC1: LTE 4G enodeB ESM Information Response Delay
     Sleep    5s
     ${intlCntxReleaseCmd}    Receive S1ap    #Initial Context Release Command received from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME    #eNB sends UE Context Release Complete to MME
-    ${procStatTimeOut}    ${stderr}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s    return_stderr=True
-    Log    ${procStatTimeOut}
-    ${esmInfoRespTimeoutCountAf}    Get GRPC Stats Response Count    ${procStatTimeOut}    ${num_of_esm_info_resp_timeout}
-    ${esmInfoRespTimeoutCountAf}    Convert to Integer    ${esmInfoRespTimeoutCountAf}
-    ${incrementEsmInfoRespTimeoutCount}    Evaluate    ${esmInfoRespTimeoutCountBf}+1
-    Should Be Equal    ${incrementEsmInfoRespTimeoutCount}    ${esmInfoRespTimeoutCountAf}    Expected ESM Info resp Count: ${incrementEsmInfoRespTimeoutCount}, but Received ESM Info resp Count: ${esmInfoRespTimeoutCountAf}    values=False
+    
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -81,6 +73,12 @@ TC1: LTE 4G enodeB ESM Information Response Delay
     Log    ${mobContextAftExec}
     Should Contain    ${mobContextAftExec}    ${IMSI_str}    Expected IMSI: ${IMSI_str}, but Received ${mobContextAftExec}    values=False
     Should Contain    ${mobContextAftExec}    EpsAttached    Expected UE State: EpsAttached, but Received ${mobContextAftExec}    values=False
+    ${procStatOutAfAttach}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
+    Log    ${procStatOutAfAttach}
+    ${ueCountAfterAttach}    Get GRPC Stats Response Count    ${procStatOutAfAttach}    ${num_of_subscribers_attached}
+    ${ueCountAfterAttach}    Convert to Integer    ${ueCountAfterAttach}
+    ${incrementUeCount}    Evaluate    ${ueCountBeforeAttach}+1
+    Should Be Equal    ${incrementUeCount}    ${ueCountAfterAttach}    Expected UE Attach Count: ${incrementUeCount}, but Received UE Attach Count: ${ueCountAfterAttach}    values=False
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
     ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME

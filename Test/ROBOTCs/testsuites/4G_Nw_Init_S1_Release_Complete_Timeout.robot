@@ -35,9 +35,6 @@ TC1: LTE 4G S1 Release Complete Timeout
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_ue_ctxt_rel_comp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    s1_rel_comp_timeout
-    ${ueCtxtreleaseTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_ue_ctxt_rel_comp_timeout}
-    ${ueCtxtreleaseTimeoutCountBf}    Convert to Integer    ${ueCtxtreleaseTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -89,9 +86,5 @@ TC1: LTE 4G S1 Release Complete Timeout
     ${ueCountAfterDetach}    Get GRPC Stats Response Count    ${procStatOutAfDetach}    ${num_of_subscribers_attached}
     ${ueCountAfterDetach}    Convert to Integer    ${ueCountAfterDetach}
     Should Be Equal    ${ueCountBeforeAttach}    ${ueCountAfterDetach}    Expected UE Detach Count: ${ueCountBeforeAttach}, but Received UE Detach Count: ${ueCountAfterDetach}    values=False
-    ${numUeCtxtRelCompTimeout}    Get GRPC Stats Response Count    ${procStatOutAfDetach}    ${num_of_ue_ctxt_rel_comp_timeout}
-    ${numUeCtxtRelCompTimeout}    Convert to Integer    ${numUeCtxtRelCompTimeout}
-    ${inc_numUeCtxtRelCompTimeout}    Evaluate    ${ueCtxtreleaseTimeoutCountBf}+1
-    Should Be Equal    ${inc_numUeCtxtRelCompTimeout}    ${numUeCtxtRelCompTimeout}    Expected num ue ctxt rel comp timeout After Detach: ${inc_numUeCtxtRelCompTimeout}, but Received num ue ctxt rel comp timeout After Detach: ${numUeCtxtRelCompTimeout}    values=False
     [Teardown]    Attach Test Teardown
     

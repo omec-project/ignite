@@ -18,12 +18,24 @@ import os
 import sys, requests
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'Dev', 'Common'))
 import igniteCommonUtil as icu
+import sshUtils as su
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..','ROBOTCs','keywords','systemkeywords'))
+import dictOperations as do
 
 clr_flag=False
+ssh_client = None
 
 try:
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'MessageTemplates', 'Util'))
     from loadMessage import *
+
+    command = "export LD_LIBRARY_PATH=" + mme_lib_path + " && " + mme_grpc_client_path + "/mme-grpc-client mme-app show procedure-stats"
+
+    ssh_client = su.sshConnect(mmeIP, mme_username, mme_password, "ssh-password", timeout=10, port=None)
+    proc_stat = su.executeCommand(command,ssh_client)
+
+    ue_count_before_attach = int(do.splitProcStats(proc_stat, stats_type["subs_attached"]))
 
     #required message templates
     initial_ue_guti = json.loads(open('../MessageTemplates/S1AP/initial_uemessage_guti.json').read())
@@ -76,7 +88,7 @@ try:
     gs.sendGtp('create_session_response', create_session_response, msg_hierarchy)
 
     igniteLogger.logger.info("\n---------------------------------------\nInitial Context Setup Request received from MME\n---------------------------------------")
-    s1.receiveS1ap()
+    init_ctxt_setup_req=s1.receiveS1ap()
 
     igniteLogger.logger.info("\n---------------------------------------\nSend Initial Context Setup Response to MME\n---------------------------------------")
     s1.sendS1ap('initial_context_setup_response', initialcontextsetup_response, enbues1ap_id)
@@ -99,6 +111,11 @@ try:
 
     time.sleep(2)
 
+    mme_ue_S1AP_id , mme_ue_S1AP_id_present = icu.getKeyValueFromDict(init_ctxt_setup_req, "MME-UE-S1AP-ID")
+    mob_ctxt_command = "export LD_LIBRARY_PATH=" + mme_lib_path + " && " + mme_grpc_client_path + "/mme-grpc-client mme-app show mobile-context "+str(mme_ue_S1AP_id)
+    mob_ctxt_af_attach = su.executeCommand(mob_ctxt_command,ssh_client)
+    icu.mobileContextValidation(str(imsi),mob_ctxt_af_attach)
+
     igniteLogger.logger.info("\n---------------------------------------\nSend Detach Request to MME\n---------------------------------------")
     s1.sendS1ap('detach_request', uplinknastransport_detach_request, enbues1ap_id, nas_detach_request)
 
@@ -110,7 +127,7 @@ try:
 
     igniteLogger.logger.info("\n---------------------------------------\nSend Purge Response to MME\n---------------------------------------")
     ds.sendS6aMsg('purge_response', msg_data_pua, imsi)
-
+    
     igniteLogger.logger.info("\n---------------------------------------\nSend Delete Session Response to MME\n---------------------------------------")
     gs.sendGtp('delete_session_response', delete_session_response, msg_hierarchy)
 
@@ -127,7 +144,7 @@ try:
 
 
     igniteLogger.logger.info ("\n---------------------------------------\nSend Attach Request to MME\n---------------------------------------")
-    s1.sendS1ap('attach_request_guti',initial_ue_guti, enbues1ap_id, nas_attach_request_guti)
+    s1.sendS1ap('attach_request_guti',initial_ue_guti, enbues1ap_id, nas_attach_request_guti,guti_invalid)
 
     igniteLogger.logger.info ("\n---------------------------------------\nIdentity Request from MME\n---------------------------------------")
     s1.receiveS1ap()
@@ -143,7 +160,7 @@ try:
 
     # Reattach
     igniteLogger.logger.info ("\n---------------------------------------\nSend Attach Request to MME\n---------------------------------------")
-    s1.sendS1ap('attach_request_guti',initial_ue_guti, enbues1ap_id, nas_attach_request_guti)
+    s1.sendS1ap('attach_request_guti',initial_ue_guti, enbues1ap_id, nas_attach_request_guti,guti_invalid)
 
     igniteLogger.logger.info ("\n---------------------------------------\nIdentity Request from MME\n---------------------------------------")
     s1.receiveS1ap()
@@ -208,12 +225,23 @@ try:
 
     time.sleep(2)
 
+    proc_stat_af_attach = su.executeCommand(command,ssh_client)
+
+    ue_count_after_attach = int(do.splitProcStats(proc_stat_af_attach, stats_type["subs_attached"]))
+    icu.grpcValidation(ue_count_before_attach + 1, ue_count_after_attach, "Number of Subs Attached")
+
     igniteLogger.logger.info ("\n---------------------------------------\nSend Detach Request to MME\n---------------------------------------")
     s1.sendS1ap('detach_request', uplinknastransport_detach_request, enbues1ap_id, nas_detach_request)
 
-    igniteLogger.logger.info ("\n---------------------------------------\nDelete Session Request received from MME\n---------------------------------------")
+    igniteLogger.logger.info("\n---------------------------------------\nPurge Request received from MME\n---------------------------------------")
+    ds.receiveS6aMsg()
+
+    igniteLogger.logger.info("\n---------------------------------------\nDelete Session Request received from MME\n---------------------------------------")
     gs.receiveGtp()
 
+    igniteLogger.logger.info("\n---------------------------------------\nSend Purge Response to MME\n---------------------------------------")
+    ds.sendS6aMsg('purge_response', msg_data_pua, imsi)
+    
     igniteLogger.logger.info ("\n---------------------------------------\nSend Delete Session Response to MME\n---------------------------------------")
     gs.sendGtp('delete_session_response', delete_session_response, msg_hierarchy)
 
@@ -225,6 +253,12 @@ try:
 
     igniteLogger.logger.info ("\n---------------------------------------\neNB sends UE Context Release Complete to MME\n---------------------------------------")
     s1.sendS1ap('uecontextrelease_complete', uecontextrelease_complete,enbues1ap_id)
+
+    time.sleep(1)
+    proc_stat_af_detach = su.executeCommand(command,ssh_client)
+
+    ue_count_after_detach = int(do.splitProcStats(proc_stat_af_detach, stats_type["subs_attached"]))
+    icu.grpcValidation(ue_count_before_attach, ue_count_after_detach, "Number of Subs Attached After Detach")
 
     print("\n-------------------------------------\nGUTI Attach Detach Execution Successful\n---------------------------------------")
 	

@@ -9,7 +9,9 @@
   "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
   "_comment": "See the License for the specific language governing permissions and",
   "_comment": "limitations under the License.",
-  "msgHeirarchy": ["Diameter"],
+  "msgHeirarchy": [
+    "Diameter"
+  ],
   "msgDetails": {
     "diameter": {
       "protocol": "diameter",

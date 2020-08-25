@@ -33,9 +33,6 @@ TC1: LTE 4G UE Security Mode Delay
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_sec_mode_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    sec_mode_resp_timeout
-    ${secModeRespTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_sec_mode_resp_timeout}
-    ${secModeRespTimeoutCountBf}    Convert to Integer    ${secModeRespTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -45,13 +42,8 @@ TC1: LTE 4G UE Security Mode Delay
     Sleep    5s
     ${intlCntxReleaseCmd}    Receive S1ap    #Initial Context Release Command received from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME
-    ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
-    Log    ${procStatOutAfTimeout}
-    ${secModeRespTimeoutCountAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfTimeout}    ${num_of_sec_mode_resp_timeout}
-    ${secModeRespTimeoutCountAfTimeout}    Convert to Integer    ${secModeRespTimeoutCountAfTimeout}
-    ${incrementsecModeRespTimeoutCountAfTimeout}    Evaluate    ${secModeRespTimeoutCountBf}+1
-    Should Be Equal    ${incrementsecModeRespTimeoutCountAfTimeout}    ${secModeRespTimeoutCountAfTimeout}    Expected Security Mode Response Timeout Count: ${incrementsecModeRespTimeoutCountAfTimeout}, but Security Mode Response Timeout Count: ${secModeRespTimeoutCountAfTimeout}    values=False
-    Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
+    
+	Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
     ${authReqResp}    Receive S1ap    #Auth Request received from MME

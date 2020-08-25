@@ -33,9 +33,6 @@ TC1: LTE 4G Service Request Modify Bearer Response Timeout
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_mb_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    mb_resp_timeout
-    ${mbResponseTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_mb_resp_timeout}
-    ${mbResponseTimeoutCountBf}    Convert to Integer    ${mbResponseTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -90,12 +87,6 @@ TC1: LTE 4G Service Request Modify Bearer Response Timeout
     ${downlinkDataNotificationFailure}    Receive GTP    #DDN Failure received from MME
     ${intlCntxReleaseCmd}    Receive S1ap    #Initial Context Release Command received from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME    #eNB sends UE Context Release Complete to MME
-    ${procStatOutAfTimeout}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s
-    Log    ${procStatOutAfTimeout}
-    ${mbResponseTimeoutCountAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfTimeout}    ${num_of_mb_resp_timeout}
-    ${mbResponseTimeoutCountAfTimeout}    Convert to Integer    ${mbResponseTimeoutCountAfTimeout}
-    ${incrementmbResponseTimeoutCountAfTimeout}    Evaluate    ${mbResponseTimeoutCountBf}+1
-    Should Be Equal    ${incrementmbResponseTimeoutCountAfTimeout}    ${mbResponseTimeoutCountAfTimeout}    Expected Modify Bearer Response Timeout Count: ${incrementmbResponseTimeoutCountAfTimeout}, but Received Modify Bearer Response Timeout Count: ${mbResponseTimeoutCountAfTimeout}    values=False
     Send GTP    downlink_data_notification    ${downlinkDataNotification}    ${gtpMsgHeirarchy_tag5}    #Send DDN to MME
     ${pagingReq}    Receive S1ap    #Paging Request received from MME
     Send S1ap    service_request    ${initUeServiceReq}    ${enbUeS1APId}    ${nasServiceRequest}    #Send Service Request to MME

@@ -35,22 +35,12 @@ TC1: LTE 4G Diameter Aia Delay
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_aia_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    aia_timeout
-    ${aiaTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatbfExec}    ${num_of_aia_timeout}
-    ${aiaTimeoutCountBf}    Convert to Integer    ${aiaTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Sleep    5s
     ${attachReject}    Receive S1ap    #Attach Reject received from MME
     ${intlCntxReleaseCmd}    Receive S1ap    #Initial Context Release Command received from MME
     Send S1ap    ue_context_release_cmp    ${ueContextReleaseCmp}    ${enbUeS1APId}    #eNB sends UE Context Release Complete to MME
-    Sleep    1s 
-    ${procStatAiaTimeOut}    ${stderr}    Execute Command    export LD_LIBRARY_PATH=${openMmeLibPath} && ${mmeGrpcClientPath}/mme-grpc-client mme-app show procedure-stats    timeout=30s    return_stderr=True
-    Log    ${procStatAiaTimeOut}
-    ${aiaTimeoutCountAf}    Get GRPC Stats Response Count    ${procStatAiaTimeOut}    ${num_of_aia_timeout}
-    ${aiaTimeoutCountAf}    Convert to Integer    ${aiaTimeoutCountAf}
-    ${incrementaiaTimeoutCount}    Evaluate    ${aiaTimeoutCountBf}+1
-    Should Be Equal    ${incrementaiaTimeoutCount}    ${aiaTimeoutCountAf}    Expected aia Count: ${incrementaiaTimeoutCount}, but Received AIA Count: ${aiaTimeoutCountAf}    values=False
     
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME

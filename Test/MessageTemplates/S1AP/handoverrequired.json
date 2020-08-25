@@ -1,9 +1,9 @@
 {
-  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Copyright (c) 2020, Infosys Ltd.",
   "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
   "_comment": "you may not use this file except in compliance with the License.",
   "_comment": "You may obtain a copy of the License at",
-  "_comment": "       http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
   "_comment": "Unless required by applicable law or agreed to in writing, software",
   "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
   "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
@@ -12,11 +12,11 @@
   "NAS-MESSAGE": {},
   "S1AP-PDU": {
     "initiatingMessage": {
-      "procedure": 0,
+      "procedureCode": 0,
       "criticality": 1,
       "value": {
         "HandoverRequired": {
-          "ProtocallIEs": [
+          "protocolIEs": [
             {
               "id": 0,
               "criticality": 1,
@@ -26,7 +26,7 @@
             },
             {
               "id": 8,
-              "citicality": 1,
+              "criticality": 1,
               "value": {
                 "ENB-UE-S1AP-ID": 0
               }
@@ -43,7 +43,7 @@
               "criticality": 0,
               "value": {
                 "Cause": {
-                  "CauseRadioNetwork": 33
+                  "radioNetwork": 33
                 }
               }
             },
@@ -51,33 +51,34 @@
               "id": 4,
               "criticality": 0,
               "value": {
-                "TargetID": [
-                  {
-                    "targeteNB-ID": {
-                      "id": 59,
-                      "criticality": 0,
-                      "value": {
-                        "global-ENB-ID": {
-                          "pLMNidentity": "02f829",
-                          "eNB-ID": {
-                            "macroENB-ID": "070801"
-                          }
-                        },
-                        "selected-TAI": {
-                          "pLMNidentity": "02f829",
-                          "tAC": "1002"
-                        }
+                "TargetID": {
+                  "targeteNB-ID": {
+                    "global-ENB-ID": {
+                      "pLMNidentity": "02f829",
+                      "eNB-ID": {
+                        "macroENB-ID": "070810"
                       }
+                    },
+                    "selected-TAI": {
+                      "pLMNidentity": "02f829",
+                      "tAC": "1001"
                     }
                   }
-                ]
+                }
+              }
+            },
+            {
+              "id": 79,
+              "criticality": 1,
+              "value": {
+                "Direct-Forwarding-Path-Availability": 0
               }
             },
             {
               "id": 104,
               "criticality": 1,
               "value": {
-                "Source-ToTarget-TransparentContainer": "4f3bc21e"
+                "Source-ToTarget-TransparentContainer": "816a0081540e404ac9980063010406180bf0d1bf91ff8dfc8ffc6fe47fe37f23ff1bf91ff8dfc8ffc6fe47fdff3ffa6a208008c870ca74a92207099c00000005e30101000a8000000062880109400427460115c40000390caab541a955aa22920c112000600054384271cfbe669aed97284e39f7ccd35db2f509c73ef99a6bb65e2138e7df334d76cb73d011bc410a438f5e9a19a6bb65b003203a038037a94c00001a496f489a3660a830a1c48d33620f33035758a6601404e291810012161031f1ab3432b2596620040009801bbc8c6620040009801a3c2c66200400098010000035b00f51c03307638055340332760bea25f1c2180bdf61af8e12e05e7cc01f23f05123f860c10001f032007900090c00009c0010043604000a1311a404c4c800006434a0a180630044828c2e284a97ac102c794000501000010050783eaaf03801807f720b070ac0262402400014480228dc81033be22000134108000018000013f18400001900800fff"
               }
             }
           ]
@@ -86,4 +87,3 @@
     }
   }
 }
-

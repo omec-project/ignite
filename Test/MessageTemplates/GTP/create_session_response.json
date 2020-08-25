@@ -1,147 +1,142 @@
 {
-	"_comment": "Copyright (c) 2019, Infosys Ltd.",
-	"_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
-    "_comment": "you may not use this file except in compliance with the License.",
-    "_comment": "You may obtain a copy of the License at",
-    "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
-    "_comment": "Unless required by applicable law or agreed to in writing, software",
-    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
-    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
-    "_comment": "See the License for the specific language governing permissions and",
-    "_comment": "limitations under the License.",
-    "msgHeirarchy": ["gtpv2"],
-    "msgDetails": 
-	{
-        "gtpv2": 
-	{
-        "protocol": "gtpv2",
-        "msg": 
-	{
-            "flags": "48",
-            "message_type": 33,
-            "teid": 1,
-            "sequence_number": 1,
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "msgHeirarchy": [
+    "gtpv2"
+  ],
+  "msgDetails": {
+    "gtpv2": {
+      "protocol": "gtpv2",
+      "msg": {
+        "flags": "48",
+        "message_type": 33,
+        "teid": 1,
+        "sequence_number": 1,
+        "spare": 0,
+        "information_elements": [
+          {
+            "ie_type": 2,
             "spare": 0,
-            "information_elements":
-	    [
-                {
-                    "ie_type": 2,
-                    "spare": 0,
-                    "instance": 0,
-		    "cause_value": 16,
-		    "spare": 0,
-		    "pce": 0,
-		    "pbe": 0,
-		    "cs": 0
-                },
-		{
-		    "ie_type": 87,
-                    "spare": 0,
-		    "instance": 0,
-                    "ipv4present": 1,
-                    "ipv6present": 0,
-		    "interface_type": 10,
-                    "teid_gre_key": 566,
-                    "ipv4address": "127.0.0.1"
-                },
-		{
-		    "ie_type": 87,
-                    "spare": 0,
-		    "instance": 1,
-                    "ipv4present": 1,
-                    "ipv6present": 0,
-		    "interface_type": 7,
-                    "teid_gre_key": 566,
-                    "ipv4address": "127.0.0.1"
-                },
-		{
-		    "ie_type": 79,
-                    "spare": 0,
-		    "instance": 0,
-		    "pdn_type" : 1,
-		    "prefix_and_ipv4address": "106.192.63.121"
-                },
-		{
-		    "ie_type": 127,
-                    "spare": 0,
-		    "instance": 0,
-		    "restriction_value": 1
-                },
-		{
-		    "ie_type": 93,
-                    "spare": 0,
-		    "instance": 0,
-		    "bearer_context":
-				    [
-				        {
-				            "ie_type": 73,
-					    "spare": 0,
-					    "instance": 0,
-					    "spare": 0,
-					    "eps_bearer_id": 5
-				        },
-				        {
-					      "ie_type": 2,
-					      "spare": 0,
-					      "instance": 0,
-					      "cause_value": 16,						  
-					      "pce": 0,
-					      "pbe": 0,
-					      "cs": 0
-				        },
-					{
-					      "ie_type": 87,
-					      "spare" : 0,
-					      "instance": 0,
-					      "ipv4present": 1,
-                          		      "ipv6present": 0,
-					      "interface_type": 1,
-					      "teid_gre_key": 566,
-					      "ipv4address": "127.0.0.1"
-					 },
-					 {
-					      "ie_type": 87,
-					      "spare" : 0,
-					      "instance": 2,
-					      "ipv4present": 1,
-                          		      "ipv6present": 0,
-					      "interface_type": 5,
-					      "teid_gre_key": 566,
-					      "ipv4address": "127.0.0.1"
-					 },
-					 { 
-					       "ie_type": 80,
-					       "spare": 0,
-					       "instance": 0,
-					       "spare": 0,
-					       "pci" : 0,
-					       "pl": 1,
-					       "pvi": 0,
-					       "qci": 9,
-					       "max_bit_rate_ul": "0000000000",
-                           		       "max_bit_rate_dl": "0000000000",
-                           		       "guaranteed_bit_rate_ul": "0000000000",
-                           		       "guaranteed_bit_rate_dl": "0000000000"
-					  },
-					  {
-					       "ie_type": 94,
-					       "spare": 0,
-					       "instance": 0,
-					       "charging_id_value": 600002
-					  }
-				    ]
-				},
-				{
-					  
-					  
-				"ie_type": 78,
-			       "spare": 0,
-		       		"instance": 0,	       
-		             "pco": "8080211003000010810606060606830606060605000D0405050505"
-}
-		]					 
-		}	  			  
-	}			     					
-	}
+            "instance": 0,
+            "cause_value": 16,
+            "spare": 0,
+            "pce": 0,
+            "pbe": 0,
+            "cs": 0
+          },
+          {
+            "ie_type": 87,
+            "spare": 0,
+            "instance": 0,
+            "ipv4present": 1,
+            "ipv6present": 0,
+            "interface_type": 11,
+            "teid_gre_key": 566,
+            "ipv4address": "$SgwIpAddress"
+          },
+          {
+            "ie_type": 87,
+            "spare": 0,
+            "instance": 1,
+            "ipv4present": 1,
+            "ipv6present": 0,
+            "interface_type": 7,
+            "teid_gre_key": 566,
+            "ipv4address": "127.0.0.1"
+          },
+          {
+            "ie_type": 79,
+            "spare": 0,
+            "instance": 0,
+            "pdn_type": 1,
+            "prefix_and_ipv4address": "106.192.63.121"
+          },
+          {
+            "ie_type": 127,
+            "spare": 0,
+            "instance": 0,
+            "restriction_value": 1
+          },
+          {
+            "ie_type": 93,
+            "spare": 0,
+            "instance": 0,
+            "bearer_context": [
+              {
+                "ie_type": 73,
+                "spare": 0,
+                "instance": 0,
+                "spare": 0,
+                "eps_bearer_id": 5
+              },
+              {
+                "ie_type": 2,
+                "spare": 0,
+                "instance": 0,
+                "cause_value": 16,
+                "pce": 0,
+                "pbe": 0,
+                "cs": 0
+              },
+              {
+                "ie_type": 87,
+                "spare": 0,
+                "instance": 0,
+                "ipv4present": 1,
+                "ipv6present": 0,
+                "interface_type": 1,
+                "teid_gre_key": 566,
+                "ipv4address": "$SgwIpAddress"
+              },
+              {
+                "ie_type": 87,
+                "spare": 0,
+                "instance": 2,
+                "ipv4present": 1,
+                "ipv6present": 0,
+                "interface_type": 5,
+                "teid_gre_key": 566,
+                "ipv4address": "127.0.0.1"
+              },
+              {
+                "ie_type": 80,
+                "spare": 0,
+                "instance": 0,
+                "spare": 0,
+                "pci": 0,
+                "pl": 1,
+                "pvi": 0,
+                "qci": 9,
+                "max_bit_rate_ul": "0000000000",
+                "max_bit_rate_dl": "0000000000",
+                "guaranteed_bit_rate_ul": "0000000000",
+                "guaranteed_bit_rate_dl": "0000000000"
+              },
+              {
+                "ie_type": 94,
+                "spare": 0,
+                "instance": 0,
+                "charging_id_value": 600002
+              }
+            ]
+          },
+          {
+            "ie_type": 78,
+            "spare": 0,
+            "instance": 0,
+            "pco": "8080211003000010810606060606830606060605000D0405050505"
+          }
+        ]
+      }
+    }
+  }
 }	
 

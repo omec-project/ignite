@@ -23,7 +23,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'NAS', 'Decoder'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'NAS', 'Encoder'))
 
 asn1_file = os.path.join(os.path.dirname(__file__), 'asn1_spec.asn')
-asn1_file_decoder = os.path.join(os.path.dirname(__file__), 'asn1_spec_decoder.asn')
 asn1_obj_encoder = compile_files(asn1_file, 'per', numeric_enums=True)
-asn1_obj_decoder = compile_files(asn1_file_decoder, 'per', numeric_enums=True)
+asn1_obj_decoder = compile_files(asn1_file, 'per', numeric_enums=True)
 

@@ -99,53 +99,56 @@ def processTuple(data,asn1_obj):
 
 
 def Decoding(data, asn1_obj):
-	try:
-		input_data = bytearray.fromhex(data)
-		decoded_data = asnDecoding("S1AP-PDU", input_data, asn1_obj)
+    try:
+        input_data = bytearray.fromhex(data)
+        decoded_data = asnDecoding("S1AP-PDU", input_data, asn1_obj)
 
-		message_type = lambda key: MESSAGE_TYPE[str(key)]
-		ie_s = lambda key: IES_TYPE[str(key)]
-		message_code = message_type(decoded_data[1]['procedureCode'])
+        message_type = lambda key: MESSAGE_TYPE[str(key)]
+        ie_s = lambda key: IES_TYPE[str(key)]
+        message_code = message_type(decoded_data[1]['procedureCode'])
 
-		data_msg = decoded_data[1]
-		if type(data_msg) == dict:
-			data_message = {}
-			decode_value = data_msg['value']
-			decoded_msg = asnDecoding(message_code, decode_value, asn1_obj)
-			data_message[message_code] = decoded_msg
-			data_msg['value'] = data_message
-			protocolies_list = decoded_msg['protocolIEs']
-			decoded_ies_list = []
+        if type(message_code)==dict:
+            message_code = message_code[decoded_data[0]]
 
-			for l in range(len(protocolies_list)):
-				decoded_ies = {}
-				ies_list = protocolies_list[l]
-				ie_code = ie_s(ies_list['id'])
-				ies_value = ies_list['value']
-				decoded_ie_code = asnDecoding(ie_code, ies_value, asn1_obj)
-				if type(decoded_ie_code) == bytes:
-					if ie_code == "NAS-PDU":
-						processed_byte = processBytes(decoded_ie_code)
-						decoded_ies[ie_code] = nasDecode(processed_byte)
-					else:
-						decoded_ies[ie_code] = processBytes(decoded_ie_code)
-				elif type(decoded_ie_code) == dict:
-					decoded_ies[ie_code] = processDict(decoded_ie_code, asn1_obj)
-				elif type(decoded_ie_code) == int:
-					decoded_ies[ie_code] = decoded_ie_code
-				elif type(decoded_ie_code) == str:
-					decoded_ies[ie_code] = decoded_ie_code
-				elif type(decoded_ie_code) == list:
-					decoded_ies[ie_code] = processList(decoded_ie_code, asn1_obj)
-				elif type(decoded_ie_code) == tuple:
-					decoded_ies[ie_code] = processTuple(decoded_ie_code,asn1_obj)
+        data_msg = decoded_data[1]
+        if type(data_msg) == dict:
+            data_message = {}
+            decode_value = data_msg['value']
+            decoded_msg = asnDecoding(message_code, decode_value, asn1_obj)
+            data_message[message_code] = decoded_msg
+            data_msg['value'] = data_message
+            protocolies_list = decoded_msg['protocolIEs']
+            decoded_ies_list = []
 
-				ies_list['value'] = decoded_ies
-				decoded_ies_list.append(ies_list)
-			decoded_msg['protocolIEs'] = decoded_ies_list
-			data_message[message_code] = decoded_msg
-			data_msg['value'] = data_message
-		return decoded_data
-	
-	except Exception as e:
-		igniteLogger.logger.info("Printing exception : "f"{e}")
+            for l in range(len(protocolies_list)):
+                decoded_ies = {}
+                ies_list = protocolies_list[l]
+                ie_code = ie_s(ies_list['id'])
+                ies_value = ies_list['value']
+                decoded_ie_code = asnDecoding(ie_code, ies_value, asn1_obj)
+                if type(decoded_ie_code) == bytes:
+                    if ie_code == "NAS-PDU":
+                        processed_byte = processBytes(decoded_ie_code)
+                        decoded_ies[ie_code] = nasDecode(processed_byte)
+                    else:
+                        decoded_ies[ie_code] = processBytes(decoded_ie_code)
+                elif type(decoded_ie_code) == dict:
+                    decoded_ies[ie_code] = processDict(decoded_ie_code, asn1_obj)
+                elif type(decoded_ie_code) == int:
+                    decoded_ies[ie_code] = decoded_ie_code
+                elif type(decoded_ie_code) == str:
+                    decoded_ies[ie_code] = decoded_ie_code
+                elif type(decoded_ie_code) == list:
+                    decoded_ies[ie_code] = processList(decoded_ie_code, asn1_obj)
+                elif type(decoded_ie_code) == tuple:
+                    decoded_ies[ie_code] = processTuple(decoded_ie_code,asn1_obj)
+
+                ies_list['value'] = decoded_ies
+                decoded_ies_list.append(ies_list)
+            decoded_msg['protocolIEs'] = decoded_ies_list
+            data_message[message_code] = decoded_msg
+            data_msg['value'] = data_message
+        return decoded_data
+
+    except Exception as e:
+        igniteLogger.logger.info("Printing exception : "f"{e}")

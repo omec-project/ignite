@@ -1,154 +1,150 @@
 {
-    "_comment": "Copyright (c) 2019, Infosys Ltd.",
-    "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
-    "_comment": "you may not use this file except in compliance with the License.",
-    "_comment": "You may obtain a copy of the License at",
-    "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
-    "_comment": "Unless required by applicable law or agreed to in writing, software",
-    "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
-    "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
-    "_comment": "See the License for the specific language governing permissions and",
-    "_comment": "limitations under the License.",
-    "msgHeirarchy": ["diameter"],
-    "msgDetails": {
-        "diameter": {
-            "protocol": "diameter",
-            "msg": {
-                "version": 1,
+  "_comment": "Copyright (c) 2019, Infosys Ltd.",
+  "_comment": "Licensed under the Apache License, Version 2.0 (the 'License');",
+  "_comment": "you may not use this file except in compliance with the License.",
+  "_comment": "You may obtain a copy of the License at",
+  "_comment": "http: //www.apache.org/licenses/LICENSE-2.0",
+  "_comment": "Unless required by applicable law or agreed to in writing, software",
+  "_comment": "distributed under the License is distributed on an \"AS IS\" BASIS,",
+  "_comment": "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+  "_comment": "See the License for the specific language governing permissions and",
+  "_comment": "limitations under the License.",
+  "msgHeirarchy": [
+    "diameter"
+  ],
+  "msgDetails": {
+    "diameter": {
+      "protocol": "diameter",
+      "msg": {
+        "version": 1,
+        "flags": 192,
+        "command-code": 316,
+        "application-id": 16777251,
+        "hop-by-hop-identifier": "2c708a4d",
+        "end-to-end-identifier": "011e4e95",
+        "avp": [
+          {
+            "code": 263,
+            "flags": 40,
+            "session-id": "mme.localdomain;1561353919;2;1"
+          },
+          {
+            "code": 260,
+            "flags": 40,
+            "vendor-specific-application-id": [
+              {
+                "code": 266,
+                "flags": 40,
+                "vendor-id": 10415
+              },
+              {
+                "code": 258,
+                "flags": 40,
+                "auth-application-id": 16777251
+              }
+            ]
+          },
+          {
+            "code": 277,
+            "flags": 40,
+            "auth-session-state": 1
+          },
+          {
+            "code": 1,
+            "flags": 40,
+            "user-name": "312980911000269"
+          },
+          {
+            "code": 628,
+            "flags": 80,
+            "vendor-id": 10415,
+            "supported-features": [
+              {
+                "code": 266,
+                "flags": 40,
+                "vendor-id": 10415
+              },
+              {
+                "code": 629,
+                "flags": 80,
+                "vendor-id": 10415,
+                "feature-list-id": 1
+              },
+              {
+                "code": 630,
+                "flags": 80,
+                "vendor-id": 10415,
+                "feature-list": 0
+              }
+            ]
+          },
+          {
+            "code": 1401,
+            "flags": 192,
+            "vendor-id": 10415,
+            "terminal-information": [
+              {
+                "code": 1402,
                 "flags": 192,
-                "command-code": 316,
-                "application-id": 16777251,
-                "hop-by-hop-identifier": "2c708a4d",
-                "end-to-end-identifier": "011e4e95",
-                "avp": 
-                [
-                        {
-                            "code": 263,
-                            "flags": 40,
-                            "session-id": "mme.localdomain;1561353919;2;1"
-                        },
-			{
-                            "code": 260,
-                            "flags": 40,
-                            "vendor-specific-application-id": 
-                            [    
-                                {
-                                    "code": 266,
-                                    "flags": 40,
-                                    "vendor-id": 10415
-                                },
-                                {
-                                    "code": 258,
-                                    "flags": 40,
-                                    "auth-application-id": 16777251
-                                }
-                            ]
-                        },
-			{
-                            "code": 277,
-                            "flags": 40,
-                            "auth-session-state": 1
-                        },
-			{
-                            "code": 1,
-                            "flags": 40,
-                            "user-name": "312980911000269"
-                        },
-                        {
-                            "code": 628,
-                            "flags": 80,
-                            "vendor-id": 10415,
-                            "supported-features": 
-                            [
-                                {
-                                    "code": 266,
-                                    "flags": 40,
-	    			    "vendor-id":10415                                                                       
-                                },
-                                {
-                                    "code": 629,
-                                    "flags": 80,
-                                    "vendor-id": 10415,
-                                    "feature-list-id": 1
-                                },
-                                {
-                                    "code": 630,
-                                    "flags": 80,
-                                    "vendor-id": 10415,
-                                    "feature-list": 0
-                                }
-                            ]
-                        },
-			{
-                            "code": 1401,
-                            "flags": 192,
-	    		    "vendor-id": 10415,
-                            "terminal-information":
-	    			[
-                                {
-                                    "code": 1402,
-                                    "flags": 192,
-	    			    "vendor-id":10415,
-	    			    "imei":"21000001100002"                                                                 
-                                },
-                                {
-                                    "code": 1403,
-                                    "flags": 192,
-                                    "vendor-id": 10415,
-                                    "software-version": "69"
-                                }
-                            	]
-
-                        },
-			{
-                            "code": 1032,
-                            "flags": 192,
-			    "vendor-id": 10415,
-                            "rat-type": 1004
-                        },
-			{
-                            "code": 1405,
-                            "flags": 192,
-	    		    "vendor-id": 10415,
-                            "ulr-flags": 34
-                        },
-			{
-                            "code": 1407,
-                            "flags": 192,
-	    		    "vendor-id": 10415,
-                            "visited-plmn-id": "05f613"
-                        },
-			{
-                            "code": 1493,
-                            "flags": 80,
-	    		    "vendor-id": 10415,
-                            "homogeneous-support-of-ims-voice-over-ps-sessions": 0
-                        },
-                        {
-                            "code": 293,
-                            "flags": 64,
-                            "destination-host": "hss.infyignite.com"
-                        },
-			{
-                            "code": 283,
-                            "flags": 40,
-                            "destination-realm": "infyignite.com"
-                        },
-			{
-                            "code": 264,
-                            "flags": 40,
-                            "origin-host": "mme.localdomain"
-                        },
-			{
-                            "code": 296,
-                            "flags": 40,
-                            "origin-realm": "localdomain"
-                        }
-	
-	    ]
-	}
-	      }
-	    }
-	}
+                "vendor-id": 10415,
+                "imei": "21000001100002"
+              },
+              {
+                "code": 1403,
+                "flags": 192,
+                "vendor-id": 10415,
+                "software-version": "69"
+              }
+            ]
+          },
+          {
+            "code": 1032,
+            "flags": 192,
+            "vendor-id": 10415,
+            "rat-type": 1004
+          },
+          {
+            "code": 1405,
+            "flags": 192,
+            "vendor-id": 10415,
+            "ulr-flags": 34
+          },
+          {
+            "code": 1407,
+            "flags": 192,
+            "vendor-id": 10415,
+            "visited-plmn-id": "05f613"
+          },
+          {
+            "code": 1493,
+            "flags": 80,
+            "vendor-id": 10415,
+            "homogeneous-support-of-ims-voice-over-ps-sessions": 0
+          },
+          {
+            "code": 293,
+            "flags": 64,
+            "destination-host": "hss.infyignite.com"
+          },
+          {
+            "code": 283,
+            "flags": 40,
+            "destination-realm": "infyignite.com"
+          },
+          {
+            "code": 264,
+            "flags": 40,
+            "origin-host": "mme.localdomain"
+          },
+          {
+            "code": 296,
+            "flags": 40,
+            "origin-realm": "localdomain"
+          }
+        ]
+      }
+    }
+  }
+}
 
 

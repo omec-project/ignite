@@ -18,12 +18,32 @@ import os
 import sys, requests
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'Dev', 'Common'))
 import igniteCommonUtil as icu
+import sshUtils as su
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..','ROBOTCs','keywords','systemkeywords'))
+import dictOperations as do
 
 clr_flag=False
+ssh_client = None
+
 
 try:
     sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'MessageTemplates', 'Util'))
     from loadMessage import *
+
+    command = "export LD_LIBRARY_PATH=" + mme_lib_path + " && " + mme_grpc_client_path + "/mme-grpc-client mme-app show procedure-stats"
+
+    ssh_client = su.sshConnect(mmeIP, mme_username, mme_password, "ssh-password", timeout=10, port=None)
+    proc_stat = su.executeCommand(command,ssh_client)
+
+    ue_count_before_attach = int(do.splitProcStats(proc_stat, stats_type["subs_attached"]))
+    num_of_processed_aia = int(do.splitProcStats(proc_stat, stats_type["processed_aia"]))
+    num_of_processed_ula = int(do.splitProcStats(proc_stat, stats_type["processed_ula"]))
+    num_of_del_session_resp = int(do.splitProcStats(proc_stat, stats_type["del_session_resp"]))
+    num_of_handled_esm_info_resp = int(do.splitProcStats(proc_stat, stats_type["esm_info_resp"]))
+    num_of_processed_sec_mode_resp = int(do.splitProcStats(proc_stat, stats_type["processed_sec_mode"]))
+    num_of_processed_init_ctxt_resp = int(do.splitProcStats(proc_stat, stats_type["init_ctxt_resp"]))
+    num_of_processed_purge_resp = int(do.splitProcStats(proc_stat, stats_type["purge_resp"]))
 
     #required message templates
     initial_ue_guti = json.loads(open('../MessageTemplates/S1AP/initial_uemessage_guti.json').read())
@@ -104,18 +124,43 @@ try:
 
     time.sleep(2)
 
+    proc_stat_af_attach = su.executeCommand(command,ssh_client)
+    ue_count_after_attach = int(do.splitProcStats(proc_stat_af_attach, stats_type["subs_attached"]))
+    icu.grpcValidation(ue_count_before_attach + 1,ue_count_after_attach,"Number of Subs Attached")
+
+
+    num_of_processed_aia_afattach = int(do.splitProcStats(proc_stat_af_attach, stats_type["processed_aia"]))
+    icu.grpcValidation(num_of_processed_aia + 1,num_of_processed_aia_afattach,"Number of Processed AIA")
+
+
+    num_of_processed_ula_afattach = int(do.splitProcStats(proc_stat_af_attach, stats_type["processed_ula"]))
+    icu.grpcValidation(num_of_processed_ula + 1,num_of_processed_ula_afattach,"Number of Processed ULA")
+
+
+    num_of_handled_esm_info_resp_afattach = int(do.splitProcStats(proc_stat_af_attach, stats_type["esm_info_resp"]))
+    icu.grpcValidation(num_of_handled_esm_info_resp + 1,num_of_handled_esm_info_resp_afattach,"Number of Handled ESM info response")
+
+
+
+    num_of_processed_sec_mode_resp_afattach = int(do.splitProcStats(proc_stat_af_attach, stats_type["processed_sec_mode"]))
+    icu.grpcValidation(num_of_processed_sec_mode_resp + 1,num_of_processed_sec_mode_resp_afattach,"Number of Processed Sec Mode Response")
+
+
+    num_of_processed_init_ctxt_resp_afattach = int(do.splitProcStats(proc_stat_af_attach, stats_type["init_ctxt_resp"]))
+    icu.grpcValidation(num_of_processed_init_ctxt_resp + 1,num_of_processed_init_ctxt_resp_afattach,"Number of Processed Initial Context Response")
+
     igniteLogger.logger.info ("\n---------------------------------------\nSend Detach Request to MME\n---------------------------------------")
     s1.sendS1ap('detach_request', uplinknastransport_detach_request, enbues1ap_id, nas_detach_request)
 
     igniteLogger.logger.info("\n---------------------------------------\nPurge Request received from MME\n---------------------------------------")
     ds.receiveS6aMsg()
-
-    igniteLogger.logger.info("\n---------------------------------------\nDelete Session Request received from MME\n---------------------------------------")
+    
+    igniteLogger.logger.info ("\n---------------------------------------\nDelete Session Request received from MME\n---------------------------------------")
     gs.receiveGtp()
 
     igniteLogger.logger.info("\n---------------------------------------\nSend Purge Response to MME\n---------------------------------------")
     ds.sendS6aMsg('purge_response', msg_data_pua, imsi)
-    
+
     igniteLogger.logger.info ("\n---------------------------------------\nSend Delete Session Response to MME\n---------------------------------------")
     gs.sendGtp('delete_session_response', delete_session_response, msg_hierarchy)
 
@@ -127,6 +172,18 @@ try:
 
     igniteLogger.logger.info ("\n---------------------------------------\neNB sends UE Context Release Complete to MME\n---------------------------------------")
     s1.sendS1ap('ue_context_release_complete', uecontextrelease_complete, enbues1ap_id,)
+
+    time.sleep(1)
+    proc_stat_af_detach = su.executeCommand(command,ssh_client)
+
+    ue_count_after_detach = int(do.splitProcStats(proc_stat_af_detach, stats_type["subs_attached"]))
+    icu.grpcValidation(ue_count_before_attach, ue_count_after_detach, "Number of Subs Attached After Detach")
+
+    num_of_del_session_resp_sent_Afdetach = int(do.splitProcStats(proc_stat_af_detach, stats_type["del_session_resp"]))
+    icu.grpcValidation(num_of_del_session_resp + 1, num_of_del_session_resp_sent_Afdetach, "Number of Deleted Session Request")
+
+    num_of_purge_resp_sent_Afdetach = int(do.splitProcStats(proc_stat_af_detach, stats_type["purge_resp"]))
+    icu.grpcValidation(num_of_processed_purge_resp + 1, num_of_purge_resp_sent_Afdetach, "Number of Purge Response")
 
     print ("\n-------------------------------------\nGUTI Attach Detach Execution Successful\n---------------------------------------")
 	

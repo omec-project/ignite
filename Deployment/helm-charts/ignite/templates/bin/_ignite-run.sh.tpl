@@ -28,7 +28,12 @@ case $APPLICATION in
     "s1ap")
       echo "Starting s1ap proxy"
 	  cd /opt/ignite/Dev/Protocols/S1AP/
-      python3 s1apProxy.py
+      python3 s1apProxy.py source
+      ;;
+    "s1aptarget")
+      echo "Starting s1ap target proxy"
+	  cd /opt/ignite/Dev/Protocols/S1AP/
+      python3 s1apProxy.py target
       ;;
     "gtp")
       echo "Starting gtp proxy"

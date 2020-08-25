@@ -33,9 +33,6 @@ TC1: LTE 4G S11 modifyBearer Response Delay
     ${num_of_subscribers_attached}    ${found}    Get Key Value From Dict    ${statsTypes}    subs_attached
     ${ueCountBeforeAttach}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_subscribers_attached}
     ${ueCountBeforeAttach}    Convert to Integer    ${ueCountBeforeAttach}
-    ${num_of_mb_resp_timeout}    ${found}    Get Key Value From Dict    ${statsTypes}    mb_resp_timeout
-    ${mbResponseTimeoutCountBf}    Get GRPC Stats Response Count    ${procStatOutBfExec}    ${num_of_mb_resp_timeout}
-    ${mbResponseTimeoutCountBf}    Convert to Integer    ${mbResponseTimeoutCountBf}
     Send S1ap    attach_request    ${initUeMessage_AttachReq}    ${enbUeS1APId}    ${nasAttachRequest}    ${IMSI}    #Send Attach Request to MME
     ${air}    Receive S6aMsg    #HSS Receives AIR from MME
     Send S6aMsg    authentication_info_response    ${msgData_aia}    ${IMSI}    #HSS sends AIA to MME
@@ -68,10 +65,6 @@ TC1: LTE 4G S11 modifyBearer Response Delay
     ${ueCountAfterAttach}    Convert to Integer    ${ueCountAfterAttach}
     ${incrementUeCount}    Evaluate    ${ueCountBeforeAttach}+1
     Should Be Equal    ${incrementUeCount}    ${ueCountAfterAttach}    Expected UE Attach Count: ${incrementUeCount}, but Received UE Attach Count: ${ueCountAfterAttach}    values=False
-    ${mbResponseTimeoutCountAfTimeout}    Get GRPC Stats Response Count    ${procStatOutAfAttach}    ${num_of_mb_resp_timeout}
-    ${mbResponseTimeoutCountAfTimeout}    Convert to Integer    ${mbResponseTimeoutCountAfTimeout}
-    ${incrementmbResponseTimeoutCountAfTimeout}    Evaluate    ${mbResponseTimeoutCountBf}+1
-    Should Be Equal    ${incrementmbResponseTimeoutCountAfTimeout}    ${mbResponseTimeoutCountAfTimeout}    Expected Modify Bearer Response Timeout Count: ${incrementmbResponseTimeoutCountAfTimeout}, but Received Modify Bearer Response Timeout Count: ${mbResponseTimeoutCountAfTimeout}    values=False
     ${detReq}    Receive S1ap    #MME send Detach request to UE
     ${delSesReqRec}    Receive GTP    #Delete Session Request received from MME
     Send GTP    delete_session_response    ${deleteSessionResp}    ${gtpMsgHeirarchy_tag3}    #Send Delete Session Response to MME
@@ -97,7 +90,6 @@ TC1: LTE 4G S11 modifyBearer Response Delay
     Send S1ap    uplink_nas_transport_attach_cmp    ${uplinkNASTransport_AttachCmp}    ${enbUeS1APId}    ${nasAttachComplete}    #Send Attach Complete to MME
     ${modBearReqRec}    Receive GTP    #Modify Bearer Request received from MME
     Send GTP    modify_bearer_response    ${modifyBearerResp}    ${gtpMsgHeirarchy_tag2}    #Send Modify Bearer Response to MME
-    ${recEMMInfo}    Receive S1ap    #EMM Information received from MME
     Sleep    1s
     Send S1ap    detach_request    ${uplinkNASTransport_DetachReq}    ${enbUeS1APId}    ${nasDetachRequest}    #Send Detach Request to MME
     ${purgeRequest}    Receive S6aMsg    #HSS receives PUR from MME

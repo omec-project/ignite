@@ -159,13 +159,13 @@ class GenericProxy:
         if(self.type_of_proxy=="gtp"):
              self.sut_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-        elif(self.type_of_proxy == "diameter" or  self.type_of_proxy == "s1ap"):
+        elif(self.type_of_proxy == "diameter" or  self.type_of_proxy.startswith("s1ap")):
              socket.IPPROTO_SCTP = 132
              self.sut_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM,socket.IPPROTO_SCTP)
 
         self.sut_socket.bind((self.ignite_ip, self.ignite_port))
 
-        if(self.type_of_proxy == "s1ap"):
+        if(self.type_of_proxy.startswith("s1ap")):
              self.sut_socket.connect((self.sut_ip,self.sut_port))
 
         elif(self.type_of_proxy=="diameter"):
@@ -210,7 +210,7 @@ class GenericProxy:
                         igniteLogger.logger.info("Encoded GTP data: "f"{e_data[0:length]}")
                         self.sut_socket.sendto(e_data[0:length], sut_address)
 
-                    elif self.type_of_proxy == "s1ap":
+                    elif self.type_of_proxy.startswith("s1ap"):
                                                 # Encode the message
                         igniteLogger.logger.info("S1AP data from Test-Case being sent to SUT : "f"{PROTOCOLMESSAGE}")
                         nas_data = PROTOCOLMESSAGE["NAS-MESSAGE"]
@@ -232,10 +232,10 @@ class GenericProxy:
                                 sut_diam_conn_socket.setblocking(0)
                                 running_inputList.append(sut_diam_conn_socket)
 
-                            elif (self.type_of_proxy == "gtp") or (self.type_of_proxy == "s1ap"):
+                            elif (self.type_of_proxy == "gtp") or (self.type_of_proxy.startswith("s1ap")):
                                 sut_data = self.sut_socket.recv(size)
                                 if sut_data:
-                                    if self.type_of_proxy == "s1ap":
+                                    if self.type_of_proxy.startswith("s1ap"):
                                         igniteLogger.logger.info("S1AP Data from SUT to Test-Case: "f"{hexlify(sut_data).decode('utf-8')}")
                                         decoded_msg = s1apDecoder.Decoding(hexlify(sut_data).decode("utf-8"),asn1_obj_decoder)
                                         msg = list(decoded_msg)

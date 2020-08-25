@@ -18,7 +18,9 @@ limitations under the License.
 {{- $configJsonRobo := index .Values.config.ignite.cfgFiles "resources.MMEConfig.txt" }}
 {{- $configJsonGtp := index $configJson "gtp" }}
 {{- $configJsonS1ap := index $configJson "s1ap" }}
+{{- $configJsonS1apTarget := index $configJson "s1ap_target" }}
 {{- $configJsonDiameter := index $configJson "diameter" }}
+{{- $configJsonTc := index $configJson "runtestcase" }}
 
 ---
 apiVersion: v1
@@ -46,6 +48,15 @@ data:
     "ignite_port": {{index $configJsonS1ap "ignite_port"}},
     "tc_port": {{index $configJsonS1ap "tc_port"}}
     },
+    "s1ap_target":
+    {
+    "type_of_socket": {{index $configJsonS1apTarget "type_of_socket" | quote}},
+    "sut_ip": "mme",
+    "sut_port": {{index $configJsonS1apTarget "sut_port"}},
+    "ignite_ip": "ignite",
+    "ignite_port": {{index $configJsonS1apTarget "ignite_port"}},
+    "tc_port": {{index $configJsonS1apTarget "tc_port"}}
+    },
     "diameter": {
     "type_of_socket": {{index $configJsonDiameter "type_of_socket"| quote}},
     "sut_ip": "mme",
@@ -57,7 +68,18 @@ data:
     "ignite_realm": {{ tuple "ignite" "realm" . | include "ignite.diameter_endpoint" | quote }},
     "mme_host": {{ tuple "mme" "identity" . | include "ignite.diameter_endpoint" | quote }},
     "mme_realm": {{ tuple "mme" "realm" . | include "ignite.diameter_endpoint" | quote }}
-    }
+    },
+    "runtestcase":
+    {
+     "sut_ip": "mme",
+     "ignite_ip": "ignite",
+     "mme_username": {{index $configJsonTc "mme_username"| quote}},
+     "mme_password": {{index $configJsonTc "mme_password"| quote}},
+     "ignite_username": {{index $configJsonTc "ignite_username"| quote}},
+     "ignite_password": {{index $configJsonTc "ignite_password"| quote}},
+     "mme_lib_path": {{index $configJsonTc "mme_lib_path"| quote}},
+     "mme_grpc_client_path": {{index $configJsonTc "mme_grpc_client_path"| quote}}
+     }
     }
   resources.MMEConfig.txt: |
     *** Settings ***
