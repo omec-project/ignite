@@ -24,7 +24,7 @@ import os
 import sys
 import json
 import requests
-import time
+import time, datetime
 
 #logger imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'Logger'))
@@ -102,7 +102,8 @@ app_receive = Blueprint('app_receive', __name__)
 def getMessagesfromProxy():
     global output
     global outFlag
-    while 1:
+    current_time=datetime.datetime.now()+datetime.timedelta(0,9)
+    while datetime.datetime.now() < current_time:
         if outFlag:
             data=output[0]
             output.pop(0)
