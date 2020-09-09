@@ -16,7 +16,7 @@
     "eps_update_type_value": "ta_updating",
     "active_flag_tau": "no_bearer_establishment_requested"
   },
-  "nas_key_set_identifier": 7,
+  "nas_key_set_identifier": "$gen_nas_ksi",
   "eps_mobile_identity_guti_tau_request": {
     "guti_octet3_high_nibble": 15,
     "odd_even_indication": 0,

@@ -11,8 +11,8 @@
   "_comment": "limitations under the License.",
   "security_header_type": "integrity_protected_and_ciphered",
   "protocol_discriminator": "eps_mobility_management_messages",
-  "message_authentication_code": 10372819,
-  "sequence_number": 2,
+  "message_authentication_code": "$gen_mac_code",
+  "sequence_number": "$gen_seqnumber",
   "security_header_type_1": "plain_nas_message_not_security_protected",
   "protocol_discriminator_1": "eps_mobility_management_messages",
   "mobility_mgmt_message_type": "detach_request",
@@ -22,7 +22,7 @@
   },
   "nas_key_set_identifier_detach_request": {
     "tsc": "native_security_context_for_ksiasme",
-    "nas_key_set_identifier_detach_request_value": "no_key_value_is_available_ue_to_network"
+    "nas_key_set_identifier_detach_request_value": "$gen_nas_ksi"
   },
   "eps_mobile_identity_guti_detach_request": {
     "guti_octet3_high_nibble": 15,

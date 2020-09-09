@@ -6,12 +6,14 @@ SUDO=''
 install_run_pkg_deps() {
         $SUDO apt-get update && $SUDO apt-get install -y \
         python3 \
+        python3-dev \
         python3-pip \
         libsctp-dev \
         net-tools \
         vim \
         jq \
         curl \
+        git \
         openssh-server \
         zip \
         tcpdump \
@@ -27,6 +29,14 @@ install_run_dep_lib() {
         robotframework-sshlibrary \
         robotframework-requests \
         flask
+}
+
+install_crypto_mobile() {
+	   cd /tmp/ \
+	&& git clone https://github.com/mitshell/CryptoMobile.git \
+	&& cd CryptoMobile \
+	&& $SUDO python3 setup.py install \
+	&& cd /root/
 }
 
 install_lib_patch() {
@@ -48,6 +58,7 @@ install_ssh_server() {
 install() {
         install_run_pkg_deps
         install_run_dep_lib
+        install_crypto_mobile
         install_ssh_server
         install_lib_patch
 }

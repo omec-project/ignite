@@ -97,12 +97,12 @@ def processString(data):
 
 
 # NAS Encoder and return the encoded value
-def encodeNasPdu(key, data, value, asn_object):
+def encodeNasPdu(key, data, value, asn_object, ctxtData={}):
     protocol = "5G"
     version = "v1"
     request_type = value
     field_validation_flag = "Y"
-    nas = nasEncoder.encoder(protocol, version, request_type, data, field_validation_flag)
+    nas = nasEncoder.encoder(protocol, version, request_type, data, field_validation_flag, ctxtData)
     bytes_array = bytes.fromhex(nas)
     nas_encoded = asnEncoding(key, bytes_array, asn_object)
     return nas_encoded
@@ -113,7 +113,7 @@ def asnEncoding(ies_key, ies_parameter, asn_object):
     return encoded_data
 
 
-def s1apEncoding(data, asn_object, nasData={}):
+def s1apEncoding(data, asn_object, nasData={}, ctxtData={}):
     try:
         list_of_ies = {}
         s1ap_pdu_msge = data["S1AP-PDU"]
@@ -127,7 +127,7 @@ def s1apEncoding(data, asn_object, nasData={}):
                     for ie_parameter_key, ie_parameter_value in list(ie_parameters.items()):
                         # If key is NAS-PDU it will call nas_pdu API
                         if ie_parameter_key == "NAS-PDU":
-                            encoded_data = encodeNasPdu(ie_parameter_key, nasData, ie_parameter_value, asn_object)
+                            encoded_data = encodeNasPdu(ie_parameter_key, nasData, ie_parameter_value, asn_object, ctxtData)
                             list_of_ies_parameter[index]['value'] = encoded_data
 
                         elif type(ie_parameter_value) == int:

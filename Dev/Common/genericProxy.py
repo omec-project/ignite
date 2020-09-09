@@ -59,6 +59,7 @@ output = []
 outFlag=False
 PROTOCOLMESSAGE={}
 CTXDATA={}
+UEID=""
 
 clear_buffer= Blueprint('clear_buffer', __name__)
 @clear_buffer.route('/clearMessageBuffer', methods = ['GET'])
@@ -81,11 +82,16 @@ app_send = Blueprint('app_send', __name__)
 def sendMessagesToProxy():
     global PROTOCOLMESSAGE
     global CTXDATA
+    global UEID
 
     if request.is_json:
         data=request.get_json()
     for key in data[1].keys():
         CTXDATA[key]=data[1][key]
+    
+    if len(data) > 3 and data[2] == 's1ap' and data[3] != None:
+        UEID=str(data[3])
+        
     igniteLogger.logger.info("tc data of "f"{data[2]} : "f"{data[0]}")
     igniteLogger.logger.info("context data of "f"{data[2]} : "f"{CTXDATA}")
     PROTOCOLMESSAGE=data[0]
@@ -185,6 +191,8 @@ class GenericProxy:
         global output
         global outFlag
         global PROTOCOLMESSAGE
+        global CTXDATA
+        global UEID
 
         sut_address=(self.sut_ip, self.sut_port)
 
@@ -214,7 +222,12 @@ class GenericProxy:
                                                 # Encode the message
                         igniteLogger.logger.info("S1AP data from Test-Case being sent to SUT : "f"{PROTOCOLMESSAGE}")
                         nas_data = PROTOCOLMESSAGE["NAS-MESSAGE"]
-                        e_data = s1apEncoder.s1apEncoding(PROTOCOLMESSAGE,asn1_obj_encoder,nas_data)
+                        if UEID != "" :
+                            e_data = s1apEncoder.s1apEncoding(PROTOCOLMESSAGE,asn1_obj_encoder,nas_data, CTXDATA[UEID])
+                        else :
+                            e_data = s1apEncoder.s1apEncoding(PROTOCOLMESSAGE,asn1_obj_encoder,nas_data)
+
+                        UEID = ""
                         PROTOCOLMESSAGE = None
                         e_byte = bytearray.fromhex(e_data)
                         igniteLogger.logger.info("Encoded S1AP data: "f"{e_byte}")
