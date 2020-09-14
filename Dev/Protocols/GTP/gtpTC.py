@@ -76,6 +76,8 @@ def sendGtp(requestType, msgData, msgHeirarchy, ieUpdateValDict=None):
     if requestType == mt.create_session_response.name:
         updateGtpIp(msgData, config_file["gtp"]["ignite_ip"])
         setContextData(requestType,msgData)
+    elif requestType == mt.create_bearer_request.name:
+        updateGtpIp(msgData, config_file["gtp"]["ignite_ip"])
     igniteLogger.logger.info(f"Gtp data received : {msgData}")
     send_response = requests.post(url=url["send_url"], json=[msgData,S11CTXDATA,"gtp"])
     igniteLogger.logger.info(f"URL response for send gtp data  : {str(send_response)}")

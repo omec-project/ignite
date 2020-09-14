@@ -41,6 +41,8 @@ class ProtocolMessageTypes(enum.Enum):
     handover_notify = enum.auto()
     s1_setup_request_target = enum.auto()
     erab_modification_indication = enum.auto()
+    create_bearer_request = enum.auto()
+    create_bearer_response = enum.auto()
     other_messages = enum.auto()
 
 

@@ -47,6 +47,8 @@ gtpMessageDict={
     35:"modify_bearer_response",
     36:"delete_session_request",
     37:"delete_session_response",
+    95:"create_bearer_request",
+    96:"create_bearer_response",
     170:"release_bearer_request",
     171:"release_bearer_response",
     176:"downlink_data_notification",
@@ -61,7 +63,7 @@ gtpRespReqDict={
     "release_bearer_response":"release_bearer_request"
     }
 
-gtpInitialMessagesList=[mt.downlink_data_notification.name]
+gtpInitialMessagesList=[mt.downlink_data_notification.name,mt.create_bearer_request.name]
 
 
 def taiEcgiTohex(value):

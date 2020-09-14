@@ -64,11 +64,65 @@
               {
                 "ie_type": 87,
                 "spare": 0,
-                "instance": 0,
+                "instance": 1,
                 "ipv4present": 1,
                 "ipv6present": 0,
                 "interface_type": 5,
                 "teid_gre_key": 2,
+                "ipv4address": "1.1.1.1"
+              },
+              {
+                "ie_type": 80,
+                "spare": 0,
+                "instance": 0,
+                "spare": 0,
+                "pci": 1,
+                "pl": 1,
+                "spare": 0,
+                "pvi": 1,
+                "qci": 4,
+                "max_bit_rate_ul": "0000000000",
+                "max_bit_rate_dl": "0000000000",
+                "guaranteed_bit_rate_ul": "0000000000",
+                "guaranteed_bit_rate_dl": "0000000000"
+              }
+            ]
+          },
+          {
+            "ie_type": 93,
+            "spare": 0,
+            "instance": 0,
+            "bearer_context": [
+              {
+                "ie_type": 73,
+                "spare": 0,
+                "instance": 0,
+                "eps_bearer_id": 0
+              },
+              {
+                "ie_type": 84,
+                "spare": 0,
+                "instance": 0,
+                "tft": "212001091002020202ffffffff"
+              },
+              {
+                "ie_type": 87,
+                "spare": 0,
+                "instance": 0,
+                "ipv4present": 1,
+                "ipv6present": 0,
+                "interface_type": 1,
+                "teid_gre_key": 3,
+                "ipv4address": "$SgwIpAddress"
+              },
+              {
+                "ie_type": 87,
+                "spare": 0,
+                "instance": 1,
+                "ipv4present": 1,
+                "ipv6present": 0,
+                "interface_type": 5,
+                "teid_gre_key": 3,
                 "ipv4address": "1.1.1.1"
               },
               {
