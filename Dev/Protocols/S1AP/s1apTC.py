@@ -293,12 +293,14 @@ def setContextData(s1apMsg,requestType):
     if matched and procedure_code == 13: #uplink nas
         if  s1apMsg.get('NAS-MESSAGE', None) != None and 'sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
             S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] += 1
-    elif matched and procedure_code == 12: #Init ue -service request
-        if  s1apMsg.get('NAS-MESSAGE', None) != None and 'ksi_sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
-            S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] += 1
+    elif matched and procedure_code == 12: #Init ue - detach and service request
+        if  s1apMsg.get('NAS-MESSAGE', None) != None:
+            if 'ksi_sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
+                S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] += 1
+            elif 'sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
+                S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] += 1
         
     igniteLogger.logger.info(f"s1ap context data : {S1APCTXDATA}")
-
 
 def updateMessageFromContextData(s1apMsg,requestType):
     global IMSI
@@ -330,27 +332,35 @@ def updateMessageFromContextData(s1apMsg,requestType):
     
 def updateMessageFromSecurityContext(s1apMsg,requestType):
     global IMSI
+    nasMsgKeys = s1apMsg['NAS-MESSAGE'].keys()
 
     procedure_code, matched = icu.getKeyValueFromDict(s1apMsg, 'procedureCode')
     if matched and procedure_code == 13:  # uplink nas
         if s1apMsg.get('NAS-MESSAGE', None) != None:
-            if 'message_authentication_code' in s1apMsg['NAS-MESSAGE'].keys():
+            if 'message_authentication_code' in nasMsgKeys:
                 s1apMsg['NAS-MESSAGE']['message_authentication_code'] = 0
-            if 'sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
+            if 'sequence_number' in nasMsgKeys:
                 s1apMsg['NAS-MESSAGE']['sequence_number'] = S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT']
-            if 'nas_key_set_identifier_detach_request' in s1apMsg['NAS-MESSAGE'].keys():
+            if 'nas_key_set_identifier_detach_request' in nasMsgKeys:
                 if 'nas_key_set_identifier_detach_request_value' in s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request'].keys():
                    s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request']['nas_key_set_identifier_detach_request_value'] = S1APCTXDATA[IMSI]['SEC_CXT']['KSI']
 
-    elif matched and procedure_code == 12:  #Init ue - service req
+    elif matched and procedure_code == 12:  #Init ue - detach and service req
         if s1apMsg.get('NAS-MESSAGE', None) != None:
-            if 'message_authentication_code_short' in s1apMsg['NAS-MESSAGE'].keys():
+            if 'message_authentication_code' in nasMsgKeys:
+                s1apMsg['NAS-MESSAGE']['message_authentication_code'] = 0
+            elif 'message_authentication_code_short' in nasMsgKeys:
                 s1apMsg['NAS-MESSAGE']['message_authentication_code_short'] = 0
-            if 'ksi_sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
+            if 'sequence_number' in nasMsgKeys:
+                s1apMsg['NAS-MESSAGE']['sequence_number'] = S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT']
+            elif 'ksi_sequence_number' in nasMsgKeys:
                 if 'nas_key_set_identifier_service_req' in s1apMsg['NAS-MESSAGE']['ksi_sequence_number'].keys():
                     s1apMsg['NAS-MESSAGE']['ksi_sequence_number']['nas_key_set_identifier_service_req'] = S1APCTXDATA[IMSI]['SEC_CXT']['KSI']
                 if 'sequence_number_service_req' in s1apMsg['NAS-MESSAGE']['ksi_sequence_number'].keys():
                     s1apMsg['NAS-MESSAGE']['ksi_sequence_number']['sequence_number_service_req'] = S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT']
+            if 'nas_key_set_identifier_detach_request' in nasMsgKeys:
+                if 'nas_key_set_identifier_detach_request_value' in s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request'].keys():
+                   s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request']['nas_key_set_identifier_detach_request_value'] = S1APCTXDATA[IMSI]['SEC_CXT']['KSI']
 
     if requestType == mt.tau_request.name:
         icu.updateKeyValueInDict(s1apMsg, "nas_key_set_identifier", S1APCTXDATA[IMSI][mt.attach_request.name]['nas_key_set_identifier'])

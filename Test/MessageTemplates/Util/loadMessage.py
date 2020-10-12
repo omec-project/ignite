@@ -76,6 +76,7 @@ try:
     handover_cancel = json.loads(open('../MessageTemplates/S1AP/handover_cancel.json').read())
     handover_negative_acknowledge = json.loads(open('../MessageTemplates/S1AP/handoverrequest_nack.json').read())
     erabmodification_indication = json.loads(open('../MessageTemplates/S1AP/erabmodification_indication.json').read())
+    init_ue_detach_request = json.loads(open('../MessageTemplates/S1AP/init_ue_detachrequest.json').read())
 
     # Load NAS Symbols
     nas_attach_request = json.loads(open('../MessageTemplates/NAS/attach_request.json').read())
