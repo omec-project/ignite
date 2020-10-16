@@ -64,7 +64,7 @@
               {
                 "ie_type": 87,
                 "spare": 0,
-                "instance": 0,
+                "instance": 1,
                 "ipv4present": 1,
                 "ipv6present": 0,
                 "interface_type": 5,
