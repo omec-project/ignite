@@ -97,7 +97,9 @@ def setContextData(requestType, diameterMsg):
     if requestType == mt.authentication_info_response.name:
         autn,autn_present = icu.getKeyValueFromDict(diameterMsg,"autn")
         rand,rand_present = icu.getKeyValueFromDict(diameterMsg,"rand")
-        S6ACTXDATA[IMSI][requestType]={"autn":int(autn,16),"rand":int(rand,16)}
+        kasme, kasme_present = icu.getKeyValueFromDict(diameterMsg,"kasme")
+        S6ACTXDATA[IMSI][requestType]={"autn":int(autn,16),"rand":int(rand,16), "kasme":kasme}
+            
     elif requestType == mt.update_location_response.name:
         msisdn,msisdn_present = icu.getKeyValueFromDict(diameterMsg,"msisdn")
         S6ACTXDATA[IMSI][requestType]={"msisdn":msisdn}

@@ -399,7 +399,7 @@
           "protocol_discriminator"
         ]
       },
-      "sequence_number",
+      "ksi_sequence_number",
       "message_authentication_code_short"
     ],
     "O": [

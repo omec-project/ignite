@@ -191,7 +191,7 @@ try:
     s1.receiveS1ap()
 
     igniteLogger.logger.info("\n---------------------------------------\nSend Security Mode Complete to MME\n---------------------------------------")
-    s1.sendS1ap('uplinknastransport_securitymode_complete', uplinknastransport_securitymode_complete, enbues1ap_id_1, nas_securitymode_complete)
+    s1.sendS1ap('securitymode_complete', uplinknastransport_securitymode_complete, enbues1ap_id_1, nas_securitymode_complete)
 
     igniteLogger.logger.info("\n---------------------------------------\nInitial Context Setup Request received from MME\n---------------------------------------")
     s1.receiveS1ap()
