@@ -166,7 +166,7 @@ try:
     time.sleep(1)
 
     igniteLogger.logger.info("\n---------------------------------------\nSend Detach Request to MME\n---------------------------------------")
-    s1.sendS1ap('detach_request', uplinknastransport_detach_request, enbues1ap_id, nas_detach_request)
+    s1.sendS1ap('detach_request', init_ue_detach_request, enbues1ap_id, nas_detach_request)
  
     igniteLogger.logger.info("\n---------------------------------------\nPurge Request received from MME\n---------------------------------------")
     ds.receiveS6aMsg()

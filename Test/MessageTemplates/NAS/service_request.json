@@ -11,7 +11,9 @@
   "_comment": "limitations under the License.",
   "security_header_type": "security_header_service_request",
   "protocol_discriminator": "eps_mobility_management_messages",
-  "nas_key_set_identifier": 0,
-  "sequence_number": 2,
-  "message_authentication_code_short": 22049
+  "message_authentication_code_short": "$gen_mac_code",
+  "ksi_sequence_number": {
+    "nas_key_set_identifier_service_req": "$gen_nas_ksi",
+    "sequence_number_service_req": "$gen_seqnumber"
+  }
 }

@@ -1,3 +1,19 @@
+#
+# Copyright (c) 2019, Infosys Ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 import enum
 
 class ProtocolMessageTypes(enum.Enum):
@@ -18,6 +34,7 @@ class ProtocolMessageTypes(enum.Enum):
     downlink_data_notification = enum.auto()
     downlink_data_notification_ack = enum.auto()
     downlink_nas_transport = enum.auto()
+    uplink_nas_transport = enum.auto()
     identity_request = enum.auto()
     identity_response = enum.auto()
     initial_context_setup_request = enum.auto()
@@ -41,6 +58,8 @@ class ProtocolMessageTypes(enum.Enum):
     handover_notify = enum.auto()
     s1_setup_request_target = enum.auto()
     erab_modification_indication = enum.auto()
+    securitymode_complete = enum.auto()
+    attach_complete = enum.auto()
     other_messages = enum.auto()
 
 

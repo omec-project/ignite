@@ -3,40 +3,4 @@ Known Issues
 
 1. Transport layer address in asn1 spec is modified to OCTET from BITSTRING as a workaround, as the asn1tools=0.137.4  is encoding the transport layer data with extra bits,when specified as BITSTRING.
 2. When Ignite is started in non kubernetes environment and while MME is running in docker, then GRPC validation in ROBO TC needs to be commented, before execution.
-3. Security is not yet supported. Latest MME has added integrity protection. Inorder to run ignite TC, disable MAC validation for UL NAS messages on the MME side by the below code tweak:
-diff --git a/src/mme-app/utils/mmeNasUtils.cpp b/src/mme-app/utils/mmeNasUtils.cpp
-index 42781f1..b670f0b 100644
---- a/src/mme-app/utils/mmeNasUtils.cpp
-+++ b/src/mme-app/utils/mmeNasUtils.cpp
-@@ -400,12 +400,12 @@ int MmeNasUtils::parse_nas_pdu(s1_incoming_msg_data_t* msg_data, unsigned char *
-                                    (unsigned char *)short_mac_local,
-                                     SHORT_MAC_SIZE, &bufflog));
-                         log_buffer_free(&bufflog);
--                        if(memcmp(nas->header.short_mac,
-+                        /*if(memcmp(nas->header.short_mac,
-                                   short_mac_local, SHORT_MAC_SIZE))
-                         {
-                             log_msg(LOG_ERROR,"MAC not matching. Fail msg.\n");
-                             return E_FAIL;
-                         {
-                             log_msg(LOG_ERROR,"MAC not matching. Fail msg.\n");
-                             return E_FAIL;
--                        }
-+                        }*/
-
-                         log_msg(LOG_DEBUG, "MAC matched for service req.\n");
-                         secContext.increment_uplink_count();
-@@ -458,11 +458,11 @@ int MmeNasUtils::parse_nas_pdu(s1_incoming_msg_data_t* msg_data, unsigned char *
-                                                (unsigned char *)calc_mac,
-                                                MAC_SIZE, &bufflog));
-                         log_buffer_free(&bufflog);
--                        if(memcmp(nas_header_sec.mac, calc_mac, MAC_SIZE))
-+                        /*if(memcmp(nas_header_sec.mac, calc_mac, MAC_SIZE))
-                         {
-                             log_msg(LOG_ERROR,"MAC not matching. Fail msg.\n");
-                             return E_FAIL;
--                        }
-+                        }*/
-
-                         log_msg(LOG_DEBUG, "MAC matched.\n");
-                         secContext.increment_uplink_count();
+3. Security Support is partial. Ciphering is not supported. For intergrity protection of UL NAS message, SNOW_3G algorithm is used. Validation of MAC of DL NAS messages is currently not supported.

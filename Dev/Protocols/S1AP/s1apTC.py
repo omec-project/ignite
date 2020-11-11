@@ -21,6 +21,7 @@ import os
 import sys
 import requests
 import time
+import re
 from s1apUtils import *
 from s1apMsgUtils import *
 
@@ -30,6 +31,7 @@ from protocolMessageTypes import ProtocolMessageTypes as mt
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'NAS', 'Util'))
 import nasUtils as nu
+import secUtils as su
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'Logger'))
 import igniteLogger
@@ -118,6 +120,7 @@ def sendS1ap(requestType,s1apData,enbUeS1apId,nasData={},imsi=None,ieUpdateValDi
     igniteLogger.logger.info(f"s1ap message type : {requestType}")
     s1apData["NAS-MESSAGE"] = nasData
     count=0
+    
     if enbUeS1apId !=None:
         if requestType == mt.attach_request.name:
             icu.updateKeyValueInDict(s1apData, "ENB-UE-S1AP-ID", enbUeS1apId)
@@ -151,6 +154,7 @@ def sendS1ap(requestType,s1apData,enbUeS1apId,nasData={},imsi=None,ieUpdateValDi
             icu.updateKeyValueInDict(s1apData, "ENB-UE-S1AP-ID", enbUeS1apId)
             icu.updateKeyValueInDict(s1apData,"m-TMSI", icu.formatHex(S1APCTXDATA[IMSI][mt.attach_accept.name]["m_tmsi"]))
             icu.updateKeyValueInDict(s1apData,"mMEC", '0'+str(S1APCTXDATA[IMSI][mt.attach_accept.name]["mme_code"]))
+            updateMessageFromContextData(s1apData,requestType)
 
         else:
             if requestType == mt.initial_context_setup_response.name:
@@ -199,8 +203,9 @@ def sendS1ap(requestType,s1apData,enbUeS1apId,nasData={},imsi=None,ieUpdateValDi
         send_response = requests.post(url["send_url"], json=[None,S1APCTXDATA,"s1ap"])
     else:
         send_url = url["send_url"]
-
-    send_response = requests.post(send_url, json=[s1apData,S1APCTXDATA,"s1ap"])
+    
+    send_response = requests.post(send_url, json=[s1apData, S1APCTXDATA, "s1ap", IMSI])
+    
     igniteLogger.logger.info(f"URL response for send s1ap data : {str(send_response)}")
 
 def setContextData(s1apMsg,requestType):
@@ -213,16 +218,32 @@ def setContextData(s1apMsg,requestType):
         else:
             key = enb_ue_s1ap_id
         plmn_identity, plmn_identity_present = icu.getKeyValueFromDict(s1apMsg, "pLMNidentity")
+        nas_ksi_attach, nas_ksi_attach_present = icu.getKeyValueFromDict(s1apMsg, "nas_key_set_identifier")
         if S1APCTXDATA[key].get(mt.attach_request.name,None)==None:
             S1APCTXDATA[key][mt.attach_request.name]={"enb_ue_s1ap_id":enb_ue_s1ap_id}
         else:
             S1APCTXDATA[key][mt.attach_request.name]["enb_ue_s1ap_id"]=enb_ue_s1ap_id
         S1APCTXDATA[key][mt.attach_request.name]["plmn_identity"] = plmn_identity
-
+        S1APCTXDATA[key][mt.attach_request.name]["nas_key_set_identifier"] = nas_ksi_attach
 
     elif requestType==mt.authentication_request.name:
         mme_ue_s1ap_id, mme_ue_s1ap_id_present = icu.getKeyValueFromDict(s1apMsg, "MME-UE-S1AP-ID")
         S1APCTXDATA[IMSI][requestType]={"mme_ue_s1ap_id":mme_ue_s1ap_id}
+        nas_ksi, nas_ksi_present = icu.getKeyValueFromDict(s1apMsg, "nas_key_set_identifier_auth_req")
+        response = requests.get(url["diameter_ctx_data_url"])
+        imsiKey = str(IMSI)
+        if response.json() != {} and response.json().get(imsiKey, None) != None:
+            S1APCTXDATA[IMSI]['SEC_CXT'] = {}
+            S1APCTXDATA[IMSI]['SEC_CXT']['KSI'] = nas_ksi
+            #TODO: Fetch KASME based on KSI
+            S1APCTXDATA[IMSI]['SEC_CXT']['KASME'] = response.json()[imsiKey]["authentication_info_response"]["kasme"]
+            S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] = 0
+            #TODO: Support DL NAS Count && MAC validation
+            
+    elif requestType==mt.security_mode_command.name:
+        # MME is trying to establish/re-establish 
+        # integrity protection. Reset counts to 0 
+        S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] = 0
 
     elif  requestType==mt.identity_request.name:
         mme_ue_s1ap_id, mme_ue_s1ap_id_present = icu.getKeyValueFromDict(s1apMsg, "MME-UE-S1AP-ID")
@@ -264,9 +285,22 @@ def setContextData(s1apMsg,requestType):
     elif requestType == mt.esm_information_response.name:
         apn , apn_present = icu.getKeyValueFromDict(s1apMsg, "apn_esm")
         S1APCTXDATA[IMSI][requestType]={"apn":apn}
+        
+    elif requestType == mt.securitymode_complete.name:
+        S1APCTXDATA[IMSI]['SEC_CXT']['INTEGRITY_KEY'] = su.createIntegrityKey(2, str(S1APCTXDATA[IMSI]["SEC_CXT"]["KASME"]))
 
+    procedure_code, matched = icu.getKeyValueFromDict(s1apMsg,'procedureCode')
+    if matched and procedure_code == 13: #uplink nas
+        if  s1apMsg.get('NAS-MESSAGE', None) != None and 'sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
+            S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] += 1
+    elif matched and procedure_code == 12: #Init ue - detach and service request
+        if  s1apMsg.get('NAS-MESSAGE', None) != None:
+            if 'ksi_sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
+                S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] += 1
+            elif 'sequence_number' in s1apMsg['NAS-MESSAGE'].keys():
+                S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT'] += 1
+        
     igniteLogger.logger.info(f"s1ap context data : {S1APCTXDATA}")
-
 
 def updateMessageFromContextData(s1apMsg,requestType):
     global IMSI
@@ -274,7 +308,7 @@ def updateMessageFromContextData(s1apMsg,requestType):
     if requestType==mt.detach_request.name:
         nu.setGuti(S1APCTXDATA[IMSI][mt.attach_accept.name]["guti_list"],s1apMsg)
 
-    if requestType==mt.tau_request.name:
+    elif requestType==mt.tau_request.name:
         nu.setGuti(S1APCTXDATA[IMSI][mt.attach_accept.name]["guti_list"],s1apMsg)
 
     elif requestType==mt.handover_required.name:
@@ -294,6 +328,42 @@ def updateMessageFromContextData(s1apMsg,requestType):
     elif S1APCTXDATA[IMSI].get(mt.ue_context_release_command.name,None)!=None:
         icu.updateKeyValueInDict(s1apMsg, "MME-UE-S1AP-ID", S1APCTXDATA[IMSI][mt.ue_context_release_command.name]["mme_ue_s1ap_id"])
 
+    updateMessageFromSecurityContext(s1apMsg, requestType)
+    
+def updateMessageFromSecurityContext(s1apMsg,requestType):
+    global IMSI
+    nasMsgKeys = s1apMsg['NAS-MESSAGE'].keys()
+
+    procedure_code, matched = icu.getKeyValueFromDict(s1apMsg, 'procedureCode')
+    if matched and procedure_code == 13:  # uplink nas
+        if s1apMsg.get('NAS-MESSAGE', None) != None:
+            if 'message_authentication_code' in nasMsgKeys:
+                s1apMsg['NAS-MESSAGE']['message_authentication_code'] = 0
+            if 'sequence_number' in nasMsgKeys:
+                s1apMsg['NAS-MESSAGE']['sequence_number'] = S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT']
+            if 'nas_key_set_identifier_detach_request' in nasMsgKeys:
+                if 'nas_key_set_identifier_detach_request_value' in s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request'].keys():
+                   s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request']['nas_key_set_identifier_detach_request_value'] = S1APCTXDATA[IMSI]['SEC_CXT']['KSI']
+
+    elif matched and procedure_code == 12:  #Init ue - detach and service req
+        if s1apMsg.get('NAS-MESSAGE', None) != None:
+            if 'message_authentication_code' in nasMsgKeys:
+                s1apMsg['NAS-MESSAGE']['message_authentication_code'] = 0
+            elif 'message_authentication_code_short' in nasMsgKeys:
+                s1apMsg['NAS-MESSAGE']['message_authentication_code_short'] = 0
+            if 'sequence_number' in nasMsgKeys:
+                s1apMsg['NAS-MESSAGE']['sequence_number'] = S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT']
+            elif 'ksi_sequence_number' in nasMsgKeys:
+                if 'nas_key_set_identifier_service_req' in s1apMsg['NAS-MESSAGE']['ksi_sequence_number'].keys():
+                    s1apMsg['NAS-MESSAGE']['ksi_sequence_number']['nas_key_set_identifier_service_req'] = S1APCTXDATA[IMSI]['SEC_CXT']['KSI']
+                if 'sequence_number_service_req' in s1apMsg['NAS-MESSAGE']['ksi_sequence_number'].keys():
+                    s1apMsg['NAS-MESSAGE']['ksi_sequence_number']['sequence_number_service_req'] = S1APCTXDATA[IMSI]['SEC_CXT']['UPLINK_COUNT']
+            if 'nas_key_set_identifier_detach_request' in nasMsgKeys:
+                if 'nas_key_set_identifier_detach_request_value' in s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request'].keys():
+                   s1apMsg['NAS-MESSAGE']['nas_key_set_identifier_detach_request']['nas_key_set_identifier_detach_request_value'] = S1APCTXDATA[IMSI]['SEC_CXT']['KSI']
+
+    if requestType == mt.tau_request.name:
+        icu.updateKeyValueInDict(s1apMsg, "nas_key_set_identifier", S1APCTXDATA[IMSI][mt.attach_request.name]['nas_key_set_identifier'])
 
 def validateS1apIE(requestType,s1apMsg):
     global SERFLAG

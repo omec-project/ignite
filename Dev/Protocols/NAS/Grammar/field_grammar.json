@@ -3130,6 +3130,43 @@
     "byte_to_json": {},
     "format": "V"
   },
+  "ksi_sequence_number": {
+    "name": "ksi_sequence_number",
+    "type": "M",
+    "format": "V",
+    "max_size": 1,
+    "min_size": 1,
+    "join_sf": [
+      {
+        "union_sf": [
+          "nas_key_set_identifier_service_req",
+          "sequence_number_service_req"
+        ]
+      }
+    ]
+  },
+  "nas_key_set_identifier_service_req": {
+    "name": "nas_key_set_identifier_service_req",
+    "type": "M",
+    "json_type": "num",
+    "byte_type": "num",
+    "start_bit": 7,
+    "end_bit": 5,
+    "json_to_byte": {},
+    "byte_to_json": {},
+    "format": "V"
+  },
+  "sequence_number_service_req": {
+    "name": "sequence_number_service_req",
+    "type": "M",
+    "json_type": "num",
+    "byte_type": "num",
+    "start_bit": 4,
+    "end_bit": 0,
+    "json_to_byte": {},
+    "byte_to_json": {},
+    "format": "V"
+  },
   "message_authentication_code_short": {
     "name": "service_request_message_authentication_code",
     "type": "M",
@@ -5026,8 +5063,8 @@
     "name": "nas_key_set_identifier_detach_request",
     "type": "M",
     "format": "V",
-    "start_bit": 3,
-    "end_bit": 0,
+    "start_bit": 7,
+    "end_bit": 4,
     "join_sf": [
       {
         "union_sf": [
@@ -5042,8 +5079,8 @@
     "type": "M",
     "json_type": "str",
     "byte_type": "num",
-    "start_bit": 3,
-    "end_bit": 3,
+    "start_bit": 7,
+    "end_bit": 7,
     "json_to_byte": {
       "native_security_context_for_ksiasme": 0,
       "mapped_security_context_for_ksisgsn": 1
@@ -5057,21 +5094,13 @@
   "nas_key_set_identifier_detach_request_value": {
     "name": "nas_key_set_identifier_detach_request_value",
     "type": "M",
-    "json_type": "str",
+    "json_type": "num",
     "byte_type": "num",
-    "start_bit": 2,
-    "end_bit": 0,
-    "json_to_byte": {
-      "possible_value_for_the_nas_key_set_identifier_through": 1,
-      "no_key_available_ue_to_network": 6,
-      "reserved_network_to_ue": 7
-    },
-    "byte_to_json": {
-      "1": "possible_value_for_the_nas_key_set_identifier_through",
-      "6": "no_key_available_ue_to_network",
-      "7": "reserved_network_to_ue"
-    },
-    "format": "NA"
+    "start_bit": 6,
+    "end_bit": 4,
+    "json_to_byte": {},
+    "byte_to_json": {},
+    "format": "V"
   },
   "eps_mobile_identity_guti_detach_request": {
     "name": "eps_mobile_identity_guti_detach_request",
