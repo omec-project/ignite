@@ -60,6 +60,8 @@ class ProtocolMessageTypes(enum.Enum):
     erab_modification_indication = enum.auto()
     securitymode_complete = enum.auto()
     attach_complete = enum.auto()
+    create_bearer_request = enum.auto()
+    create_bearer_response = enum.auto()
     other_messages = enum.auto()
 
 
